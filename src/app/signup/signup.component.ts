@@ -34,16 +34,16 @@ export class SignupComponent {
     this.signupForm = this.fb.group({
       email: new FormControl('', {
         validators: [Validators.required, Validators.email],
-        updateOn: 'blur',
+        updateOn: 'change',
         nonNullable: true
       }),
       fullName: new FormControl('', {
         validators: [Validators.required],
-        updateOn: 'blur',
+        updateOn: 'change',
         nonNullable: true
       }),
       password: new FormControl('', {
-        updateOn: 'blur',
+        updateOn: 'change',
         nonNullable: true,
         validators: [Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/),
                       Validators.maxLength(20),
