@@ -1,0 +1,173 @@
+/* Container for the entire forgot password screen */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+    background-image: url('../../../public/assets/main-page-bg.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    min-height: 100vh;
+}
+
+/* Avatar icon styling */
+.avatar-icon img {
+    width: 300px;
+    height: 200px;
+    background-color: #1b2330;
+    border: 1px solid #00bcd4;
+    margin-bottom: 20px;
+}
+
+/* Title Styling */
+.title {
+    font-size: 24px;
+    color: whitesmoke;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-family: 'Exo 2 Black';
+    text-align: center;
+}
+
+/* Subtitle Styling */
+.subtitle {
+    font-size: 16px;
+    color: whitesmoke;
+    margin-bottom: 20px;
+    font-family: 'Exo 2', sans-serif;
+    text-align: center;
+}
+
+/* Forgot Password form wrapper styling */
+#login-part {
+    background-color: rgba(0, 0, 0, 0.6); 
+    border-radius: 15px;
+    box-shadow: 0 9px 15px rgba(0, 188, 212, 0.4);
+    border: 2px solid #00bcd4;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 400px; /* Limit width */
+    min-height: 380px;
+}
+
+/* Form Field Styling */
+.form-field {
+    width: 100% !important; /* Ensure form field takes full width */
+    margin-bottom: 20px;
+    border-radius: 70px;
+}
+
+/* Button Styling */
+.btn {
+    width: 100%; /* Make the button full width */
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid #00bcd4;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect for button */
+.btn:hover {
+    background-color: #019bab;
+    box-shadow: 0 6px 20px rgba(1, 155, 171, 0.5);
+}
+
+/* Forgot Password Link Styling */
+.forgot-password {
+    color: #00bcd4;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+    font-family: 'Exo 2 Black';
+    text-decoration: underline;
+}
+
+.login {
+    color: #00bcd4;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-family: 'Exo 2 Black';
+}
+
+/* Password Hint Styling */
+/* Password Hint Styling */
+/* Container for the password hint, with spacing */
+.password-hint {
+    font-size: 14px;
+    color: #ffffff; /* Brighter color for visibility */
+    font-weight: 600; /* Slightly bolder */
+    margin-bottom: 10px; /* Add more space between the hint and input field */
+    text-align: left;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Subtle background for readability */
+    padding: 8px;
+    border-radius: 4px;
+    line-height: 1.4;
+}
+
+/* Ensure there's enough spacing between the label and input field */
+.mat-form-field {
+    margin-top: 12px; /* Add space between the label and input field */
+}
+
+/* Make sure the mat-form-field takes full width */
+.form-field {
+    width: 100% !important;
+    margin-bottom: 20px;
+}
+#hint-icon {
+    color:whitesmoke;
+    font-size: 20px;
+    margin-right: 10px;
+    vertical-align: bottom;
+    position: relative;
+    top: 5px;
+}
+
+
+
+/* Styling for disabled button */
+button:disabled {
+    background-color: rgba(0, 0, 0, 0.3); /* Faded background for disabled state */
+    color: rgba(255, 255, 255, 0.5); /* Light text color */
+    cursor: not-allowed;
+}
+
+/* Responsive Styling */
+@media (max-width: 600px) {
+    .avatar-icon img {
+        width: 200px;
+        height: 150px;
+    }
+    .title {
+        font-size: 20px;
+        width: 100%;
+    }
+    .form-field {
+        width: 100% !important; /* Ensure full width on smaller screens */
+    }
+    #login-part {
+        width: 90%;
+        padding: 20px;
+    }
+}

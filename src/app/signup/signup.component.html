@@ -1,0 +1,97 @@
+<div class="login-container">
+    <div class="avatar-icon">
+      <img src="../../../assets/techsocial.jpeg" alt="Avatar Icon" />
+    </div>
+  
+    <div id="login-part">
+      <h2 class="title">Create Your Account</h2>
+  
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+        <!-- Full Name Field -->
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Full Name</mat-label>
+          <input matInput formControlName="fullName" placeholder="Enter your full name" required />
+          <mat-error>
+            @if (signupForm.get('fullName')?.hasError('required')) {
+              Full name is required.
+            }
+          </mat-error>
+        </mat-form-field>
+  
+        <!-- Email Field -->
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" placeholder="Enter your email" required />
+          <mat-error>
+            @if (signupForm.get('email')?.hasError('required')) {
+              Email is required.
+            }
+            @else if (signupForm.get('email')?.hasError('email')) {
+              Please enter a valid email address (e.g., example&#64;domain.com).
+            }
+          </mat-error>
+  
+        </mat-form-field>
+  
+        <!-- Password Field -->
+        <!-- Password Field with Hint -->
+<!-- Password Hint above the password input -->
+<!-- Password Hint above the password input -->
+<div class="password-hint">
+    <mat-icon id="hint-icon">help_outline</mat-icon>
+    <span class="password-requirements-title">Password Requirements:</span>
+    <p class="password-requirements-detail">
+        At least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character.
+    </p>
+</div>
+
+<mat-form-field appearance="fill" class="form-field">
+    <mat-label>Password</mat-label>
+    <input matInput formControlName="password" [type]="passwordFieldType" placeholder="Enter your password" required />
+    <mat-icon matSuffix (click)="togglePasswordFieldType()" class="password-icon">
+        {{ passwordFieldType === 'password' ? 'visibility_off' : 'visibility' }}
+    </mat-icon>
+    <mat-error>
+        @if (signupForm.get('password')?.hasError('required')) {
+            Password is required.
+        }
+        @else if (signupForm.get('password')?.hasError('pattern')) {
+            Password must meet the requirements.
+        }
+    </mat-error>
+</mat-form-field>
+
+
+  
+  
+        <!-- Confirm Password Field -->
+        <mat-form-field appearance="fill" class="form-field">
+          <mat-label>Confirm Password</mat-label>
+          <input matInput formControlName="passwordConfirmation" [type]="passwordConfirmationFieldType" placeholder="Confirm your password" required />
+          <mat-icon matSuffix (click)="togglePasswordConfirmationFieldType()" class="password-icon">
+            {{ passwordConfirmationFieldType === 'password' ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
+          <mat-error>
+            @if (signupForm.get('passwordConfirmation')?.hasError('required')) {
+              Confirming your password is required.
+            }
+            @else if (signupForm.get('passwordConfirmation')?.hasError('passwordMismatch')) {
+              Passwords must match.
+            }
+          </mat-error>
+          
+        </mat-form-field>
+  
+        <!-- Submit Button -->
+        <div class="form-buttons">
+          <button mat-raised-button type="submit" [disabled]="signupForm.invalid" class="btn signup">Sign Up</button>
+        </div>
+      </form>
+  
+      <!-- Already have an account Link -->
+      <div class="login">
+        <a routerLink="/login" class="login">Already have an account? Sign In</a>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,192 @@
+/* Container for the entire login screen */
+.login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+    background-image: url('../../../public/assets/main-page-bg.jpeg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    gap: 20px;
+    min-height: 100vh; /* Ensure the container fills the entire viewport height */
+}
+
+/* Avatar icon styling */
+.avatar-icon img {
+    width: 300px;
+    height: 200px;
+    background-color: #1b2330;
+    border: 1px solid #00bcd4;
+    margin-bottom: 20px;
+}
+
+/* Title Styling */
+.title {
+    font-size: 24px;
+    color: whitesmoke;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 40px;
+    font-family: 'Exo 2 Black';
+    width: 409px;
+    font-size: calc(100% + 0.7em);
+    text-align: center;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), 0px 0px 25px rgba(0, 188, 212, 0.5);
+    transform: perspective(500px) rotateX(5deg) rotateY(5deg);
+}
+
+/* Don't have an account? Sign Up link styling */
+#signup {
+    color: #00bcd4;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+    margin-top: 15px;
+    cursor: pointer;
+    font-family: 'Exo 2 Black';
+    text-decoration: underline;
+  }
+  
+  .signup-link:hover {
+    color: #019bab;
+  }
+
+  
+/* Slide-in Animation for the title */
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Login form wrapper styling */
+#login-part, .signup-link {
+    background-color: rgba(0, 0, 0, 0.6); /* Slight transparency to make the background image visible */
+    border-radius: 15px;
+    box-shadow: 0 9px 15px rgba(0, 188, 212, 0.4);
+    border: 2px solid #00bcd4;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center content vertically */
+    align-items: center;
+    width: 100%;
+    max-width: 400px; /* Restrict max width */
+    min-height: 380px; /* Ensure enough space for content */
+}
+
+.signup-link {
+    min-height: 30px;
+}
+
+/* Form Field Styling */
+ .form-field {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 70px; /* Rounded edges for MatFormField */
+}
+
+/* Password field with visibility icon */
+.password-field {
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin-bottom: 0;
+}
+
+.password-field mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+    border-radius: 30px; /* Rounded edges for MatFormField */
+}
+
+.forgot-password {
+    color: #00bcd4;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-family: 'Exo 2 Black';
+}
+
+
+
+/* Button Styling */
+.btn {
+    width: 200px;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+    display: block; /* Center the button */
+    margin: 0 auto; /* Center the button horizontally */
+    line-height: 1; /* Center the text vertically */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button:disabled {
+    background-color: rgba(0, 0, 0, 0.3); /* Faded dark background */
+    color: rgba(255, 255, 255, 0.5); /* Faded white text */
+    cursor: not-allowed;
+}
+
+/* Login Button Styling */
+.login {
+    background-color: transparent;
+    border: 2px solid #00bcd4;
+    color: #00bcd4;
+}
+
+
+#remember-me {
+    color: whitesmoke;
+    font-size: calc(100% + 0.3em);
+    font-family: 'Exo 2 Black';
+}
+
+mat-checkbox {
+    color: #00bcd4;
+    margin-bottom: 30px;
+}
+
+
+/* Hover effects for button */
+.btn:hover {
+    background-color: #019bab;
+    box-shadow: 0 6px 20px rgba(1, 155, 171, 0.5);
+}
+
+/* Responsive Styling */
+@media (max-width: 600px) {
+    .avatar-icon img {
+        width: 200px;
+        height: 150px;
+    }
+    .title {
+        font-size: 20px;
+        width: 100%;
+    }
+    .form-field {
+        width: 90%;
+    }
+    #login-part {
+        width: 90%;
+        padding: 20px;
+    }
+}
