@@ -30,7 +30,7 @@
     text-transform: uppercase;
     font-weight: 700;
     margin-bottom: 40px;
-    font-family: 'Exo 2 Black';
+    font-family: 'Exo 2';
     width: 409px;
     font-size: calc(100% + 0.7em);
     text-align: center;
@@ -46,15 +46,15 @@
     width: 100%;
     margin-top: 15px;
     cursor: pointer;
-    font-family: 'Exo 2 Black';
+    font-family: 'Exo 2';
     text-decoration: underline;
   }
-  
+
   .signup-link:hover {
     color: #019bab;
   }
 
-  
+
 /* Slide-in Animation for the title */
 @keyframes slideIn {
     0% {
@@ -113,7 +113,7 @@
     width: 100%;
     margin-bottom: 20px;
     cursor: pointer;
-    font-family: 'Exo 2 Black';
+    font-family: 'Exo 2';
 }
 
 

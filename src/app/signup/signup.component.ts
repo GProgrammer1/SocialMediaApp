@@ -28,7 +28,6 @@ export class SignupComponent {
   signupForm: FormGroup;
   passwordFieldType: string = 'password';
   passwordConfirmationFieldType: string = 'password';
-  passwordStrength: string = '';
 
   constructor(private fb: FormBuilder) {
     this.signupForm = this.fb.group({
@@ -45,30 +44,24 @@ export class SignupComponent {
       password: new FormControl('', {
         updateOn: 'change',
         nonNullable: true,
-        validators: [Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/),
-                      Validators.maxLength(20),
-                      Validators.required
-                    ]
+        validators: [
+          Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/),
+          Validators.maxLength(20),
+          Validators.required
+        ]
       }),
       passwordConfirmation: new FormControl('', {
-        validators: [Validators.required, this.passwordsMatchValidator],
+        validators: [Validators.required],
         updateOn: 'blur',
         nonNullable: true
-        
       })
-    });
-    
-  }
-
-  onSubmit() {
-    console.log(this.signupForm.value);
+    }, { validators: this.passwordsMatchValidator });
   }
 
   passwordsMatchValidator(group: FormGroup): { [key: string]: boolean } | null {
     const password = group.get('password')?.value;
     const passwordConfirmation = group.get('passwordConfirmation')?.value;
-
-    return ( password && passwordConfirmation ) && (password === passwordConfirmation) ? null : { 'passwordMismatch': true };
+    return (password && passwordConfirmation) && (password === passwordConfirmation) ? null : { 'passwordMismatch': true };
   }
 
   togglePasswordFieldType() {
@@ -79,4 +72,9 @@ export class SignupComponent {
     this.passwordConfirmationFieldType = this.passwordConfirmationFieldType === 'password' ? 'text' : 'password';
   }
 
+  onSubmit() {
+    if (this.signupForm.valid) {
+      console.log(this.signupForm.value);
+    }
+  }
 }
