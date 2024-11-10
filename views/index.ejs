@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register, Delete & Get Users</title>
+</head>
+<body>
+    <h2>Register</h2>
+    <form id="registerForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <h2>Delete Users</h2>
+    <!-- Delete All Users Form -->
+    <form id="deleteAllForm">
+        <button type="button" id="deleteAllButton">Delete All Users</button>
+    </form>
+    <br>
+
+    <!-- Delete Specific User by Email Form -->
+    <form id="deleteUserForm">
+        <label for="deleteEmail">Delete User by Email:</label>
+        <input type="email" id="deleteEmail" name="email" required><br><br>
+        <button type="submit">Delete User</button>
+    </form>
+
+    <h2>Get All Users</h2>
+    <!-- Button to fetch all users -->
+    <button id="getAllUsersButton">Get All Users</button>
+    <!-- Display the list of users -->
+    <div id="usersList"></div>
+
+    <div id="result"></div>
+
+    <script>
+        // Register Form Handling
+        document.getElementById('registerForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the form from submitting traditionally
+
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Prepare the payload
+            const data = {
+                name: name,
+                email: email,
+                password: password
+            };
+
+            try {
+                // Send POST request to register endpoint
+                const response = await fetch('http://localhost:3000/auth/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                // Parse the response and show result
+                const result = await response.json();
+                console.log(result);
+                
+                if (response.ok) {
+                    document.getElementById('result').innerHTML = `<p style="color: green;">${result.message}</p>`;
+                } else {
+                    document.getElementById('result').innerHTML = `<p style="color: red;">${result.message}</p>`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = `<p style="color: red;">Failed to register. Please try again later.</p>`;
+            }
+        });
+
+        // Delete All Users Button Handler
+        document.getElementById('deleteAllButton').addEventListener('click', async function() {
+            try {
+                // Send DELETE request to delete all users
+                const response = await fetch('http://localhost:3000/auth/delete-all', {
+                    method: 'DELETE',
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    document.getElementById('result').innerHTML = `<p style="color: green;">${result.msg}</p>`;
+                } else {
+                    document.getElementById('result').innerHTML = `<p style="color: red;">${result.msg}</p>`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = `<p style="color: red;">Failed to delete all users. Please try again later.</p>`;
+            }
+        });
+
+        // Delete Specific User by Email
+        document.getElementById('deleteUserForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the form from submitting traditionally
+
+            const email = document.getElementById('deleteEmail').value;
+
+            try {
+                // Send DELETE request to delete a user by email
+                const response = await fetch(`http://localhost:3000/auth/delete/${email}`, {
+                    method: 'DELETE',
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    document.getElementById('result').innerHTML = `<p style="color: green;">${result.msg}</p>`;
+                } else {
+                    document.getElementById('result').innerHTML = `<p style="color: red;">${result.msg}</p>`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = `<p style="color: red;">Failed to delete user. Please try again later.</p>`;
+            }
+        });
+
+        // Get All Users Button Handler
+        document.getElementById('getAllUsersButton').addEventListener('click', async function() {
+            try {
+                // Send GET request to get all users
+                const response = await fetch('http://localhost:3000/auth/users', {
+                    method: 'GET',
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Create a list of users
+                    let usersHtml = '<ul>';
+                    result.users.forEach(user => {
+                        usersHtml += `<li>Name: ${user.name}, Email: ${user.email}</li>`;
+                    });
+                    usersHtml += '</ul>';
+
+                    document.getElementById('usersList').innerHTML = usersHtml;
+                } else {
+                    document.getElementById('usersList').innerHTML = `<p style="color: red;">${result.msg}</p>`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('usersList').innerHTML = `<p style="color: red;">Failed to retrieve users. Please try again later.</p>`;
+            }
+        });
+    </script>
+</body>
+</html>
