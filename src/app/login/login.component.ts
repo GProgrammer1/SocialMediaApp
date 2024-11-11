@@ -60,17 +60,28 @@ export class LoginComponent {
         this.loading = false;
         
       },
-      error: (error) => {
+      error: (error: {err: string}) => {
         console.log('Error:', error);
         this.loading = false;
-        this.snack.open('Invalid email or password', 'Close', {
-          duration: 5000,
-          horizontalPosition: 'center',
-          verticalPosition: 'top'
 
-        });
-        this.loginForm.reset();
-
+        if (error.err === 'Account is inactive') {
+          const snackRef = this.snack.open('Account is inactive', 'Activate', {
+            duration: 5000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          });
+          snackRef.onAction().subscribe(() => {
+            
+            this.activateAccount(email);
+          });
+        } else {
+          this.snack.open('Invalid email or password', 'Close', {
+            duration: 5000,
+            horizontalPosition: 'center',
+            verticalPosition: 'top'
+          });
+          this.loginForm.reset();
+        }
       }
     });
   }, 1000);
@@ -78,5 +89,31 @@ export class LoginComponent {
 
   togglePasswordVisibility() {
     this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+  }
+
+  activateAccount(email: string) {
+
+    this.loading = true;
+    setTimeout(() => {
+    this.authService.activateAccount(email).subscribe({
+      next: (response: any) => {
+        console.log('Response:', response);
+        this.snack.open('Account activated successfully', 'Close', {
+          duration: 4000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+        this.loading = false;
+      },
+      error: (error: any) => {
+        console.log('Error:', error);
+        this.snack.open('Error activating account', 'Close', {
+          duration: 4000,
+          horizontalPosition: 'center',
+          verticalPosition: 'top'
+        });
+        this.loading = false;
+      }
+    })}, 1000);
   }
 }
