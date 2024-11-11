@@ -17,6 +17,7 @@ export class ProfileComponent {
   followingCount: number = 180;
   postsCount: number = 10;
 
+
   editProfile() {
     console.log('Edit profile clicked');
     // Implement edit profile logic here
@@ -26,4 +27,10 @@ export class ProfileComponent {
     console.log('Settings clicked');
     // Implement settings logic here
   }
+
+  userName = 'John Doe';
+  userBio = 'A short bio about the user.';
+  userEmail = 'johndoe@example.com';
+  userLocation = 'Lebanon';
+
 }

@@ -1,2 +1,31 @@
 
 <app-navbar></app-navbar>
+<div class="profile-container">
+  <div class="profile-header">
+    <div class="profile-picture">
+      <img src="icon.png" alt="Profile Picture" />
+      <button class="upload-button">Change Picture</button>
+    </div>
+    <div class="profile-info">
+      <h2>{{ userName }}</h2>
+      <p>{{ userBio }}</p>
+      <button class="edit-profile-button">Edit Profile</button>
+    </div>
+  </div>
+
+  <div class="profile-details">
+    <div class="details-section">
+      <h3>Personal Information</h3>
+      <ul>
+        <li><strong>Email:</strong> {{ userEmail }}</li>
+        <li><strong>Location:</strong> {{ userLocation }}</li>
+      </ul>
+    </div>
+
+    <div class="details-section">
+      <h3>Account Settings</h3>
+      <button class="deactivate-button">Deactivate Account</button>
+      <button class="delete-button">Delete Account</button>
+    </div>
+  </div>
+</div>
