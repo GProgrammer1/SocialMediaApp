@@ -14,9 +14,25 @@ interface User {
     dislikes: Dislike[] ;
     comments?: CommentText[] ;
     friendRequests?: FriendRequest[] ;
-    accountStatus: 'Active' | 'Deactivated' | 'Pending' ;
+    accountStatus: 'Active' | 'Deactivated' | 'Suspended' ;
     accountPrivacy: 'Private' | 'Public';
+    emailToken?: EmailVerificationToken;
+    resetToken?: ResetToken;
 }
+
+interface ResetToken {
+    token: string;
+    email: string;
+    createdAt: Date;
+}
+
+interface EmailVerificationToken {
+    token: string;
+    expiryDate: Date;
+    userId: number;
+}
+
+
 
 interface Post {
     id? : number ;

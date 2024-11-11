@@ -1,0 +1,23 @@
+<div class="explore-container">
+  <app-navbar class="navbar"></app-navbar>
+
+  <div class="explore-main">
+    <div class="search">
+      <!-- Search bar and results -->
+      <div class="search-bar">
+        <!-- <input type="text" placeholder="Search..." (input)="onSearch($event)"> -->
+      </div>
+      <div class="search-results">
+        <ul>
+          <!-- <li *ngFor="let result of searchResults">{{ result }}</li> -->
+        </ul>
+      </div>
+    </div>
+    <!-- Suggested section -->
+    <div class="suggested">
+      <h3>Suggested for you</h3>
+      <!-- Suggested content here (Angular component) -->
+      <app-suggested></app-suggested>
+    </div>
+  </div>
+</div>

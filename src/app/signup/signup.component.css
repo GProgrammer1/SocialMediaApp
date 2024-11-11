@@ -29,7 +29,7 @@
     text-transform: uppercase;
     font-weight: 700;
     margin-bottom: 10px;
-    font-family: 'Exo 2 Black';
+    font-family: 'Exo 2';
     text-align: center;
 }
 
@@ -38,13 +38,13 @@
     font-size: 16px;
     color: whitesmoke;
     margin-bottom: 20px;
-    font-family: 'Exo 2', sans-serif;
+    font-family: 'Exo 2';
     text-align: center;
 }
 
 /* Forgot Password form wrapper styling */
 #login-part {
-    background-color: rgba(0, 0, 0, 0.6); 
+    background-color: rgba(0, 0, 0, 0.6);
     border-radius: 15px;
     box-shadow: 0 9px 15px rgba(0, 188, 212, 0.4);
     border: 2px solid #00bcd4;
@@ -113,8 +113,7 @@ button:disabled {
     width: 100%;
     margin-bottom: 20px;
     cursor: pointer;
-    font-family: 'Exo 2 Black';
-} */
+
 
 /* Password Hint Styling */
 /* Password Hint Styling */

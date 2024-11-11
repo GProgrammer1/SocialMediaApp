@@ -1,0 +1,59 @@
+.feed {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 200px;
+  width: calc(100% - 200px);
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.home-story {
+  height: 20%;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: #9ca3af;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 12px;
+}
+
+.home-post {
+  flex: 1;
+  overflow-y: auto;
+  background-color: #121212;
+  color: #e0e0e0;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .home{
+    display: flex;
+    flex-direction: column;
+  }
+
+  .feed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+
+  .home-story {
+    height: auto;
+    min-height: 100px;
+    padding: 10px;
+  }
+
+  .home-post {
+    padding: 10px;
+  }
+  .navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+  }
+}

@@ -4,15 +4,17 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
     background-color: #0d1117;
     position: relative;
     padding: 20px;
+    padding-top: 50px;
+    padding-bottom: 40px;
     background-image: url('../../../public/assets/main-page-bg.jpeg');
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center;
     margin: 0;
-
+    overflow: hidden;
   }
 
 
@@ -24,7 +26,7 @@
     border: 1px solid #00bcd4;
     margin-bottom: 20px;
   }
-  
+
   /* Title Styling */
   /* Title Styling with 3D Effect */
 .title {
@@ -33,14 +35,14 @@
   text-transform: uppercase;
   font-weight: 700;
   margin-bottom: 40px;
-  font-family: 'Exo 2 Black';
+  font-family: 'Exo 2';
   width: 409px;
   font-size: calc(100% + 0.7em);
   text-align: center;
   
   /* 3D Effect: Text shadow to create depth */
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), 0px 0px 25px rgba(0, 188, 212, 0.5);
-  
+
   /* Optional: Slightly more dynamic depth */
 }
 
@@ -83,23 +85,22 @@ a:link {
     cursor: pointer;
     transition: background 0.3s ease, box-shadow 0.3s ease;
   }
-  
+
   .create-account {
     background-color: #00bcd4;
     border: none;
     box-shadow: 0 4px 15px rgba(0, 188, 212, 0.4);
   }
-  
+
   .login {
     background-color: transparent;
     border: 2px solid #00bcd4;
     color: #00bcd4;
   }
 
-  
-  
+
+
   .btn:hover {
     background-color: #019bab;
     box-shadow: 0 6px 20px rgba(1, 155, 171, 0.5);
   }
-  

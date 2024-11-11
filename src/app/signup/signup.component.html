@@ -2,10 +2,10 @@
     <div class="avatar-icon">
       <img src="../../../assets/techsocial.jpeg" alt="Avatar Icon" />
     </div>
-  
+
     <div id="login-part">
       <h2 class="title">Create Your Account</h2>
-  
+
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <!-- Full Name Field -->
         <mat-form-field appearance="fill" class="form-field">
@@ -17,7 +17,7 @@
             }
           </mat-error>
         </mat-form-field>
-  
+
         <!-- Email Field -->
         <mat-form-field appearance="fill" class="form-field">
           <mat-label>Email</mat-label>
@@ -30,8 +30,9 @@
               Please enter a valid email address (e.g., example&#64;domain.com).
             }
           </mat-error>
-  
+
         </mat-form-field>
+
         <!-- Password Field -->
         <!-- Password Field with Hint -->
 <!-- Password Hint above the password input -->
@@ -59,8 +60,8 @@
 </mat-form-field>
 
 
-  
-  
+
+
         <!-- Confirm Password Field -->
         <mat-form-field appearance="fill" class="form-field">
           <mat-label>Confirm Password</mat-label>
@@ -70,18 +71,24 @@
           <mat-error *ngIf="signupForm.get('passwordConfirmation')?.hasError('required')">
             Confirming your password is required.
           </mat-error>
+
           
           <mat-error *ngIf="passwordMismatchError">
             Passwords do not match.
           </mat-error>
         </mat-form-field>
         
+
+
+      
+
+
         <!-- Submit Button -->
         <div class="form-buttons">
           <button mat-raised-button type="submit" [disabled]="signupForm.invalid"  class="btn signup">Sign Up</button>
         </div>
       </form>
-  
+
       <!-- Already have an account Link -->
       <div class="login">
         <a routerLink="/login" class="login">Already have an account? Sign In</a>
@@ -89,4 +96,3 @@
 
     </div>
   </div>
-  
