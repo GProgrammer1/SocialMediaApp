@@ -1,1 +1,41 @@
-<p>settings works!</p>
+<app-navbar class="navbar"></app-navbar>
+<div class="settings">
+  <div class="settings-container">
+    <h2>Settings</h2>
+    <ul class="settings-list">
+      <li>
+        <i class="fas fa-thumbs-up"></i>
+        <a routerLink="/liked">Liked Content</a>
+      </li>
+      <li class="access-level">
+        <i class="fas fa-lock"></i> Level of Access
+        <select [(ngModel)]="selectedAccessLevel" class="access-dropdown">
+          <option [value]="accessOptions[0]">
+            Public
+          </option>
+          <option [value]="accessOptions[1]">
+            Friends Only
+          </option>
+          <option [value]="accessOptions[2]">
+            Private
+          </option>
+        </select>
+      </li>
+      <li class="notifications" (click)="toggleNotifications()">
+        <i class="fas fa-bell"></i> Notifications
+        <button class="toggle-button">
+          {{ isNotificationsOn ? 'On' : 'Off' }}
+        </button>
+      </li>
+      <li>
+        <i class="fas fa-user-slash"></i> Deactivate Account
+      </li>
+      <li id="red">
+        <i class="fas fa-trash-alt"></i> Delete Account
+      </li>
+      <li id="red">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </li>
+    </ul>
+  </div>
+</div>
