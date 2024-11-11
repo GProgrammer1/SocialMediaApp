@@ -66,7 +66,7 @@
 }
 
 /* Button Styling */
-.btn {
+.btn{
     width: 100%; /* Make the button full width */
     padding: 12px;
     margin: 10px 0;
@@ -78,10 +78,17 @@
     background-color: transparent;
     border: 2px solid #00bcd4;
     cursor: pointer;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
+    transition: background 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+button:disabled {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: rgba(255, 255, 255, 0.5);
+    cursor: not-allowed;
 }
 
 /* Hover effect for button */
+
 .btn:hover {
     background-color: #019bab;
     box-shadow: 0 6px 20px rgba(1, 155, 171, 0.5);
@@ -99,7 +106,7 @@
     text-decoration: underline;
 }
 
-.login {
+/* .login {
     color: #00bcd4;
     font-size: 14px;
     text-align: center;
@@ -107,7 +114,7 @@
     margin-bottom: 20px;
     cursor: pointer;
     font-family: 'Exo 2 Black';
-}
+} */
 
 /* Password Hint Styling */
 /* Password Hint Styling */
@@ -123,6 +130,16 @@
     padding: 8px;
     border-radius: 4px;
     line-height: 1.4;
+}
+
+.login {
+    color: #00bcd4;
+    font-size: 14px;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px;
+    cursor: pointer;
+    font-family: 'Exo 2 Black';
 }
 
 /* Ensure there's enough spacing between the label and input field */
@@ -143,8 +160,18 @@
     position: relative;
     top: 5px;
 }
+.success-snackbar {
+    background-color: #4caf50 !important; /* Green color */
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
+  }
 
-
+  
+  
+.loading-cursor {
+    cursor: wait;
+}
 
 /* Styling for disabled button */
 button:disabled {
@@ -170,4 +197,7 @@ button:disabled {
         width: 90%;
         padding: 20px;
     }
+
+    
+      
 }

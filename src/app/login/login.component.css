@@ -50,23 +50,10 @@
     text-decoration: underline;
   }
   
-  .signup-link:hover {
-    color: #019bab;
-  }
 
-  
-/* Slide-in Animation for the title */
-@keyframes slideIn {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(0);
-    }
-}
 
 /* Login form wrapper styling */
-#login-part, .signup-link {
+#login-part {
     background-color: rgba(0, 0, 0, 0.6); /* Slight transparency to make the background image visible */
     border-radius: 15px;
     box-shadow: 0 9px 15px rgba(0, 188, 212, 0.4);
@@ -79,6 +66,14 @@
     width: 100%;
     max-width: 400px; /* Restrict max width */
     min-height: 380px; /* Ensure enough space for content */
+}
+
+.signup-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-top: 20px;
 }
 
 .signup-link {
@@ -119,26 +114,7 @@
 
 
 /* Button Styling */
-.btn {
-    width: 200px;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 30px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-    color: #fff;
 
-    text-decoration: none;
-    cursor: pointer;
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-    display: block; /* Center the button */
-    margin: 0 auto; /* Center the button horizontally */
-    line-height: 1; /* Center the text vertically */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
 
 button:disabled {
     background-color: rgba(0, 0, 0, 0.3); /* Faded dark background */
@@ -146,11 +122,30 @@ button:disabled {
     cursor: not-allowed;
 }
 
+button {
+    width: 100%; /* Make the button full width */
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 30px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    background-color: transparent;
+    border: 2px solid #00bcd4;
+    cursor: pointer;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
 /* Login Button Styling */
 .login {
     background-color: transparent;
     border: 2px solid #00bcd4;
     color: #00bcd4;
+}
+
+.loading-cursor {
+    cursor: wait;
 }
 
 

@@ -1,4 +1,4 @@
-<div class="login-container">
+<div class="login-container" [ngClass]="{'loading-cursor' : loading}">
   <div class="avatar-icon">
     <img src="../../../assets/techsocial.jpeg" alt="Avatar Icon" />
   </div>
@@ -16,7 +16,7 @@
             Email is required
           }
           @else if (loginForm.get('email')?.hasError('email')) {
-            Please enter a valid email address
+            Please enter a valid email address(e.g., example&commat;domain.com)
           }
         </mat-error>
         
@@ -34,16 +34,14 @@
         </mat-error>
       </mat-form-field>
 
-      <!-- Remember Me Checkbox -->
-      <div class="remember-me">
-        <mat-checkbox formControlName="rememberMe" class="remember-me"><span id="remember-me">Remember me</span></mat-checkbox>
-      </div>
-
       <!-- Forgot Password Link -->
       <div class="forgot-password">
         <a routerLink="/forgotpassword" class="forgot-password">Forgot password?</a>
       </div>
 
+     <div class="signup-link">
+        <a routerLink="/signup" id="signup">Don't have an account? Sign Up</a>
+      </div>
       <!-- Submit Button -->
       <div class="form-buttons">
         <button mat-raised-button type="submit" [disabled]="loginForm.invalid" class="btn login">Sign In</button>
@@ -53,7 +51,5 @@
     <!-- Don't have an account? Sign Up Link -->
     
   </div>
-  <div class="signup-link">
-    <a routerLink="/signup" id="signup">Don't have an account? Sign Up</a>
-  </div>
+  
 </div>

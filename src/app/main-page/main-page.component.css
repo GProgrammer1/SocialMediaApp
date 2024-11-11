@@ -37,12 +37,11 @@
   width: 409px;
   font-size: calc(100% + 0.7em);
   text-align: center;
-  animation: slideIn 1s ease-out forwards;
+  
   /* 3D Effect: Text shadow to create depth */
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), 0px 0px 25px rgba(0, 188, 212, 0.5);
   
   /* Optional: Slightly more dynamic depth */
-  transform: perspective(500px) rotateX(5deg) rotateY(5deg);
 }
 
 @keyframes slideIn {

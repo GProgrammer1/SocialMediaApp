@@ -1,0 +1,84 @@
+.confirmation-container {
+    height: 100vh;
+    background-image: url('../../../public/assets/main-page-bg.jpeg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Exo 2 Black';
+  }
+  
+  .content-container {
+    text-align: center;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 500px;
+    font-family: 'Exo 2 Black';
+  }
+  
+  .gmail-icon {
+    font-size: 50px;
+    color: #DB4437; /* Gmail Red */
+    margin-bottom: 20px;
+    width: 90px;
+    height: 90px;
+  }
+  
+ 
+  .message-container {
+    margin-top: 20px;
+    font-family: 'Exo 2 Black';
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    font-family: 'Exo 2 Black';
+  }
+  
+  .icon {
+    font-size: 50px;
+    margin-bottom: 20px;
+  }
+  
+  .success {
+    color: green;
+  }
+  
+  .error {
+    color: red;
+  }
+  
+  .loading {
+    color: #ffa500;
+  }
+  
+  button {
+    
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  .button-denied {
+    background-color: #db4437;
+    color: black;
+  }
+
+  .button-confirmed {
+    background-color: #0f9d58;
+  }
+
+  
+  button:hover {
+    filter: brightness(0.9);
+  }
+  
+  
