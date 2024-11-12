@@ -4,9 +4,14 @@ const port = 3000;
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 dotenv.config();
+const cookieParser = require('cookie-parser');
 
+app.use(cookieParser());
 const cors = require('cors');
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:4200',
+    credentials: true
+}));
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
