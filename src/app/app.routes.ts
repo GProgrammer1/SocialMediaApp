@@ -3,7 +3,6 @@ import { MainPageComponent } from './main-page/main-page.component';
 import { SignupComponent } from './signup/signup.component';
 import { LoginComponent } from './login/login.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-
 import { ConfirmationPageComponent } from './confirmation-page/confirmation-page.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
@@ -18,9 +17,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeStoryComponent } from './home-story/home-story.component';
 import { HomePostComponent } from './home-post/home-post.component';
 import { SuggestedComponent } from './suggested/suggested.component';
+import { autoLoginResolver } from './auto-login.resolver';
 
 export const routes: Routes = [
-  { path: '', component: MainPageComponent },
+  { path: '', component: MainPageComponent, resolve: { autoLogin: autoLoginResolver } },
   { path: 'signup', component: SignupComponent },
   { path: 'login', component: LoginComponent },
   { path: 'forgotpassword', component: ForgotPasswordComponent },
@@ -33,6 +33,8 @@ export const routes: Routes = [
   { path: 'navbar', component: NavbarComponent},
   { path: 'home-story', component: HomeStoryComponent},
   { path: 'home-post', component: HomePostComponent},
-  { path: 'suggested', component: SuggestedComponent}
+  { path: 'suggested', component: SuggestedComponent},
+  { path: 'auth/confirm/:token', component: ConfirmationPageComponent },
+  { path: 'auth/resetPassword/:token', component: ResetPasswordComponent }
 
 ];

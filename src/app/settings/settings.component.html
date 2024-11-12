@@ -9,13 +9,11 @@
       </li>
       <li class="access-level">
         <i class="fas fa-lock"></i> Level of Access
-        <select [(ngModel)]="selectedAccessLevel" class="access-dropdown">
+        <select [(ngModel)]="selectedAccessLevel" class="access-dropdown" (change)="changeAccountPrivacy(selectedAccessLevel)">
           <option [value]="accessOptions[0]">
             Public
           </option>
-          <option [value]="accessOptions[1]">
-            Friends Only
-          </option>
+    
           <option [value]="accessOptions[2]">
             Private
           </option>
@@ -27,13 +25,15 @@
           {{ isNotificationsOn ? 'On' : 'Off' }}
         </button>
       </li>
-      <li>
+      <li (click)="deactivateAccount()">
         <i class="fas fa-user-slash"></i> Deactivate Account
+
+        
       </li>
-      <li id="red">
+      <li id="red" (click)="deleteAccount()">
         <i class="fas fa-trash-alt"></i> Delete Account
       </li>
-      <li id="red">
+      <li id="red" (click)="logout()">
         <i class="fas fa-sign-out-alt"></i> Logout
       </li>
     </ul>
