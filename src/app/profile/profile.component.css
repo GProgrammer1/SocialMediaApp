@@ -1,147 +1,201 @@
-/* Main Profile Container */
+/* Profile Page Styles */
+.profile {
+  position: relative;
+  left: 200px;
+  width: calc(100% - 200px);
+  height: 100%;
+  background-color: #1a1a1a; /* Dark background */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+
+/* Profile Container */
 .profile-container {
-    margin-left: 200px; /* Offset to accommodate navbar width */
-    padding: 20px;
-    font-family: Arial, sans-serif;
-    color: #333;
+  width: 90%;
+  /*height should reach the bottom*/
+  height: 85%;
+  max-width: 800px; /* Maximum width to prevent stretching on large screens */
+  background-color: #202020; /* Dark container background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  color: #a9a9a9; /* Light gray text color */
+  position: relative; /* For absolute positioning of settings button */
+}
+
+/* Profile Header Section */
+.profile-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 20px 0;
+}
+
+.profile-pic {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-right: 20px;
+  border: 3px solid #0056b3; /* Darker blue border around profile pic */
+}
+
+.profile-info {
+  flex-grow: 1;
+
+  .followers-info {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-  }
-  
-  /* Header Section - Profile Picture and Basic Info */
-  .profile-header {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-    padding: 20px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .profile-picture {
-    position: relative;
-    width: 120px;
-    height: 120px;
-    margin-right: 20px;
-  }
-  
-  .profile-picture img {
-    width: 100%;       /* Ensures it takes the full width of the container */
-    height: 100%;      /* Ensures it takes the full height of the container */
-    border-radius: 50%; /* Makes the image circular */
-    border: 2px solid #888; /* Optional border for styling */
-    object-fit: cover; /* Ensures the image scales correctly inside the circle */
-  }
-  
-  
-  .upload-button {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  /* Profile Information */
-  .profile-info {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  
-  .profile-info h2 {
-    font-size: 24px;
-    margin-bottom: 5px;
-  }
-  
-  .profile-info p {
-    color: #555;
-    margin-bottom: 10px;
-  }
-  
-  .edit-profile-button {
-    background-color: #28a745;
-    color: #fff;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  /* Profile Details Sections */
-  .profile-details {
-    width: 100%;
-    max-width: 800px;
-    margin-top: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  .details-section {
-    margin-bottom: 20px;
-  }
-  
-  .details-section h3 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .details-section ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .details-section ul li {
-    margin-bottom: 5px;
-  }
-  
-  /* Account Management Buttons */
-  .deactivate-button,
-  .delete-button {
-    background-color: #dc3545;
-    color: #fff;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .delete-button {
-    background-color: #ff4444;
-    margin-left: 10px;
-  }
-  
-  /* Media Query for smaller screens */
-  @media (max-width: 768px) {
-    .profile-container {
-      margin-left: 0;
-      padding: 10px;
-    }
-  
-    .profile-header,
-    .profile-details {
-      max-width: 100%;
-    }
-  
-    .profile-info h2 {
-      font-size: 20px;
-    }
-  
-    .profile-info p {
+    justify-content: space-between;
+    max-width: 150px;
+    width: 100%; /* Make sure it takes full width available */
+
+    p {
+      margin: 0;
       font-size: 14px;
-    }
-  
-    .deactivate-button,
-    .delete-button {
-      padding: 6px 10px;
+      color: #bbb; /* Lighter gray for followers info */
     }
   }
-  
+
+  .profile-details {
+    h2 {
+      margin: 0;
+      font-size: 24px;
+      color: #0056b3; /* Darker blue accent color */
+    }
+
+    p {
+      margin: 0;
+      font-size: 16px;
+      color: #bbb; /* Lighter gray for the email */
+    }
+  }
+}
+
+/* Bio Section Styling */
+.bio-section {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #bbb; /* Light gray text color */
+}
+
+/* Posts Section Styling */
+.posts-section {
+  margin-top: 30px;
+
+  h3 {
+    font-size: 20px;
+    color: #0056b3; /* Darker blue accent color */
+  }
+
+  .posts-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+
+    .post {
+      position: relative;
+
+      .post-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+    }
+  }
+}
+
+/* Profile Settings Button Styling */
+.profile-settings-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: transparent; /* Transparent background */
+  border: 2px solid #0056b3; /* Darker blue border */
+  border-radius: 50%;
+  padding: 6px; /* Smaller circle */
+  width: 40px;
+  height: 40px;
+}
+
+.profile-settings-btn button {
+  color: #0056b3; /* Darker blue icon color */
+}
+
+hr{
+  border: 1px solid #333;
+  margin: 20px 0;
+}
+
+/* Profile Page on Mobile View */
+@media (max-width: 768px) {
+  .profile {
+    left: 0;
+    width: 100%;
+    padding-top: 0;
+    justify-content: flex-start;
+    padding: 20px;
+  }
+
+  .profile-container {
+    width: 95%;
+    height: 83%;
+    margin: 15px auto;
+    padding: 15px;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .profile-pic {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .profile-info {
+    text-align: center;
+  }
+
+  .bio-section {
+    margin-top: 15px;
+    font-size: 14px;
+  }
+
+  .posts-section {
+    margin-top: 20px;
+  }
+
+  .posts-list {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-settings-btn {
+    top: 20px;
+    right: 20px;
+  }
+
+  /* Fix navbar to the bottom */
+  .navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+
+  /* Adjust follower info section on smaller screens */
+  .profile-info .followers-info {
+    flex-direction: column; /* Stack followers and following vertically */
+    align-items: center;
+    max-width: 100%; /* Allow full width */
+    margin: 8px 0px; /* Add space between the sections */
+  }
+}

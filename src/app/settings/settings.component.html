@@ -3,29 +3,33 @@
   <div class="settings-container">
     <h2>Settings</h2>
     <ul class="settings-list">
-      <li>
-        <i class="fas fa-thumbs-up"></i>
-        <a routerLink="/liked">Liked Content</a>
-      </li>
+      <a routerLink="/liked">
+        <li>
+          <i class="fas fa-thumbs-up"></i>
+          Liked Content
+        </li>
+      </a>
       <li class="access-level">
-        <i class="fas fa-lock"></i> Level of Access
-        <select [(ngModel)]="selectedAccessLevel" class="access-dropdown">
-          <option [value]="accessOptions[0]">
-            Public
-          </option>
-          <option [value]="accessOptions[1]">
-            Friends Only
-          </option>
-          <option [value]="accessOptions[2]">
-            Private
-          </option>
-        </select>
+        <div class="access-text">
+          <i class="fas fa-lock"></i> Level of Access
+        </div>
+        <div class="access-toggle">
+          <span class="access-label" [class.on]="isPublicAccess" [class.off]="!isPublicAccess">
+            {{ isPublicAccess ? 'Public' : 'Private' }}
+          </span>
+          <mat-slide-toggle [(ngModel)]="isPublicAccess" color="primary"></mat-slide-toggle>
+        </div>
       </li>
-      <li class="notifications" (click)="toggleNotifications()">
-        <i class="fas fa-bell"></i> Notifications
-        <button class="toggle-button">
-          {{ isNotificationsOn ? 'On' : 'Off' }}
-        </button>
+      <li class="notifications">
+        <div class="notification-text">
+          <i class="fas fa-bell"></i> Notifications
+        </div>
+        <div class="notification-toggle">
+          <span class="notifications-label" [class.on]="isNotificationsOn" [class.off]="!isNotificationsOn">
+            {{ isNotificationsOn ? 'On' : 'Off' }}
+          </span>
+          <mat-slide-toggle [(ngModel)]="isNotificationsOn" color="primary"></mat-slide-toggle>
+        </div>
       </li>
       <li>
         <i class="fas fa-user-slash"></i> Deactivate Account

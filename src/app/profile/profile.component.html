@@ -1,31 +1,40 @@
-<p>profile works!</p>
-<app-navbar></app-navbar>
-<div class="profile-container">
-  <div class="profile-header">
-    <div class="profile-picture">
-      <img src="icon.png" alt="Profile Picture" />
-      <button class="upload-button">Change Picture</button>
-    </div>
-    <div class="profile-info">
-      <h2>{{ userName }}</h2>
-      <p>{{ userBio }}</p>
-      <button class="edit-profile-button">Edit Profile</button>
-    </div>
-  </div>
-
-  <div class="profile-details">
-    <div class="details-section">
-      <h3>Personal Information</h3>
-      <ul>
-        <li><strong>Email:</strong> {{ userEmail }}</li>
-        <li><strong>Location:</strong> {{ userLocation }}</li>
-      </ul>
+<app-navbar class="navbar"></app-navbar>
+<div class="profile">
+  <div class="profile-container">
+    <div class="profile-header">
+      <img mat-card-image class="profile-pic" src="../../../assets/download.jpeg" alt="Profile Picture">
+      <div class="profile-info">
+        <div class="followers-info">
+          <p><strong>{{ numberOfPosts }} Posts</strong></p>
+          <p><strong>{{ numberOfFriends }} Friends</strong></p>
+        </div>
+        <div class="profile-details">
+          <h2>{{ username }}</h2>
+          <p>{{ email }}</p>
+        </div>
+      </div>
     </div>
 
-    <div class="details-section">
-      <h3>Account Settings</h3>
-      <button class="deactivate-button">Deactivate Account</button>
-      <button class="delete-button">Delete Account</button>
+    <div class="bio-section">
+      <p>{{ bio }}</p>
+    </div>
+
+    <hr>
+
+    <div class="posts-section">
+      <h3>Your Posts</h3>
+      <div class="posts-list">
+        <!-- <div class="post" *ngFor="let post of posts">
+        <img mat-card-image class="post-image" [src]="post.imageUrl" alt="Post Image">
+      </div> -->
+      </div>
+    </div>
+    <div class="profile-settings-btn">
+      <a routerLink="/settings">
+        <button mat-icon-button>
+          <mat-icon>settings</mat-icon>
+        </button>
+      </a>
     </div>
   </div>
 </div>
