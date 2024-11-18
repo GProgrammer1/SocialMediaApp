@@ -12,7 +12,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
 import { CreatePostComponent } from './create-post/create-post.component';
 import { ExploreComponent } from './explore/explore.component';
-import { ChatComponent } from './chat/chat.component';
+import { ChatListComponent } from './chat-list/chat-list.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { HomeStoryComponent } from './home-story/home-story.component';
 import { HomePostComponent } from './home-post/home-post.component';
@@ -29,7 +29,7 @@ export const routes: Routes = [
   { path: 'settings', component: SettingsComponent },
   { path: 'create-post', component: CreatePostComponent },
   { path: 'explore', component: ExploreComponent },
-  { path: 'chat', component: ChatComponent},
+  { path: 'chat', component: ChatListComponent},
   { path: 'navbar', component: NavbarComponent},
   { path: 'home-story', component: HomeStoryComponent},
   { path: 'home-post', component: HomePostComponent},
