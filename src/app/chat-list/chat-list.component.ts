@@ -21,8 +21,8 @@ getChatFriendProfilePicture() {
 throw new Error('Method not implemented.');
 }
   chatList: any;
-  selectChat(_t6: any) {
-    
+  selectChat(chat: Chat) {
+    this.selectedChat = chat;
   }
 
   selectedChat: any;
