@@ -1,0 +1,41 @@
+<div class="chat-container">
+    <!-- Chat List Column -->
+    <div class="chat-list">
+      <h2>Chats</h2>
+      <button (click)="getChats()">Get chats</button>
+        @if (chats$ | async ; as chats){
+            @if (chats.length > 0) {
+                <ul>
+                <li *ngFor="let chat of chats" (click)="selectChat(chat)">
+                    <div class="chat-item">
+                      
+                      <span>{{ getChatFriendName(chat) }}</span>
+                    </div>
+                  </li>
+                </ul>
+              
+            }
+            @else {
+                <p>No chats found</p>
+            }
+        }
+        
+  
+    <!-- Chat Window Column -->
+    <div class="chat-window" *ngIf="selectedChat">
+      <h3>Chat with {{ getChatFriendName(selectedChat) }}</h3>
+      <div class="message-list">
+        <div *ngFor="let message of selectedChat.messages" class="message">
+          <span class="message-text">{{ message.text }}</span>
+        </div>
+      </div>
+      <div class="message-input">
+        <input type="text" [(ngModel)]="newMessage" placeholder="Type a message..." />
+        <button (click)="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Navbar at the bottom -->
+  <app-navbar></app-navbar>
+  
