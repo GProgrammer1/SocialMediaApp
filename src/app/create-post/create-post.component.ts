@@ -6,8 +6,9 @@ import { NavbarComponent } from "../navbar/navbar.component";
   standalone: true,
   imports: [NavbarComponent],
   templateUrl: './create-post.component.html',
-  styleUrl: './create-post.component.css'
+  styleUrls: ['./create-post.component.css']
 })
 export class CreatePostComponent {
+  
 
 }

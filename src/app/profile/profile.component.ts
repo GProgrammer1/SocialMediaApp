@@ -10,4 +10,8 @@ import { NavbarComponent } from "../navbar/navbar.component";
 })
 export class ProfileComponent {
 
+  userName = 'John Doe';
+  userBio = 'A short bio about the user.';
+  userEmail = 'johndoe@example.com';
+  userLocation = 'Lebanon';
 }
