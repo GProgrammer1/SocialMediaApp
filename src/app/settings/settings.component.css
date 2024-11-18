@@ -56,59 +56,51 @@
   color: #007bff; /* Icon color */
 }
 
-/* Toggle Button for Notifications */
-.notifications {
-  position: relative;
-}
-
-.toggle-button {
-  padding: 5px 10px;
-  background-color: #555;
-  color: #a9a9a9;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  position: absolute;
-  right: 10px;
-}
-
-.toggle-button:hover {
-  background-color: #1c1c1c;
-}
-
-/* Logout Special Styling */
-#red {
-  color: #ff4c4c;
-  font-weight: bold;
-}
-
-#red:hover {
-  color: #ff2d2d;
-}
-
-/* Hover Effects */
 .settings-list li:hover {
   background-color: #333;
   color: #0260c5;
 }
 
-/* Access Level Dropdown Styling */
-.access-dropdown {
-  margin-left: auto;
-  padding: 5px;
-  font-size: 1em;
-  color: #a9a9a9;
-  background-color: #333;
-  border: 1px solid #444;
-  border-radius: 5px;
-  appearance: none;
-  cursor: pointer;
+#red{
+  color: rgb(255, 70, 70);
+  font-weight: bold;
 }
 
-.access-dropdown option {
-  background-color: #333;
+#red:hover{
+  color: rgb(230, 0, 0);
+}
+
+/* Common Styling for Access Level and Notifications */
+.access-level, .notifications {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.access-text, .notification-text {
+  flex-grow: 1;
+}
+
+.access-label, .notifications-label {
+  margin-right: 10px; /* Space between text and toggle button */
   color: #a9a9a9;
+}
+
+.access-toggle, .notification-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Label styling for 'On' and 'Off' states */
+.access-toggle .on, .notification-toggle .on {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.access-toggle .off, .notification-toggle .off {
+  color: #a9a9a9;
+  font-weight: bold;
 }
 
 a{
@@ -117,7 +109,6 @@ a{
 }
 a:hover{
   color: #0260c5;
-
 }
 
 @media (max-width: 768px) {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -10,21 +11,25 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
 
+
 @Component({
   selector: 'app-settings',
   standalone: true,
+
   imports: [
     FormsModule, MatButtonModule, CommonModule,
     MatIconModule, MatOptionModule, MatListModule, MatDialogModule, NavbarComponent
   ],
+
   templateUrl: './settings.component.html',
-  styleUrls: ['./settings.component.css']
+  styleUrl: './settings.component.css'
 })
 export class SettingsComponent {
 
   isNotificationsOn: boolean = false;
   accessOptions: string[] = ['Public', 'Friends Only', 'Private'];
   selectedAccessLevel: string = this.accessOptions[0];
+isPublicAccess: any;
 
   constructor(private authService: AuthService, private dialog: MatDialog, private router: Router) {}
 
@@ -97,6 +102,9 @@ export class SettingsComponent {
   isSelectedOption(option: string): boolean {
     return this.selectedAccessLevel === option;
   }
+
+ 
+
 }
 
 // Inline Delete Confirmation Dialog Component

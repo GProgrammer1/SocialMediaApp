@@ -1,4 +1,6 @@
 
+
+<p>profile works!</p>
 <app-navbar></app-navbar>
 <div class="profile-container">
   <div class="profile-header">
@@ -26,6 +28,44 @@
       <h3>Account Settings</h3>
       <button class="deactivate-button">Deactivate Account</button>
       <button class="delete-button">Delete Account</button>
+<app-navbar class="navbar"></app-navbar>
+<div class="profile">
+  <div class="profile-container">
+    <div class="profile-header">
+      <img mat-card-image class="profile-pic" src="../../../assets/download.jpeg" alt="Profile Picture">
+      <div class="profile-info">
+        <div class="followers-info">
+          <p><strong>{{ numberOfPosts }} Posts</strong></p>
+          <p><strong>{{ numberOfFriends }} Friends</strong></p>
+        </div>
+        <div class="profile-details">
+          <h2>{{ userName }}</h2>
+          <p>{{ email }}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bio-section">
+      <p>{{ bio }}</p>
+    </div>
+
+    <hr>
+
+    <div class="posts-section">
+      <h3>Your Posts</h3>
+      <div class="posts-list">
+        <!-- <div class="post" *ngFor="let post of posts">
+        <img mat-card-image class="post-image" [src]="post.imageUrl" alt="Post Image">
+      </div> -->
+      </div>
+    </div>
+    <div class="profile-settings-btn">
+      <a routerLink="/settings">
+        <button mat-icon-button>
+          <mat-icon>settings</mat-icon>
+        </button>
+      </a>
+
     </div>
   </div>
 </div>
