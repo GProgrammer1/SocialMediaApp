@@ -204,6 +204,8 @@ authRouter.delete('/deleteAll', async (req, res) => {
 authRouter.get('/users', async (req, res) => {
     try{
         const users = await User.find();
+        console.log(users);
+        
         res.status(200).send({users: users});
     }
     catch(err){
@@ -302,36 +304,36 @@ authRouter.post('/resetPassword/:token', async (req, res) => {
 }
 );
 
-// authRouter.post('/login', async (req, res) => {
-//     const { email, password } = req.body;
-//     try{
-//         const user = await User.findOne({email: email});
-//         console.log(user);
+authRouter.post('/login', async (req, res) => {
+    const { email, password } = req.body;
+    try{
+        const user = await User.findOne({email: email});
+        console.log(user);
         
-//         if(!user) res.status(404).send({err: 'User not found'});
-//         const isMatch = await bcrypt.compare(password, user.password);
-//         if(!isMatch) res.status(401).send({err: 'Invalid password'});
+        if(!user) res.status(404).send({err: 'User not found'});
+        const isMatch = await bcrypt.compare(password, user.password);
+        if(!isMatch) res.status(401).send({err: 'Invalid password'});
 
-//         if(user.accountStatus !== 'active') res.status(401).send({err: 'Account is inactive'});
+        if(user.accountStatus !== 'active') res.status(401).send({err: 'Account is inactive'});
         
-//         const refreshToken = jwt.sign({email: email}, process.env.SESSION_REFRESH_KEY, {expiresIn: '7d'});
-//         const token = jwt.sign({email: email}, process.env.SECRET_AUTH_KEY, {expiresIn: '1h'});
+        const refreshToken = jwt.sign({email: email}, process.env.SESSION_REFRESH_KEY, {expiresIn: '7d'});
+        const token = jwt.sign({email: email}, process.env.SECRET_AUTH_KEY, {expiresIn: '1h'});
 
-//         console.log(refreshToken, token);
+        console.log(refreshToken, token);
         
-//         await user.updateOne({refreshToken: new RefreshToken({token: refreshToken})});
+        await user.updateOne({refreshToken: new RefreshToken({token: refreshToken})});
 
-//         console.log(res);
+        console.log(res);
         
         
-//         res.status(200).send({authToken: token, email: email});
+        res.status(200).send({authToken: token, email: email});
         
-//     }
-//     catch(err) {
-//         res.status(500).send({err: err.message});
-//     }
-// }
-// );
+    }
+    catch(err) {
+        res.status(500).send({err: err.message});
+    }
+}
+);
 
 authRouter.put('/deactivate', async (req, res) => {
     const { email } = req.body;
@@ -388,48 +390,19 @@ authRouter.put('/updateUser/:email', async (req, res) => {
 }
 );
 
-// authRouter.post('/logout', async (req, res) => {
-//     const {email} = req.body ;
-//     try {
-//     const user = await User.findOne({email: email});
-//     user.refreshToken = '';
-//     await user.save();
-//     res.status(200).send({ message: 'Logged out successfully' });
-//     }
-//     catch(err){
-//         res.status(500).send({err: err.message});
-//     }
-// });
+authRouter.post('/logout', async (req, res) => {
+    const {email} = req.body ;
+    try {
+    const user = await User.findOne({email: email});
+    user.refreshToken = '';
+    await user.save();
+    res.status(200).send({ message: 'Logged out successfully' });
+    }
+    catch(err){
+        res.status(500).send({err: err.message});
+    }
+});
 
-// authRouter.post('/refreshToken', async (req, res) => {
-   
-//     const { email } = req.body;
-//     const user = await User.findOne({ email: email });
-//     if (!user) {
-//         return res.status(404).send({ error: 'User not found' });
-//     }
-
-//     const refreshTokenId = user.refreshToken;
-//     const refreshToken = await RefreshToken.findById(refreshTokenId); 
-//     const tokenString = refreshToken.token;
-//     if (!refreshToken) {
-//         return res.status(401).send({ error: 'No refresh token provided' });
-//     }
-
-//     try {
-//         const decoded = jwt.verify(tokenString, process.env.SESSION_REFRESH_KEY);
-//         const user = await User.findOne({ email: decoded.email });
-//         if (!user) {
-//             res.status(404).send({ error: 'User not found' });
-//         }
-//         const authToken = jwt.sign({ email: user.email }, process.env.SECRET_AUTH_KEY, { expiresIn: '1h' });
-//         res.status(200).send({ authToken: authToken, user: user });
-//     }
-//     catch (e) {
-//         res.status(401).send({ error: e.message });
-//     }
-// }
-// );
 
 
 
@@ -449,8 +422,17 @@ authRouter.post('/logout', async (req, res) => {
 
 // Refresh token route
 authRouter.post('/refreshToken', async (req, res) => {
+    console.log('reached refresh method');
+    
     try {
-        const refreshToken = req.cookies.refreshToken; // Access the refresh token from cookies
+        console.log('reached refresh method');
+        
+        console.log(req.cookies);
+        
+        const refreshToken = req.cookies.refreshToken;
+        console.log(refreshToken);
+        
+         // Access the refresh token from cookies
         if (!refreshToken) {
             return res.status(401).send({ error: 'No refresh token provided' });
         }
@@ -458,12 +440,14 @@ authRouter.post('/refreshToken', async (req, res) => {
         const decoded = jwt.verify(refreshToken, process.env.SESSION_REFRESH_KEY);
         const user = await User.findOne({ email: decoded.email });
         if (!user) {
-            return res.status(404).send({ error: 'User not found' });
+            return res.status(404).send({ error: 'We didnt find the user' });
         }
 
         const authToken = jwt.sign({ email: user.email }, process.env.SECRET_AUTH_KEY, { expiresIn: '1h' });
         res.status(200).send({ authToken: authToken, user: user });
     } catch (e) {
+        console.log('errorr :: ');
+        
         res.status(401).send({ error: e.message });
     }
 });
@@ -480,7 +464,7 @@ authRouter.post('/login', async (req, res) => {
         }
 
         const refreshToken = jwt.sign({ email: user.email }, process.env.SESSION_REFRESH_KEY, { expiresIn: '7d' });
-        res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true, sameSite: 'strict' }); // Set the refresh token as an HTTP-only cookie
+        res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true, sameSite: 'none' , maxAge: 7 * 24 * 60 * 60*1000}); // Set the refresh token as an HTTP-only cookie
 
         const authToken = jwt.sign({ email: user.email }, process.env.SECRET_AUTH_KEY, { expiresIn: '1h' });
         res.status(200).send({ authToken: authToken, user: user });
@@ -489,12 +473,10 @@ authRouter.post('/login', async (req, res) => {
     }
 });
 
-module.exports = authRouter;
-
-
 
 
 module.exports = authRouter;
+
 
 
 
