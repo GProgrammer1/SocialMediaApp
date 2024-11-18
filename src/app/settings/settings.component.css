@@ -1,0 +1,143 @@
+/* Main Settings Layout */
+.settings {
+  position: relative;
+  left: 200px;
+  width: calc(100% - 200px);
+  height: 100%;
+  background-color: #1a1a1a; /* Dark background */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+  box-sizing: border-box;
+}
+
+/* Settings Container Styling */
+.settings-container {
+  width: 90%;
+  max-width: 700px;
+  background-color: #202020;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  color: #a9a9a9;
+}
+
+.settings-container h2 {
+  margin-bottom: 20px;
+  color: #a9a9a9;
+  font-size: 1.8em;
+  font-weight: 500;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 10px;
+}
+
+/* Settings List Styling */
+.settings-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.settings-list li {
+  padding: 15px 10px;
+  font-size: 1.1em;
+  color: #a9a9a9;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-bottom: 1px solid #444;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.settings-list li i {
+  margin-right: 10px;
+  color: #007bff; /* Icon color */
+}
+
+.settings-list li:hover {
+  background-color: #333;
+  color: #0260c5;
+}
+
+#red{
+  color: rgb(255, 70, 70);
+  font-weight: bold;
+}
+
+#red:hover{
+  color: rgb(230, 0, 0);
+}
+
+/* Common Styling for Access Level and Notifications */
+.access-level, .notifications {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.access-text, .notification-text {
+  flex-grow: 1;
+}
+
+.access-label, .notifications-label {
+  margin-right: 10px; /* Space between text and toggle button */
+  color: #a9a9a9;
+}
+
+.access-toggle, .notification-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+/* Label styling for 'On' and 'Off' states */
+.access-toggle .on, .notification-toggle .on {
+  color: #007bff;
+  font-weight: bold;
+}
+
+.access-toggle .off, .notification-toggle .off {
+  color: #a9a9a9;
+  font-weight: bold;
+}
+
+a{
+  text-decoration: none;
+  color: #a9a9a9;
+}
+a:hover{
+  color: #0260c5;
+}
+
+@media (max-width: 768px) {
+  .settings {
+    left: 0;
+    width: 100%;
+    padding-top: 0;
+    justify-content: flex-start;
+    padding: 20px;
+  }
+
+  .settings-container {
+    width: 95%;
+    margin: 15px auto;
+    padding: 15px;
+  }
+
+  .settings-container h2 {
+    font-size: 1.5em;
+  }
+
+  .settings-list li {
+    font-size: 1em;
+  }
+
+  .navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+}
