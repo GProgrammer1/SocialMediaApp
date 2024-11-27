@@ -1,5 +1,5 @@
 export interface User {
-    id: string;
+
     _id?: number;
     name: string ;
     email: string;
@@ -44,7 +44,8 @@ export interface Post {
     comments?: CommentText[];
     uploadDate: Date ;
     lastUpdateDate?: Date ;
-    contentType: string;
+    contentType: string; 
+    text?: string;
     mediaUrl? : string ;
     privacyStatus: 'Public' | 'Private' | 'Friends Only';
     userId: number ;
@@ -52,7 +53,6 @@ export interface Post {
 
 export interface Chat {
     _id?: number;
-
     participants: User[];
     messages?: Message[];
 }

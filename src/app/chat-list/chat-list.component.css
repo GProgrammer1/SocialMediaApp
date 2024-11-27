@@ -1,3 +1,27 @@
+
+/* 
+app-navbar {
+    width: 100%; 
+    position: fixed;
+    height: 60px;
+    bottom: 0;
+} */
+
+.chat-container {
+  display: flex;
+  height: calc(100vh - 50px); /* Adjust based on navbar height */
+  margin-left: 200px; /* Space for the fixed navbar */
+}
+
+  
+  .chat-list {
+    width: 50%;
+    border-right: 1px solid #ddd;
+    /* padding: 1rem; */
+    overflow-y: auto;
+    margin-right: 20px;
+  }
+
 /* Chat Container Styling */
 .chat-container {
   display: flex;
@@ -140,13 +164,107 @@
     width: 30%;
     min-width: 250px;
     overflow-y: auto; /* Allow scrolling within chat list */
+
   }
   .custom-x{
     position: fixed;
     bottom: 0;
     width: 100%;
   }
+
+  
+  .chat-list li {
+    cursor: pointer;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .chat-list li:hover {
+    background-color: #f5f5f5;
+  }
+
+  .chat-item {
+    word-wrap: break-word;  /* Ensures text breaks into new line when reaching the edge */
+    overflow-wrap: break-word;  /* Alternative for word wrapping */
+    white-space: normal; 
+    display: flex;
+    align-items: center; 
+    gap: 4px;/* Ensures wrapping of text */
 }
+
+
+.profile-container {
+  position: relative;
+  display: inline-block;
+}
+
+
+
+
+.profile-pic {
+  width: 50px; /* or your desired size */
+  height: 50px; /* or your desired size */
+  border-radius: 50%;
+  border: 2px solid #fff; /* Optional: white border to make the profile picture stand out */
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: 10px;
+  right: 3px;
+  width: 8px;  /* Size of the green circle */
+  height: 8px; /* Size of the green circle */
+  border-radius: 50%;
+  background-color: rgb(13, 177, 13); /* Green color */
+  border: 2px solid white; /* Optional: white border around the green circle */
+}
+
+app-chat {
+  width: 50vw;
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.friend-name {
+  vertical-align: middle;
+}
+ 
+  
+ 
+  @media screen and (max-width: 768px) {
+    .chat-container {
+      margin-left: 0;
+      display: flex;
+    }
+
+    .chat-list{ 
+      display: none;
+    }
+
+   
+
+
+/*   
+    .chat-list {
+      width: 100%;
+      margin-right: 0;
+    }
+  
+    .chat-window {
+      width: 100%;
+    } */
+
+    /* .navbar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    } */
+    
+  }
+  
+
+}
+
 
 @media (max-width: 768px) {
   /* Stack elements for smaller screens */

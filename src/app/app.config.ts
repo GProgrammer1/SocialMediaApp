@@ -11,7 +11,9 @@ export const appConfig: ApplicationConfig = {
 
 
   providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideAnimationsAsync(), provideAnimationsAsync(),
-    provideHttpClient(withInterceptors([httpInterceptor])), { provide: 'autoLoginResolver', useValue: autoLoginResolver }, provideAnimationsAsync()
+
+    provideHttpClient(withInterceptors([httpInterceptor])), { provide: 'autoLoginResolver', useValue: autoLoginResolver }
+
     
   ]
 

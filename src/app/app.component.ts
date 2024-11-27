@@ -32,6 +32,9 @@ export class AppComponent  {
     const user = sessionStorage.getItem('user');
     if (user) {
       const userObj = JSON.parse(user);
+
+      console.log("User is offline");
+
       this.chatService.updateUserState(userObj._id, false);
     }
   }

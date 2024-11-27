@@ -18,7 +18,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
   imports: [
     FormsModule, MatButtonModule, CommonModule,
-    MatIconModule, MatOptionModule, MatListModule, MatDialogModule, NavbarComponent, MatSlideToggleModule, LikedComponent, RouterLink
+    MatIconModule, MatOptionModule, MatListModule, MatDialogModule, NavbarComponent, MatSlideToggleModule
+
   ],
 
   templateUrl: './settings.component.html',
