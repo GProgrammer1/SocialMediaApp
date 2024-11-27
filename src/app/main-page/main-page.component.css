@@ -39,7 +39,7 @@
   width: 409px;
   font-size: calc(100% + 0.7em);
   text-align: center;
-  
+
   /* 3D Effect: Text shadow to create depth */
   text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2), 0px 0px 25px rgba(0, 188, 212, 0.5);
 

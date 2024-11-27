@@ -22,7 +22,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    return this.http.post('http://localhost:3000/auth/login', { email, password, withCredentials: true,
+    return this.http.post('http://localhost:3000/auth/login', { email, password},{ withCredentials: true,
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       }),

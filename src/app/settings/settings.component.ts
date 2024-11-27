@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { LikedComponent } from '../liked/liked.component';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -10,7 +10,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-settings',
@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 
   imports: [
     FormsModule, MatButtonModule, CommonModule,
-    MatIconModule, MatOptionModule, MatListModule, MatDialogModule, NavbarComponent
+    MatIconModule, MatOptionModule, MatListModule, MatDialogModule, NavbarComponent, MatSlideToggleModule, LikedComponent, RouterLink
   ],
 
   templateUrl: './settings.component.html',
@@ -103,7 +103,7 @@ isPublicAccess: any;
     return this.selectedAccessLevel === option;
   }
 
- 
+
 
 }
 
@@ -112,7 +112,7 @@ isPublicAccess: any;
   template: `
     <h2 mat-dialog-title>Account Deletion Confirmation</h2>
     <mat-dialog-content>
-      Deleting your account will permanently remove all your data, including your posts, likes, and comments. 
+      Deleting your account will permanently remove all your data, including your posts, likes, and comments.
       This action cannot be undone. Are you sure you want to proceed with deleting your account?
     </mat-dialog-content>
     <mat-dialog-actions align="end">
@@ -137,7 +137,7 @@ export class DeleteConfirmationDialog {
   template: `
     <h2 mat-dialog-title>Account Deactivation Confirmation</h2>
     <mat-dialog-content>
-      Deactivating your account will temporarily disable your profile and remove your content from visibility. 
+      Deactivating your account will temporarily disable your profile and remove your content from visibility.
       You can reactivate your account anytime by logging back in. Are you sure you want to deactivate?
     </mat-dialog-content>
     <mat-dialog-actions align="end">

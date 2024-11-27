@@ -1,0 +1,21 @@
+<h2 mat-dialog-title>Friends List</h2>
+<mat-dialog-content>
+  <div>
+    <ul class="friends-list">
+      <!-- <li *ngFor="let friend of friends" class="friend-item"> -->
+      <li>
+        <img [src]="'assets/default-profile-pic.jpeg'" alt="Friend Picture" />
+        <div class="friend-info">
+          <p><strong>name</strong></p>
+          <p>email</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <ng-template #noFriends>
+    <p>No friends to show.</p>
+  </ng-template>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

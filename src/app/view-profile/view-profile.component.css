@@ -10,7 +10,6 @@
   align-items: flex-start;
   padding-top: 20px;
   box-sizing: border-box;
-  overflow: auto;
 }
 
 /* Profile Container */
@@ -25,25 +24,6 @@
   margin: 20px;
   color: #a9a9a9; /* Light gray text color */
   position: relative; /* For absolute positioning of settings and edit buttons */
-  overflow: auto;
-}
-
-.profile-container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.profile-container::-webkit-scrollbar-track {
-  background: #2a2a2a; /* Dark track to blend with container */
-  border-radius: 8px;
-}
-
-.profile-container::-webkit-scrollbar-thumb {
-  background: #007bff; /* Primary accent color */
-  border-radius: 8px;
-}
-
-.profile-container::-webkit-scrollbar-thumb:hover {
-  background: #0056b3; /* Darker accent on hover */
 }
 
 /* Profile Header Section */
@@ -79,9 +59,6 @@
       font-size: 14px;
       color: #bbb; /* Lighter gray for followers info */
     }
-  }
-  .followers{
-    cursor: pointer;
   }
 
   .profile-details {

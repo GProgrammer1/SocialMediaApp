@@ -57,7 +57,10 @@ export class LoginComponent {
         const token = response.authToken;
         
         sessionStorage.setItem('authToken', token);
+        sessionStorage.setItem('email', email);
+        sessionStorage.setItem('user', JSON.stringify(response.user));
         this.loading = false;
+        this.router.navigate(['/home']);
         
       },
       error: (error: {err: string}) => {

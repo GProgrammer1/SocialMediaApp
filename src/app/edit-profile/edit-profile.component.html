@@ -1,0 +1,56 @@
+<app-navbar class="navbar"></app-navbar>
+<div class="edit-profile">
+  <div class="edit-profile-container">
+    <h2>Edit Profile</h2>
+    <form [formGroup]="editProfileForm" class="edit-profile-form" (ngSubmit)="saveChanges()">
+      <!-- Profile Picture -->
+      <div class="profile-pic-section">
+        <!--<img
+          class="profile-pic-preview"
+          [src]="profileImage || 'assets/default-profile.png'"
+          alt="Profile Picture"
+        />-->
+        <div class="profile-pic-upload">
+          <label for="profilePicture">Update Profile Picture</label><br />
+          <input type="file" id="profilePicture" (change)="onFileSelect($event)" />
+        </div>
+      </div>
+
+      <!-- Username -->
+      <div>
+        <label for="username">Username</label><br />
+        <input id="username" type="text" formControlName="username" placeholder="Enter your username" />
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="email">Email</label><br />
+        <input id="email" type="email" formControlName="email" placeholder="Enter your email" />
+      </div>
+
+      <!-- Bio -->
+      <div>
+        <label for="bio">Bio</label><br />
+        <textarea id="bio" formControlName="bio" rows="3" placeholder="Write a short bio"></textarea>
+      </div>
+
+      <!-- Profession -->
+      <div>
+        <label for="profession">Profession</label><br />
+        <input id="profession" type="text" formControlName="profession" placeholder="Your profession" />
+      </div>
+
+      <!-- Location -->
+      <div>
+        <label for="location">Location</label><br />
+        <input id="location" type="text" formControlName="location" placeholder="Your location" />
+      </div>
+
+      <!-- Form Buttons -->
+      <div class="form-buttons">
+        <button type="submit" class="save-btn" [disabled]="!editProfileForm.valid">Save Changes</button>
+        <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
