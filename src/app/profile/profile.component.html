@@ -3,15 +3,15 @@
   <div class="profile-container">
     <div class="profile-header">
       <img mat-card-image class="profile-pic"
-        [src]="profilePicture ? profilePicture : 'assets/default-profile-pic.jpeg'" alt="Profile Picture" />
+        [src]="profilePicture" onerror="this.src = '../../../assets/default-profile-pic.jpeg'" alt="Profile Picture" />
       <div class="profile-info">
         <div class="followers-info">
-          <p><strong>{{ numberOfPosts }} Posts</strong></p>
-          <p class="followers"><strong (click)="openFriendsList()">{{ numberOfFriends }} Friends</strong></p>
+          <p><strong>{{ posts.length }} Posts</strong></p>
+          <p class="followers"><strong (click)="openFriendsList()">{{ friends.length }} Friends</strong></p>
         </div>
         <div class="profile-details">
-          <h2>{{ username }}</h2>
-          <p>{{ email }}</p>
+          <h2>{{ user.name }}</h2>
+          <p>{{ user.email }}</p>
         </div>
       </div>
     </div>
@@ -23,7 +23,7 @@
     <hr>
 
     <div class="posts-section">
-      <h3>Your Posts</h3>
+      <!-- <h3>Your Posts</h3>
       <div class="posts-list">
         <div class="post">
         <img mat-card-image class="post-image" src="assets/default-profile-pic.jpeg" alt="Post Image">
@@ -47,7 +47,21 @@
         <img mat-card-image class="post-image" src="assets/default-profile-pic.jpeg" alt="Post Image">
       </div>
 
-      </div>
+      </div> -->
+      @if (posts.length === 0) {
+        <p>No posts yet</p>
+      }
+      
+      @else {
+        @for (post of posts ; track post) {
+         
+        <div class="post">
+        
+          <img mat-card-image class="post-image" [src]="post.mediaUrl"  alt="Post Image">
+        </div>
+      }
+      }
+      
     </div>
     <div class="profile-settings-edit-btns">
       <!-- Settings Button -->

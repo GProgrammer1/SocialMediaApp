@@ -8,7 +8,7 @@ import { Chat, Message, User } from '../models';
 })
 export class ChatService implements OnDestroy {
   private socket!: Socket;
-  private periodicCheck$ = interval(4000000);
+  private periodicCheck$ = interval(10000);
 
   onlineUsersSubject = new BehaviorSubject<User[]>([]);
   onlineUsers$ = this.onlineUsersSubject.asObservable();
@@ -36,6 +36,8 @@ export class ChatService implements OnDestroy {
     this.socket.on('get-online-users', (users) => {
       console.log(users);
       this.onlineUsersSubject.next(users);
+      console.log('Online users in chat service sockeg listener:', users);
+      
     });
 
     this.socket.on('new_message', (message) => {
@@ -65,6 +67,15 @@ export class ChatService implements OnDestroy {
       console.log(messages);
       this.messagesSubject.next(messages);
     });
+
+    this.socket.on('disconnect', () => {
+      const user = JSON.parse(sessionStorage.getItem('user') || '{}');
+      if (user && user._id) {
+        this.updateUserState(user._id, false);
+      }
+    });
+
+    
 
     this.setupPeriodicOnlineUsersCheck();
   }
@@ -137,4 +148,5 @@ export class ChatService implements OnDestroy {
   disconnect() {
     this.socket.disconnect();
   }
+
 }

@@ -27,15 +27,33 @@ export class AppComponent  {
   }
 
   @HostListener('window:beforeunload', ['$event'])
-  onBeforeUnload(event: Event) {
-    // Only mark the user as offline when the tab is closing
-    const user = sessionStorage.getItem('user');
-    if (user) {
-      const userObj = JSON.parse(user);
+onBeforeUnload(event: Event) {
+  this.setUserOffline();
+}
 
-      console.log("User is offline");
-
-      this.chatService.updateUserState(userObj._id, false);
-    }
+@HostListener('document:visibilitychange')
+onVisibilityChange() {
+  if (document.visibilityState === 'hidden') {
+    this.setUserOffline();
+  } else if (document.visibilityState === 'visible') {
+    this.setUserOnline();
   }
+}
+
+private setUserOnline() {
+  const user = sessionStorage.getItem('user');
+  if (user) {
+    const userObj = JSON.parse(user);
+    this.chatService.updateUserState(userObj._id, true);
+  }
+}
+
+private setUserOffline() {
+  const user = sessionStorage.getItem('user');
+  if (user) {
+    const userObj = JSON.parse(user);
+    this.chatService.updateUserState(userObj._id, false);
+  }
+}
+
 }

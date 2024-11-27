@@ -77,8 +77,12 @@ export class CreatePostComponent {
       
       this.postService.createPost(formData).subscribe(
         {
-          next: (res) => {
-            console.log('Post created successfully', res);
+          next: (res: any) => {
+            const newUser = res.updatedUser;
+            const newPost = res.updatedPost;
+            console.log(newPost);
+            
+            sessionStorage.setItem('user', JSON.stringify(newUser));
           },
           error: (err) => {
             console.error('Error creating post', err);

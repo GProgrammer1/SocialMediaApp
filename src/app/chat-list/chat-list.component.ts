@@ -145,5 +145,5 @@ export class ChatListComponent implements OnDestroy, OnInit {
 
   getChatFriendProfilePicture(chat: Chat) {
 
-}
+  }
 }

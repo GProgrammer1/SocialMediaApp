@@ -8,14 +8,17 @@ app-navbar {
 } */
 
 .chat-container {
+  /* width: 90vw; Full width for chat container */
   display: flex;
   height: calc(100vh - 50px); /* Adjust based on navbar height */
   margin-left: 200px; /* Space for the fixed navbar */
 }
 
+
+
   
   .chat-list {
-    width: 50%;
+    /* width: 50%; */
     border-right: 1px solid #ddd;
     /* padding: 1rem; */
     overflow-y: auto;
@@ -25,6 +28,7 @@ app-navbar {
 /* Chat Container Styling */
 .chat-container {
   display: flex;
+  /* width: 100vw; Full width for chat container */
   height: 100vh;
   margin-left: 200px; /* Space for the fixed navbar */
   background-color: #1a1a1a; /* Dark background for consistency */
@@ -69,6 +73,16 @@ app-navbar {
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
 }
+.status-indicator {
+  position: relative;
+  bottom: 24px;
+  left: 34px; 
+  width: 8px;  /* Size of the green circle */
+  height: 8px; /* Size of the green circle */
+  border-radius: 50%;
+  background-color: rgb(13, 177, 13); /* Green color */
+  border: 2px solid white; /* Optional: white border around the green circle */
+}
 
 .chat-list li:hover {
   background-color: #333;
@@ -93,17 +107,23 @@ app-navbar {
   overflow-y: hidden; /* Prevent scrolling inside the chat window */
 }
 
-.message-list {
+app-chat {
+  width: 70%;
+  overflow: auto;
+  overflow-x: auto;
+}
+
+/* .message-list {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  overflow-y: auto; /* Allow scrolling for the message list */
+  overflow-y: auto; 
   margin-bottom: 1rem;
   padding-right: 0.5rem;
-}
+} */
 
 /* Messages Styling */
-.MyMessages {
+/* .MyMessages {
   background-color: #1b3b5f;
   color: #e0e6ed;
   align-self: flex-end;
@@ -113,9 +133,9 @@ app-navbar {
   max-width: 60%;
   word-wrap: break-word;
   box-shadow: 0px 4px 8px rgba(41, 120, 181, 0.5);
-}
+} */
 
-.OtherMessages {
+/* .OtherMessages {
   background-color: #333;
   color: #e0e6ed;
   align-self: flex-start;
@@ -124,10 +144,10 @@ app-navbar {
   margin-bottom: 5px;
   max-width: 60%;
   word-wrap: break-word;
-}
+} */
 
 /* Scroll-to-Bottom Button */
-.scroll-to-bottom {
+/* .scroll-to-bottom {
   position: fixed;
   bottom: 10px;
   right: 10px;
@@ -142,11 +162,11 @@ app-navbar {
   align-items: center;
   cursor: pointer;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
-}
-
+} */
+/* 
 .scroll-to-bottom:hover {
   background-color: #0056b3; /* Darker blue on hover */
-}
+/*} */
 
 /* Responsive Design */
 @media (max-width: 1100px) {
@@ -208,19 +228,10 @@ app-navbar {
   border: 2px solid #fff; /* Optional: white border to make the profile picture stand out */
 }
 
-.status-indicator {
-  position: absolute;
-  bottom: 10px;
-  right: 3px;
-  width: 8px;  /* Size of the green circle */
-  height: 8px; /* Size of the green circle */
-  border-radius: 50%;
-  background-color: rgb(13, 177, 13); /* Green color */
-  border: 2px solid white; /* Optional: white border around the green circle */
-}
+
 
 app-chat {
-  width: 50vw;
+  width: 100vw;
   overflow: auto;
   overflow-x: hidden;
 }

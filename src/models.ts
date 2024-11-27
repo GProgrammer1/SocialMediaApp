@@ -5,7 +5,7 @@ export interface User {
     email: string;
     password: string;
     role: 'User' | 'Admin';
-    friendsIds?: number[];
+    friends?: User[];
     posts?: Post[];
     profilePic?: string;
     bio?: string ;
@@ -19,6 +19,7 @@ export interface User {
     accountPrivacy: 'Private' | 'Public';
     emailToken?: EmailVerificationToken;
     resetToken?: ResetToken;
+    notificiations: boolean;
 }
 
 export interface ResetToken {

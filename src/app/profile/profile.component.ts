@@ -11,6 +11,10 @@ import { RouterLink } from '@angular/router';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FriendsListComponent } from '../friends-list/friends-list.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Post, User } from '../../models';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -19,17 +23,68 @@ import { MatDialog } from '@angular/material/dialog';
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css'],
 })
-export class ProfileComponent {
+export class ProfileComponent implements OnInit {
   profilePicture: string | null = null; // Null if no custom picture is set
-  bio: string = 'This is my bio...';
-  followersCount: number = 320;
-  followingCount: number = 180;
-  postsCount: number = 10;
+  bio: string | null = null; // Null if no bio is set
+    posts: Post[] = []; 
+  user!: User; 
 
+  profileSubject! : BehaviorSubject<User>;
+  profile$! : Observable<User>;
+  friends: User[] = [];
+  constructor(private dialog: MatDialog, private userService: UserService, private router: Router) {
+  
+    this.user = JSON.parse(sessionStorage.getItem('user') || '{}');
+    this.profileSubject = new BehaviorSubject<User>(this.user);
+    this.profile$ = this.profileSubject.asObservable();
+  }
 
   editProfile() {
     console.log('Edit profile clicked');
     // Implement edit profile logic here
+  }
+
+  ngOnInit(): void {
+    console.log("User: ", this.user);
+    
+      this.profileSubject.subscribe((user: User) => {
+        console.log('User:', user);
+        
+        this.profilePicture = user.profilePic!;
+        this.posts = user.posts!;
+        this.bio = user.bio!;
+        this.friends = user.friends!;
+      
+
+      });
+      const state = this.router.getCurrentNavigation()?.extras.state as { updated: boolean };
+      if (state?.updated) {
+        this.user = JSON.parse(sessionStorage.getItem('user') || '{}');
+        this.profileSubject.next(this.user);
+      }
+
+
+  }
+
+  getProfilePicture() {
+    this.userService.getProfilePicture(this.user._id!).subscribe(
+      {
+        next: (response: any)=> {
+          const url = response.profilePic ;
+          if (!url) {
+            this.profileSubject.next({...this.user, profilePic: ''});
+            return;
+          }
+          this.profileSubject.next({...this.user, profilePic: url});
+
+        },
+        error: (error: any) => {
+          console.log(error);
+          this.profileSubject.next({...this.user, profilePic: ''});
+        }
+      });
+
+
   }
 
   openSettings() {
@@ -38,32 +93,8 @@ export class ProfileComponent {
   }
 
 
-  userName = 'John Doe';
-  userBio = 'A short bio about the user.';
-  userEmail = 'johndoe@example.com';
-  userLocation = 'Lebanon';
 
-
-
-  // Example data, you can replace it with dynamic data from a service
-  username = 'John Doe';
-  email = 'johndoe@example.com';
-  numberOfFriends = 150;
-  numberOfPosts = 10;
-  posts = [
-    { imageUrl: 'path_to_post_image1.jpg' },
-    { imageUrl: 'path_to_post_image2.jpg' },
-    { imageUrl: 'path_to_post_image3.jpg' }
-  ];
-
-  friends = [
-    { name: 'John Doe', email: 'john@example.com', profilePicture: 'assets/john-pic.jpeg' },
-    { name: 'Jane Smith', email: 'jane@example.com', profilePicture: null },
-    // Add more friends as needed
-  ];
-
-  constructor(private dialog: MatDialog) {}
-
+  
   openFriendsList() {
     this.dialog.open(FriendsListComponent, {
       data: { friends: this.friends },

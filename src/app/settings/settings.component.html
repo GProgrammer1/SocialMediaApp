@@ -10,8 +10,7 @@
         </li>
       </a>
       <li class="access-level">
-        
-        
+
 
 
         <div class="access-text">
@@ -21,7 +20,8 @@
           <span class="access-label" [class.on]="isPublicAccess" [class.off]="!isPublicAccess">
             {{ isPublicAccess ? 'Public' : 'Private' }}
           </span>
-          <mat-slide-toggle [(ngModel)]="isPublicAccess" color="primary"></mat-slide-toggle>
+        
+          <input type="checkbox" (change)="changeAccountPrivacy()" [(ngModel)]="isPublicAccess">
         </div>
       </li>
       <li class="notifications">
@@ -32,20 +32,20 @@
           <span class="notifications-label" [class.on]="isNotificationsOn" [class.off]="!isNotificationsOn">
             {{ isNotificationsOn ? 'On' : 'Off' }}
           </span>
-          <mat-slide-toggle [(ngModel)]="isNotificationsOn" color="primary"></mat-slide-toggle>
+          <input type="checkbox" [(ngModel)]="isNotificationsOn" (change)="changeNotification()">
         </div>
       </li>
-      <li (click)="deactivateAccount()">
+      <!-- <li (click)="deactivateAccount()">
         <i class="fas fa-user-slash"></i> Deactivate Account
 
 
-      </li>
+      </li> -->
       <li id="red" (click)="deleteAccount()">
         <i class="fas fa-trash-alt"></i> Delete Account
       </li>
-      <li id="red" (click)="logout()">
+      <!-- <li id="red" (click)="logout()">
         <i class="fas fa-sign-out-alt"></i> Logout
-      </li>
+      </li> -->
     </ul>
   </div>
 </div>

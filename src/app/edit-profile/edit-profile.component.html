@@ -34,21 +34,9 @@
         <textarea id="bio" formControlName="bio" rows="3" placeholder="Write a short bio"></textarea>
       </div>
 
-      <!-- Profession -->
-      <div>
-        <label for="profession">Profession</label><br />
-        <input id="profession" type="text" formControlName="profession" placeholder="Your profession" />
-      </div>
-
-      <!-- Location -->
-      <div>
-        <label for="location">Location</label><br />
-        <input id="location" type="text" formControlName="location" placeholder="Your location" />
-      </div>
-
       <!-- Form Buttons -->
       <div class="form-buttons">
-        <button type="submit" class="save-btn" [disabled]="!editProfileForm.valid">Save Changes</button>
+        <button type="submit" class="save-btn" (click)="saveChanges()" [disabled]="!editProfileForm.valid">Save Changes</button>
         <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
       </div>
     </form>

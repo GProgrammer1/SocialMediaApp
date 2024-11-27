@@ -1,4 +1,3 @@
-<div class="main">
   <div class="chat-container">
     <!-- Chat List Column -->
     <div class="chat-list">
@@ -15,11 +14,11 @@
                   }
                 </div>
                 <span class="friend-name">{{ getChatFriendName(chat) }}</span>
-                <img [src]="getChatFriendName(chat)" alt="User Image" onerror="this.src='../../../assets/default-pp.jpeg'" class="profile-pic" />
+                <!-- <img [src]="getChatFriendName(chat)" alt="User Image" onerror="this.src='../../../assets/default-pp.jpeg'" class="profile-pic" />
                 @if (isUserOnline(chat.participants[1]._id!)) {
                   <div class="status-indicator"></div>
                 }
-                <span class="friend-name">{{ getChatFriendName(chat) }}</span>
+                <span class="friend-name">{{ getChatFriendName(chat) }}</span> -->
               </div>
             </li>
           </ul>
@@ -31,52 +30,7 @@
 
     <!-- Chat Window Column -->
     <app-chat [selectedChat]="selectedChat"></app-chat>
-
-    <div class="chat-window">
-      @if (selectedChat) {
-        <h3>Chat with {{ getChatFriendName(selectedChat) }}</h3>
-        @if (messages$ | async ; as messages) {
-          @if (messages.length === 0) {
-            <p>No messages found</p>
-          } @else {
-            <div class="message-list" #chatWindow (scroll)="onScroll()">
-              <div *ngFor="let message of messages" class="message" [ngClass]="{'MyMessages' : user._id === message.sender._id, 'OtherMessages': user._id !== message.sender._id}">
-                <p class="message-text">{{ message.content }}</p>
-                <span class="message-timestamp">{{ formatTime(message.timestamp) }}</span>
-                <span class="message-status">
-                  @if (message.receiver._id !== user._id) {
-                    @if (message.status === 'sent') {
-                      <mat-icon>done</mat-icon>
-                    } @else if (message.status === 'delivered') {
-                      <mat-icon>done_all</mat-icon>
-                    } @else {
-                      <mat-icon class="read">done_all</mat-icon>
-                    }
-                  }
-                </span>
-              </div>
-            </div>
-            @if (showScrollToBottom) {
-              <div class="scroll-to-bottom">
-                <button mat-icon-button>
-                  <mat-icon (click)="scrollToBottom(true)">arrow_downward</mat-icon>
-                </button>
-              </div>
-            }
-          }
-        }
-        <div class="message-input">
-          <input type="text" [(ngModel)]="message" placeholder="Type a message..." (keydown.enter)="sendMessage()" />
-          <button mat-icon-button (click)="sendMessage()">
-            <mat-icon>send</mat-icon>
-          </button>
-        </div>
-      } @else {
-        <div>
-          <h2>No selected Chats available</h2>
-        </div>
-      }
-    </div>
   </div>
+
+   
   <app-navbar class="custom-x"></app-navbar>
-</div>
