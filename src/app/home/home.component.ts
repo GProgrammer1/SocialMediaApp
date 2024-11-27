@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HomeStoryComponent } from "../home-story/home-story.component";
 import { HomePostComponent } from "../home-post/home-post.component";
 import { NavbarComponent } from "../navbar/navbar.component";
+import { SocketService } from '../socket.service';
 
 @Component({
   selector: 'app-home',
@@ -10,4 +11,11 @@ import { NavbarComponent } from "../navbar/navbar.component";
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent { }
+export class HomeComponent implements OnInit {
+
+  constructor(private socketService : SocketService) { }
+
+  ngOnInit(): void {
+    this.socketService.connect();
+  }
+ }

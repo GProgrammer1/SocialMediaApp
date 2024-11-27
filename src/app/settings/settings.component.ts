@@ -10,7 +10,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
-
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @Component({
   selector: 'app-settings',
@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 
   imports: [
     FormsModule, MatButtonModule, CommonModule,
-    MatIconModule, MatOptionModule, MatListModule, MatDialogModule, NavbarComponent
+    MatIconModule, MatOptionModule, MatListModule, MatDialogModule, NavbarComponent, MatSlideToggleModule
   ],
 
   templateUrl: './settings.component.html',

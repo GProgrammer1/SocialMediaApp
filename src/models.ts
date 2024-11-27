@@ -1,5 +1,5 @@
-interface User {
-    id?: number;
+export interface User {
+    _id?: number;
     name: string ;
     email: string; 
     password: string;
@@ -20,13 +20,15 @@ interface User {
     resetToken?: ResetToken;
 }
 
-interface ResetToken {
+export interface ResetToken {
+    _id: number;
     token: string;
     email: string;
     createdAt: Date;
 }
 
-interface EmailVerificationToken {
+export interface EmailVerificationToken {
+    _id: number;
     token: string;
     expiryDate: Date;
     userId: number;
@@ -34,56 +36,60 @@ interface EmailVerificationToken {
 
 
 
-interface Post {
-    id? : number ;
+export interface Post {
+    _id?: number;
     likes?: Like[];
     dislikes?: Dislike[];
     comments?: CommentText[];
     uploadDate: Date ;
     lastUpdateDate?: Date ;
     contentType: string; 
+    text?: string;
     mediaUrl? : string ;
     privacyStatus: 'Public' | 'Private' | 'Friends Only';
     userId: number ;
 }
 
-interface Chat {
-    chatId: number;
-    participants: number[];
+export interface Chat {
+    _id?: number;
+    
+    participants: User[];
     messages?: Message[];
 }
 
-interface Message {
-    id? : number; 
+export interface Message {
+    _id?: number
     content: string ;
-    senderId: number ;
-    receiverId: number ;
+    sender: User ;
+    chat: Chat ;
+    receiver: User ;
     timestamp: Date ;
-    status: 'Read' | 'Delivered' | 'Sent' ;
+    status: 'read' | 'delivered' | 'sent' ;
 
 }
 
-interface Like {
-    id?: number;
+export interface Like {
+    _id?: number;
     likerId: number ;
     postId: number ;
 }
 
-interface Dislike {
-    id?: number;
+export interface Dislike {
+    _id?: number;
     dislikerId: number ;
     postId: number ;
 }
 
-interface CommentText {
-    id? : number ;
+export interface CommentText {
+    _id?: number;
     content: string ;
     commentatorId: number ;
     postId: number ;
     
 }
 
-interface FriendRequest {
+export interface FriendRequest {
+    _id?: number;
     senderId: number ;
     receiverId: number ;
     status: 'Accepted' | 'Pending' | 'Rejected' ;

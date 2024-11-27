@@ -1,0 +1,51 @@
+<body>
+  
+
+<mat-card class="post-card">
+  <mat-card-header>
+    <mat-card-title>Create a Post</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="postForm">
+    <!-- File Upload Section -->
+    <div class="file-upload">
+      <label for="fileInput">
+        <div *ngIf="!selectedFile" class="upload-placeholder">
+          <mat-icon>cloud_upload</mat-icon>
+          <p>Click to upload a media file</p>
+        </div>
+        <img *ngIf="selectedFile" [src]="filePreview" alt="Selected file preview" class="media-preview">
+      </label>
+      <input 
+        id="fileInput" 
+        type="file" 
+        (change)="onFileSelected($event)" 
+        accept="image/*,video/*" 
+        hidden 
+      >
+    </div>
+
+    <!-- Post Text -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Write a caption</mat-label>
+      <textarea matInput formControlName="text" rows="3" placeholder="Write something..."></textarea>
+    </mat-form-field>
+
+    <!-- Privacy Status -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Privacy Status</mat-label>
+      <mat-select formControlName="privacyStatus">
+        <mat-option value="public">Public</mat-option>
+        <mat-option value="private">Private</mat-option>
+        <mat-option value="friends only">Friends Only</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" type="button" [disabled]="postForm.invalid" (click)="onSubmit()">Post</button>
+  </mat-card-actions>
+</mat-card>
+
+<app-navbar></app-navbar>
+</body>

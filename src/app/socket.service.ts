@@ -49,12 +49,13 @@ export class SocketService {
   }
 
   onNewMessage(): Observable<any> {
+    
     return new Observable((observer) => {
       this.socket?.on('message', (message) => {
-        observer.next(message);
-        
+        observer.next(message);      
       });
     });
+
   }
 
 }
