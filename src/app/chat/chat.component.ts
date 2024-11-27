@@ -1,3 +1,4 @@
+
 import { CommonModule, AsyncPipe } from '@angular/common';
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +13,7 @@ import { Chat, Message, User } from '../../models';
   selector: 'app-chat',
   standalone: true,
   imports: [NavbarComponent, FormsModule, CommonModule, AsyncPipe, MatIconModule, MatButtonModule],
+
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })

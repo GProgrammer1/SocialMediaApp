@@ -15,9 +15,14 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { HomeStoryComponent } from './home-story/home-story.component';
 import { HomePostComponent } from './home-post/home-post.component';
 import { SuggestedComponent } from './suggested/suggested.component';
-
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { autoLoginResolver } from './auto-login.resolver';
-
+import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { LikedComponent } from './liked/liked.component';
+import { ViewProfileComponent } from './view-profile/view-profile.component';
+import { MatDialog } from '@angular/material/dialog';
+import { FriendsListComponent } from './friends-list/friends-list.component';
 
 
 export const routes: Routes = [
@@ -35,8 +40,18 @@ export const routes: Routes = [
   { path: 'home-story', component: HomeStoryComponent},
   { path: 'home-post', component: HomePostComponent},
   { path: 'suggested', component: SuggestedComponent},
-
+  { path: 'edit-profile', component: EditProfileComponent },
   { path: 'auth/confirm/:token', component: ConfirmationPageComponent },
-  { path: 'auth/resetPassword/:token', component: ResetPasswordComponent }
-
+  { path: 'auth/resetPassword/:token', component: ResetPasswordComponent },
+  { path: 'reactive-form', component: EditProfileComponent },
+  { path: 'liked', component: LikedComponent },
+  { path: 'view-profile', component: ViewProfileComponent },
+  { path: 'friends-list', component: FriendsListComponent },
+  { path: 'mat-dialog', component: MatDialog },
 ];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}

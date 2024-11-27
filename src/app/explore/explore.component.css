@@ -182,3 +182,15 @@
     overflow-y: auto;
   }
 }
+
+@media (max-width: 1024px) {
+  /* Show suggested toggle button on larger screens */
+  .suggested-toggle {
+    display: block;
+  }
+
+  /* Hide suggested section by default on larger screens */
+  .suggested {
+    display: none;
+  }
+}

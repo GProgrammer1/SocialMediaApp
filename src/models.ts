@@ -1,14 +1,15 @@
 export interface User {
+
     _id?: number;
     name: string ;
-    email: string; 
+    email: string;
     password: string;
     role: 'User' | 'Admin';
     friendsIds?: number[];
-    posts?: Post[]; 
+    posts?: Post[];
     profilePic?: string;
     bio?: string ;
-    chats?: Chat[]; 
+    chats?: Chat[];
     isOnline: boolean ;
     likes?: Like[] ;
     dislikes: Dislike[] ;
@@ -52,7 +53,6 @@ export interface Post {
 
 export interface Chat {
     _id?: number;
-    
     participants: User[];
     messages?: Message[];
 }
@@ -85,7 +85,7 @@ export interface CommentText {
     content: string ;
     commentatorId: number ;
     postId: number ;
-    
+
 }
 
 export interface FriendRequest {

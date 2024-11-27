@@ -73,6 +73,54 @@ img {
   align-self: center;
 }
 
+
+
+@media (max-width: 1100px) {
+  :host(.custom-x) .navbar {
+    /* Custom styles for x when used in the specific page at max-width 1100px */
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    width: 100%;
+    background: linear-gradient(135deg, #1e3a8a, #000);
+    padding: 0;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  :host(.custom-x) .navbar-list {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 5px 0;
+  }
+
+  :host(.custom-x) .navbar-item {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  :host(.custom-x) img {
+    display: none;
+  }
+
+  :host(.custom-x) p {
+    display: none;
+  }
+
+  :host(.custom-x) mat-icon {
+    padding: 8px;
+    font-size: 24px;
+  }
+}
+
+/* Media Query for smaller screens */
+
 @media (max-width: 768px) {
   .navbar {
     position: fixed;
