@@ -98,7 +98,7 @@ export class ProfileComponent implements OnInit {
   openFriendsList() {
     this.dialog.open(FriendsListComponent, {
       data: { friends: this.friends },
-      width: '400px'
+      width: '500px'
     });
   }
 

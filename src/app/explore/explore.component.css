@@ -93,7 +93,7 @@
 /* Suggested section */
 .suggested {
   width: 350px;
-  padding: 20px;
+  padding: 36px;
   background-color: #1a1a1a;
   border-left: 1px solid #333;
   max-height: 100%;
@@ -103,44 +103,6 @@
 .suggested h3 {
   margin-top: 0;
   color: #9ca3af;
-}
-
-.suggested-item {
-  background-color: #2a2a2a;
-  margin-bottom: 10px;
-  padding: 10px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  color: #d1d5db;
-  transition: transform 0.2s ease;
-}
-
-.suggested-item:hover {
-  transform: scale(1.03);
-  background-color: #333;
-}
-
-.suggested-toggle {
-  display: none; /* Hidden by default on larger screens */
-  text-align: center;
-  padding: 10px;
-}
-
-.suggested-button {
-  padding: 10px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 24px;
-  color: #2563eb;
-}
-
-.suggested-button mat-icon {
-  font-size: 32px;
-}
-
-.suggested-button:hover mat-icon {
-  color: #1e4fa5;
 }
 
 @media (max-width: 768px) {
@@ -193,4 +155,23 @@
   .suggested {
     display: none;
   }
+}
+
+
+.suggested::-webkit-scrollbar {
+  width: 8px;
+}
+
+.suggested::-webkit-scrollbar-track {
+  background: #2a2a2a; /* Dark track to blend with container */
+  border-radius: 8px;
+}
+
+.suggested::-webkit-scrollbar-thumb {
+  background: #007bff; /* Primary accent color */
+  border-radius: 8px;
+}
+
+.suggested::-webkit-scrollbar-thumb:hover {
+  background: #0056b3; /* Darker accent on hover */
 }
