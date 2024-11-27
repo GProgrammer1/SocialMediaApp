@@ -1,31 +1,181 @@
+/* Dialog Styles */
+.mat-dialog-container {
+  background-color: #1a1a1a;
+  /* Dark background */
+  color: #a9a9a9;
+  /* Light gray text */
+  border-radius: 10px;
+  /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  /* Subtle shadow */
+  padding: 20px;
+  /* Spacing around content */
+}
+
+/* Dialog Title */
+h2 {
+  font-size: 30px;
+  font-weight: bold;
+  color: #0056b3;
+  /* Blue accent color */
+  margin-bottom: 15px;
+  text-align: center;
+  /* Center align title */
+  border-bottom: 1px solid #333;
+  /* Divider below title */
+  padding-bottom: 10px;
+  z-index: 10;
+  /* Ensure title is above content */
+}
+
+/* Friends List */
 .friends-list {
   list-style: none;
-  padding: 0;
+  /* Remove bullets */
   margin: 0;
+  padding: 0;
+}
 
-  .friend-item {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #333;
+.friend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+  /* Space between list items */
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #202020;
+  /* Slightly lighter dark background */
+  transition: background-color 0.3s ease-in-out;
+  /* Smooth hover effect */
+  position: relative;
+  /* Position for remove button */
+}
 
-    img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-right: 10px;
-    }
+.friend-item:hover {
+  background-color: #2a2a2a;
+  /* Slightly lighter on hover */
+}
 
-    .friend-info {
-      p {
-        margin: 0;
-        color: #a9a9a9;
+/* Friend Picture */
+.friend-item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 15px;
+  /* Space between image and info */
+  border: 2px solid #0056b3;
+  /* Blue border around image */
+}
 
-        &:first-child {
-          font-weight: bold;
-          color: #0056b3;
-        }
-      }
-    }
-  }
+/* Friend Info */
+.friend-info {
+  display: flex;
+  flex-direction: column;
+  /* Stack name and email vertically */
+}
+
+.friend-info p {
+  margin: 0;
+  /* Remove default margin */
+  font-size: 14px;
+  /* Base text size */
+}
+
+.friend-info p strong {
+  font-size: 16px;
+  /* Slightly larger for the name */
+  color: #a9a9a9;
+  /* Light gray text */
+}
+
+/* No Friends Template */
+mat-dialog-content p {
+  font-size: 16px;
+  text-align: center;
+  color: #bbb;
+  /* Lighter gray text */
+  margin-top: 20px;
+}
+
+/* Dialog Actions */
+.mat-dialog-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 0 0;
+  /* Add space at the top */
+  border-top: 1px solid #333;
+  /* Divider above actions */
+}
+
+.mat-dialog-actions button {
+  color: #0056b3;
+  /* Blue button text */
+  font-weight: bold;
+}
+
+.mat-dialog-actions button:hover {
+  background-color: #0056b3;
+  /* Blue background */
+  color: #fff;
+  /* White text on hover */
+}
+
+mat-dialog-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+mat-dialog-content::-webkit-scrollbar-track {
+  background: #2a2a2a;
+  /* Dark track to blend with container */
+  border-radius: 8px;
+}
+
+mat-dialog-content::-webkit-scrollbar-thumb {
+  background: #007bff;
+  /* Primary accent color */
+  border-radius: 8px;
+}
+
+mat-dialog-content::-webkit-scrollbar-thumb:hover {
+  background: #0056b3;
+  /* Darker accent on hover */
+}
+
+.remove-btn {
+  background-color: #a9a9a9;
+  color: black;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  right: 15px;
+}
+
+.remove-btn:hover {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.close-btn {
+  background-color: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+  background-color: #1565c0;
+}
+
+hr {
+  border: 1px solid #333;
+  margin: 10px 0;
 }

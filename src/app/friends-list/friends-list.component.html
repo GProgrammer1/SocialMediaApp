@@ -1,21 +1,101 @@
-<h2 mat-dialog-title>Friends List</h2>
-<mat-dialog-content>
-  <div>
-    <ul class="friends-list">
-      <!-- <li *ngFor="let friend of friends" class="friend-item"> -->
-      <li>
-        <img [src]="'assets/default-profile-pic.jpeg'" alt="Friend Picture" />
-        <div class="friend-info">
-          <p><strong>name</strong></p>
-          <p>email</p>
-        </div>
-      </li>
-    </ul>
-  </div>
-  <ng-template #noFriends>
-    <p>No friends to show.</p>
-  </ng-template>
-</mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Close</button>
-</mat-dialog-actions>
+<div class="mat-dialog-container">
+  <h2>Friends</h2>
+  <mat-dialog-content>
+    <div class="friend-section">
+      <ul class="friends-list">
+        <!-- @if (friends$ | async ; as friends) {
+        @if (friends.length > 0) {
+
+        @for(friend of friends ; track friend){
+        <li class="friend-item">
+          <img [src]="friend.profilePic" alt="Friend Picture" />
+          <div class="friend-info">
+            <p><strong>{{ friend.name }}</strong></p>
+            <p>{{ friend.email }}</p>
+          </div>
+          <button class="remove-btn" (click)="removeFriend(friend._id!)">Remove</button>
+        </li>
+        }
+        } @else {
+        <ng-container *ngTemplateOutlet="noFriends"></ng-container>
+        }
+        } -->
+        <li class="friend-item">
+          <img [src]="'assets/default-profile-pic.jpeg'" alt="Friend Picture" />
+          <div class="friend-info">
+            <p><strong>name</strong></p>
+            <p>email</p>
+          </div>
+          <button class="remove-btn" (click)="removeFriend(1)">Remove</button>
+        </li>
+        <li class="friend-item">
+          <img [src]="'assets/default-profile-pic.jpeg'" alt="Friend Picture" />
+          <div class="friend-info">
+            <p><strong>name</strong></p>
+            <p>email</p>
+          </div>
+          <button class="remove-btn" (click)="removeFriend(1)">Remove</button>
+        </li>
+        <li class="friend-item">
+          <img [src]="'assets/default-profile-pic.jpeg'" alt="Friend Picture" />
+          <div class="friend-info">
+            <p><strong>name</strong></p>
+            <p>email</p>
+          </div>
+          <button class="remove-btn" (click)="removeFriend(1)">Remove</button>
+        </li>
+        <li class="friend-item">
+          <img [src]="'assets/default-profile-pic.jpeg'" alt="Friend Picture" />
+          <div class="friend-info">
+            <p><strong>name</strong></p>
+            <p>email</p>
+          </div>
+          <button class="remove-btn" (click)="removeFriend(1)">Remove</button>
+        </li>
+        <li class="friend-item">
+          <img [src]="'assets/default-profile-pic.jpeg'" alt="Friend Picture" />
+          <div class="friend-info">
+            <p><strong>name</strong></p>
+            <p>email</p>
+          </div>
+          <button class="remove-btn" (click)="removeFriend(1)">Remove</button>
+        </li>
+        <li class="friend-item">
+          <img [src]="'assets/default-profile-pic.jpeg'" alt="Friend Picture" />
+          <div class="friend-info">
+            <p><strong>name</strong></p>
+            <p>email</p>
+          </div>
+          <button class="remove-btn" (click)="removeFriend(1)">Remove</button>
+        </li>
+        <li class="friend-item">
+          <img [src]="'assets/default-profile-pic.jpeg'" alt="Friend Picture" />
+          <div class="friend-info">
+            <p><strong>name</strong></p>
+            <p>email</p>
+          </div>
+          <button class="remove-btn" (click)="removeFriend(1)">Remove</button>
+        </li>
+        <li class="friend-item">
+          <img [src]="'assets/default-profile-pic.jpeg'" alt="Friend Picture" />
+          <div class="friend-info">
+            <p><strong>name</strong></p>
+            <p>email</p>
+          </div>
+          <button class="remove-btn" (click)="removeFriend(1)">Remove</button>
+        </li>
+      </ul>
+    </div>
+    <ng-template #noFriends>
+      <p>No friends to show.</p>
+    </ng-template>
+    <hr>
+    <div class="suggested-section">
+      <h3>Suggested Friends</h3>
+      <app-suggested></app-suggested>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button class="close-btn" mat-dialog-close>Close</button>
+  </mat-dialog-actions>
+</div>

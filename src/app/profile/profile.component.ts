@@ -67,7 +67,7 @@ export class ProfileComponent {
   openFriendsList() {
     this.dialog.open(FriendsListComponent, {
       data: { friends: this.friends },
-      width: '400px'
+      width: '500px'
     });
   }
 
