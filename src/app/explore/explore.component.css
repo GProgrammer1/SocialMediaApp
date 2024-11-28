@@ -34,34 +34,58 @@
 .search-bar {
   width: 100%;
   max-width: 400px;
-  height: 30px;
-  padding: 12px;
+  height: 45px;
+  padding: 8px;
   background: linear-gradient(145deg, #1a1a1a, #333);
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .search-bar input {
-  width: 100%;
-  padding: 10px;
-  background-color: #2a2a2a;
-  border: 1px solid #444;
-  border-radius: 6px;
+  flex: 1;
+  height: 100%;
+  background: transparent;
+  border: none;
   color: #fff;
+  font-size: 14px;
   outline: none;
-  transition: box-shadow 0.3s ease;
 }
 
-.search-bar input:focus {
-  box-shadow: 0 0 8px #2563eb;
+.search-bar input::placeholder {
+  color: #aaa;
+  opacity: 0.7;
 }
+
+.search-bar .search-icon {
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px; /* Adjusted for a larger clickable area */
+  height: 40px;
+  background: transparent;
+  border-radius: 50%; /* Optional for a rounded button */
+  transition: background-color 0.3s ease;
+}
+
+.search-bar .search-icon mat-icon {
+  font-size: 22px;
+}
+
+/* Hover effect on the button */
+.search-bar .search-icon:hover {
+  background-color: #444; /* Darker hover effect */
+}
+
 
 /* Search Results */
 .search-results {
   flex: 1; /* Take remaining space */
-  width: 100%;
+  width: 90%;
   background: linear-gradient(135deg, #1a1a1a, #222);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
   color: #d1d5db;
@@ -76,18 +100,91 @@
   margin: 0;
 }
 
-.search-results li {
-  padding: 8px;
-  margin-bottom: 8px;
-  background-color: #2a2a2a;
-  border-radius: 6px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  transition: transform 0.2s;
+.search-result-item {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-bottom: 15px;
+  /* Space between list items */
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #202020;
+  /* Slightly lighter dark background */
+  transition: background-color 0.3s ease-in-out;
+  /* Smooth hover effect */
+  position: relative;
+  /* Position for remove button */
+  border: #1a1a1a solid;
 }
 
-.search-results li:hover {
-  transform: scale(1.02);
-  background-color: #333;
+.search-result-item:hover {
+  background-color: #2a2a2a;
+  /* Slightly lighter on hover */
+}
+
+img {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  margin-right: 15px;
+  /* Space between image and info */
+  border: 2px solid #0056b3;
+  /* Blue border around image */
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  /* Stack name and email vertically */
+}
+
+.user-info p {
+  margin: 0;
+  /* Remove default margin */
+  font-size: 14px;
+  /* Base text size */
+}
+
+.user-info p strong {
+  font-size: 16px;
+  /* Slightly larger for the name */
+  color: #a9a9a9;
+  /* Light gray text */
+}
+
+.remove-friend {
+  background-color: #a9a9a9;
+  color: black;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  right: 15px;
+}
+
+.remove-friend:hover {
+  background-color: #d32f2f;
+  color: white;
+}
+
+.add-friend {
+  background-color: #0059b9;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  right: 15px;
+}
+
+.add-friend:hover {
+  background-color: #01438b;
 }
 
 /* Suggested section */
@@ -145,7 +242,7 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1125px) {
   /* Show suggested toggle button on larger screens */
   .suggested-toggle {
     display: block;
@@ -173,5 +270,23 @@
 }
 
 .suggested::-webkit-scrollbar-thumb:hover {
+  background: #0056b3; /* Darker accent on hover */
+}
+
+.search-results::-webkit-scrollbar {
+  width: 8px;
+}
+
+.search-results::-webkit-scrollbar-track {
+  background: #2a2a2a; /* Dark track to blend with container */
+  border-radius: 8px;
+}
+
+.search-results::-webkit-scrollbar-thumb {
+  background: #007bff; /* Primary accent color */
+  border-radius: 8px;
+}
+
+.search-results::-webkit-scrollbar-thumb:hover {
   background: #0056b3; /* Darker accent on hover */
 }

@@ -3,20 +3,74 @@
 
   <div class="explore-main">
     <div class="search">
-      <!-- Search bar and results -->
+      <!-- Search bar -->
       <div class="search-bar">
-        <!-- <input type="text" placeholder="Search..." (input)="onSearch($event)"> -->
+        <input type="text" placeholder="Search users..." (keyup.enter)="onSearch()" />
+        <button class="search-icon" (click)="onSearch()">
+          <mat-icon>search</mat-icon>
+        </button>
       </div>
+
+      <!-- Search Results -->
       <div class="search-results">
         <ul>
-          <!-- <li *ngFor="let result of searchResults">{{ result }}</li> -->
+          <li class="search-result-item">
+              <img src="assets/default-profile-pic.jpeg" alt="User Picture" />
+              <div class="user-info">
+                <p><strong>username</strong></p>
+                <p>useremail</p>
+              </div>
+            <button class="add-friend">
+              Request
+            </button>
+          </li>
+          <li class="search-result-item">
+              <img src="assets/default-profile-pic.jpeg" alt="User Picture" />
+              <div class="user-info">
+                <p><strong>username</strong></p>
+                <p>useremail</p>
+              </div>
+            <button class="remove-friend">
+              Remove
+            </button>
+          </li>
+          <li class="search-result-item">
+              <img src="assets/default-profile-pic.jpeg" alt="User Picture" />
+              <div class="user-info">
+                <p><strong>username</strong></p>
+                <p>useremail</p>
+              </div>
+            <button class="add-friend">
+              Request
+            </button>
+          </li>
+          <li class="search-result-item">
+              <img src="assets/default-profile-pic.jpeg" alt="User Picture" />
+              <div class="user-info">
+                <p><strong>username</strong></p>
+                <p>useremail</p>
+              </div>
+            <button class="remove-friend">
+              Remove
+            </button>
+          </li>
+          <li class="search-result-item">
+            <img src="assets/default-profile-pic.jpeg" alt="User Picture" />
+            <div class="user-info">
+              <p><strong>username</strong></p>
+              <p>useremail</p>
+            </div>
+          <button class="remove-friend">
+            Remove
+          </button>
+        </li>
         </ul>
       </div>
     </div>
-    <!-- Suggested section -->
+
+    <!-- Suggested Section -->
     <div class="suggested">
       <h3>Suggested for you</h3>
-      <!-- Suggested content here (Angular component) -->
       <app-suggested></app-suggested>
     </div>
   </div>
