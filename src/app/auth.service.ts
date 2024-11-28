@@ -49,8 +49,8 @@ export class AuthService {
     return this.http.put('http://localhost:3000/auth/deactivate', { email });
   }
 
-  updateUserInfo(email: string, args: {[key: string]: string}) {
-    return this.http.put(`http://localhost:3000/auth/updateUser/${email}`, args);
+  updateUserInfo(email: string, formData: FormData) {
+    return this.http.put(`http://localhost:3000/auth/updateUser/${email}`, formData);
   }
 
   refreshToken() {
@@ -60,6 +60,8 @@ export class AuthService {
       }),
       
     });
+
+    
   }
   
 

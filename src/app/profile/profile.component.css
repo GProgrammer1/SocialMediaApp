@@ -110,12 +110,9 @@
 .posts-section {
   margin-top: 30px;
 
-  h3 {
-    font-size: 20px;
-    color: #0056b3; /* Darker blue accent color */
-  }
+  
 
-  .posts-list {
+ 
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
@@ -130,7 +127,7 @@
         border-radius: 8px;
       }
     }
-  }
+  
 }
 
 /* Profile Settings and Edit Buttons Container */

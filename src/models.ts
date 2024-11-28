@@ -1,11 +1,11 @@
 export interface User {
-    id: string;
+
     _id?: number;
     name: string ;
     email: string;
     password: string;
     role: 'User' | 'Admin';
-    friendsIds?: number[];
+    friends?: User[];
     posts?: Post[];
     profilePic?: string;
     bio?: string ;
@@ -19,6 +19,7 @@ export interface User {
     accountPrivacy: 'Private' | 'Public';
     emailToken?: EmailVerificationToken;
     resetToken?: ResetToken;
+    notificiations: boolean;
 }
 
 export interface ResetToken {
@@ -44,7 +45,8 @@ export interface Post {
     comments?: CommentText[];
     uploadDate: Date ;
     lastUpdateDate?: Date ;
-    contentType: string;
+    contentType: string; 
+    text?: string;
     mediaUrl? : string ;
     privacyStatus: 'Public' | 'Private' | 'Friends Only';
     userId: number ;
@@ -52,7 +54,6 @@ export interface Post {
 
 export interface Chat {
     _id?: number;
-
     participants: User[];
     messages?: Message[];
 }
