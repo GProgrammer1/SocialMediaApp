@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const LikeSchema = new mongoose.Schema({
     user: {
         type: mongoose.Schema.Types.ObjectId,
@@ -8,7 +9,15 @@ const LikeSchema = new mongoose.Schema({
     post: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post',
-        required: true
+        
+    },
+    comment: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'CommentText',
+    },
+    story: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Story',
     }
 }, {
     timestamps: true

@@ -8,6 +8,20 @@ const cookieParser = require('cookie-parser');
 const Chat = require('./models/Chat');
 const User = require('./models/User');
 const Message = require('./models/Message');
+const postRouter = require('./routes/postRouter');
+const notificationRouter = require('./routes/notificationRouter');
+app.use(express.static('public'));
+
+const allowedOrigins = ['http://localhost:4200', 'http://localhost:53547', 'http://localhost:3000', 'http://localhost:53595', 'http://localhost:53647', 'http://localhost:63257'];
+const originHandler = (origin, callback) => {
+    console.log('Origin', origin);
+    
+    if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+    } else {
+        callback(new Error('Origin not allowed'), false);
+    }
+};
 // const swaggerAutogen = require('swagger-autogen')();
 
 // const doc = {
@@ -39,9 +53,16 @@ const Message = require('./models/Message');
 app.use(cookieParser());
 const cors = require('cors');
 app.use(cors({
-    origin: 'http://localhost:4200',
+    origin: originHandler,
+    credentials: true,
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept']
+}));
+
+app.options('*', cors({
+    origin: originHandler,
     credentials: true
 }));
+
 
 app.set('view engine', 'ejs');
 app.set('views', 'views');
@@ -61,6 +82,8 @@ app.use('/user', require('./routes/userRouter'));
 
 const authRouter = require('./routes/authRouter');
 app.use('/auth', authRouter);
+app.use('/post', postRouter);
+app.use('/notification', notificationRouter);
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
@@ -75,18 +98,21 @@ app.get('/', (req, res) => {
 const http = require('http');
 const { Server } = require('socket.io');
 const useChatNamespace = require('./namespaces/chatnamespace');
-
+const useFriendRequestsNamespace = require('./namespaces/friendrequestsnamespace');
+const usePostNamespace = require('./namespaces/postnamespace');
 // Initialize express app and create an HTTP server
 const server = http.createServer(app);
+
 
 // Initialize Socket.IO on the server
 const io = new Server(server, {
     cors: {
-        origin: 'http://localhost:4200',
+        origin: originHandler,
         credentials: true,
         methods: ['GET', 'POST', 'PUT', 'DELETE']
     }
 });
+
 
 
 // Set up Socket.IO connection event
@@ -105,8 +131,10 @@ io.on('connection', (socket) => {
         console.log('User disconnected:', socket.id);
     });
 });
-
+useFriendRequestsNamespace(io);
 useChatNamespace(io);
+usePostNamespace(io);
+
 
     // Event for disconnecting from a chat room
 // Start the server

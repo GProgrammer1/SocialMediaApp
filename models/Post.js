@@ -42,6 +42,19 @@ const PostSchema = new mongoose.Schema({
         enum: ['public', 'private', 'friends only'],
         default: 'public'
     },
+    shares: {
+        type: Number,
+        default: 0
+    },
+    isShared: {
+        type: Boolean,
+        default: false
+    },
+
+    sharedBy: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
 
 }, {
     timestamps: true

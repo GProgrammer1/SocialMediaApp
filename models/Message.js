@@ -18,13 +18,25 @@ const MessageSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    chat: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Chat',
+        required: true
+    },
     status: {
         type: String,
         enum: ['delivered', 'seen', 'sent','no connection'],
-        default: 'unread'
+        default: 'sent'
     }
 }, {
     timestamps: true
 });
+
+MessageSchema.pre('save', function (next) {
+    const offset = new Date().getTimezoneOffset() * 60000; // offset in milliseconds
+    this.timestamp = new Date(Date.now() - offset);
+    next();
+});
+
 const Message = mongoose.model('Message', MessageSchema);
 module.exports = Message;

@@ -8,7 +8,15 @@ const DislikeSchema = new mongoose.Schema({
     post: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Post',
-        required: true
+        
+    },
+    comment: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'CommentText',
+    },
+    story: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Story',
     }
 }, {
     timestamps: true

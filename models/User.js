@@ -4,6 +4,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    bio: {
+        type: String,
+        default: 'Hey there! I am using Social Media.'
+    },
     email: {
         type: String,
         required: true,
@@ -15,6 +19,7 @@ const UserSchema = new mongoose.Schema({
     },
     profilePic: {
         type: String,
+        default: '/uploads/default.jpg'
     },
     friends: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -35,6 +40,10 @@ const UserSchema = new mongoose.Schema({
     isOnline: {
         type: Boolean,
         default: false
+    },
+    notificationsOn:{ 
+        type: Boolean,
+        default: true
     },
     comments: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -60,10 +69,10 @@ const UserSchema = new mongoose.Schema({
     },
     accountPrivacy: {
         type: String,
-        enum: ['public', 'private'],
-        default: 'public'
+        enum: ['Public', 'Private'],
+        default: 'Public'
     },
-   
+    
     emailToken: {
         type: mongoose.Schema.Types.ObjectId, ref: 'EmailVerificationToken'
         
@@ -71,6 +80,7 @@ const UserSchema = new mongoose.Schema({
     resetToken: {
         type: mongoose.Schema.Types.ObjectId, ref: 'ResetToken'
     },
+    
 }, {timestamps: true});
 
 const User = mongoose.model('User', UserSchema);

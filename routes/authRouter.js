@@ -15,7 +15,18 @@ const RefreshToken = require('../models/RefreshToken');
 
 require('dotenv').config();
 
+const multer = require('multer');
+const path = require('path');
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'public/uploads/');  // Save to uploads directory
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));  // Avoid file name conflict
+  }
+});
 
+const upload = multer({ storage: storage });
 const oauth2Client = new google.auth.OAuth2(
     process.env.CLIENT_ID,
     process.env.CLIENT_SECRET,
@@ -306,34 +317,75 @@ authRouter.post('/resetPassword/:token', async (req, res) => {
 
 authRouter.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    try{
-        const user = await User.findOne({email: email});
-        console.log(user);
-        
-        if(!user) res.status(404).send({err: 'User not found'});
-        const isMatch = await bcrypt.compare(password, user.password);
-        if(!isMatch) res.status(401).send({err: 'Invalid password'});
+    
+    try {
+      // Find user by email
+      const user = await User.findOne({ email });
+      console.log(user);
+      
+      if (!user) return res.status(404).send({ err: 'User not found' });
+      
+      // Check if password is correct
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (!isMatch) return res.status(401).send({ err: 'Invalid password' });
+      
+      // Check if account is active
+      if (user.accountStatus !== 'active') return res.status(401).send({ err: 'Account is inactive' });
+      
+      // Generate tokens
+      const refreshToken = jwt.sign({ email }, process.env.SESSION_REFRESH_KEY, { expiresIn: '7d' });
+      const authToken = jwt.sign({ email }, process.env.SECRET_AUTH_KEY, { expiresIn: '1h' });
+      
+      console.log(refreshToken, authToken);
+      
+      // Update user with refreshToken and set isOnline to true
+      const updatedUser = await User.findOneAndUpdate(
+        { email },
+        { $set: { refreshToken: new RefreshToken({ token: refreshToken }), isOnline: true } },
+        { new: true } // Return the updated document
+      ).populate([
+        {path: 'posts', select: 'mediaUrl text privacyStatus _id createdAt updatedAt'},
+        {path: 'friends', select: 'name _id profilePic', populate:
+            [
+                {path: 'posts', select: 'mediaUrl text privacyStatus',
+                    populate: [
+                        {path: 'comments', select: 'text', populate: [
+                            {path: 'user', select: 'name _id profilePic'},
+                            {path: 'replies', select: 'text user createdAt', populate: {path: 'user', select: 'name _id profilePic'}},
+                        ]
+                           
+                        }
+                    ]
+                },
+                {path: 'likes', populate: 'post'},
+                {path: 'dislikes', populate: 'post'},
+                {path: 'comments', select: 'text', populate: 'post'}
+            ]
 
-        if(user.accountStatus !== 'active') res.status(401).send({err: 'Account is inactive'});
-        
-        const refreshToken = jwt.sign({email: email}, process.env.SESSION_REFRESH_KEY, {expiresIn: '7d'});
-        const token = jwt.sign({email: email}, process.env.SECRET_AUTH_KEY, {expiresIn: '1h'});
-
-        console.log(refreshToken, token);
-        
-        await user.updateOne({refreshToken: new RefreshToken({token: refreshToken})});
-
-        console.log(res);
-        
-        
-        res.status(200).send({authToken: token, email: email});
-        
+        }
+    , {
+        path: 'friendRequests',
+        populate: { path: 'sender receiver', select: 'name _id' }
+    
     }
-    catch(err) {
-        res.status(500).send({err: err.message});
+    
+    
+]);
+
+    console.log("updated user", updatedUser);
+    
+      
+      // Respond with tokens and updated user data
+      res.status(200).send({
+        authToken,
+        refreshToken,
+        user: updatedUser
+      });
+    } catch (err) {
+      console.error(err); // Full error log
+      res.status(500).send({ err: err.message });
     }
-}
-);
+  });
 
 authRouter.put('/deactivate', async (req, res) => {
     const { email } = req.body;
@@ -370,25 +422,39 @@ authRouter.post('/activate', async (req, res) => {
 }
 );
 
-authRouter.put('/updateUser/:email', async (req, res) => {
-    console.log(req.body);
-    
-    const {email} = req.params;
-    try{
-        const user = await User.findOne({email: email});
-        for (let key in req.body){
-            user[key] = req.body[key];
+authRouter.put('/updateUser/:email', upload.single('profilePicture'), async (req, res) => {
+    const { email } = req.params;
+    try {
+      const user = await User.findOne({ email });
+  
+      if (!user) {
+        return res.status(404).send({ error: 'User not found' });
+      }
+  
+      // Update user data
+      for (let key in req.body) {
+        if (key !== 'profilePicture') {
+          user[key] = req.body[key];  // Update all fields except for profilePicture
         }
-        await user.save();
-        res.status(200).send({user: user});
+      }
+  
+      // Handle profile picture upload
+      if (req.file) {
+        user.profilePic = `http://localhost:3000/uploads/${req.file.filename}`;  // Save the file path to the database
+      }
+  
+      await user.save();
+      console.log(user.bio);
+      
 
+      console.log(user.profilePic);
+      
+      res.status(200).send({ user });
+    } catch (err) {
+      res.status(500).send({ error: err.message });
+    }
+  });
 
-    }
-    catch(err){
-        res.status(500).send({err: err.message});
-    }
-}
-);
 
 authRouter.post('/logout', async (req, res) => {
     const {email} = req.body ;
@@ -411,14 +477,7 @@ const cookieParser = require('cookie-parser');
 authRouter.use(cookieParser());
 
 // Logout route
-authRouter.post('/logout', async (req, res) => {
-    try {
-        res.clearCookie('refreshToken'); // Clear the refresh token cookie
-        res.status(200).send({ message: 'Logged out successfully' });
-    } catch (err) {
-        res.status(500).send({ err: err.message });
-    }
-});
+
 
 // Refresh token route
 authRouter.post('/refreshToken', async (req, res) => {
@@ -444,7 +503,15 @@ authRouter.post('/refreshToken', async (req, res) => {
         }
 
         const authToken = jwt.sign({ email: user.email }, process.env.SECRET_AUTH_KEY, { expiresIn: '1h' });
-        res.status(200).send({ authToken: authToken, user: user });
+        const updatedUser = await User.findOneAndUpdate(
+            { email: user.email },
+            { $set: { isOnline: true } },
+            { new: true }
+            
+        );
+        console.log('updated user', updatedUser);
+        
+        res.status(200).send({ authToken: authToken, user: updatedUser });
     } catch (e) {
         console.log('errorr :: ');
         
@@ -452,31 +519,6 @@ authRouter.post('/refreshToken', async (req, res) => {
     }
 });
 
-// Example route to set the refresh token cookie (e.g., during login)
-authRouter.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-    console.log(email);
-    
-    try {
-        const user = await User.findOne({email: email });
-        if (!user) {
-            return res.status(400).send({ error: 'Login failed!' });
-        }
-
-        const refreshToken = jwt.sign({ email: user.email }, process.env.SESSION_REFRESH_KEY, { expiresIn: '7d' });
-        res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true, sameSite: 'none' , maxAge: 7 * 24 * 60 * 60*1000}); // Set the refresh token as an HTTP-only cookie
-
-        const authToken = jwt.sign({ email: user.email }, process.env.SECRET_AUTH_KEY, { expiresIn: '1h' });
-        res.status(200).send({ authToken: authToken, user: user });
-    } catch (err) {
-        res.status(500).send({ error: err.message });
-    }
-});
-
-
-
 module.exports = authRouter;
 
-
-
-
+// Example route to set the refresh token cookie (e.g., during login)

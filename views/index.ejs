@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register, Delete & Get Users</title>
+    <title>Register, Login, Delete & Get Users</title>
 </head>
 <body>
     <h2>Register</h2>
@@ -18,6 +18,41 @@
         <input type="password" id="password" name="password" required><br><br>
 
         <button type="submit">Register</button>
+    </form>
+
+    <h2>Befriend a User</h2>
+<form id="befriendForm">
+    <label for="userId">Your User ID:</label>
+    <input type="text" id="userId" name="userId" required><br><br>
+
+    <label for="friendId">Friend's User ID:</label>
+    <input type="text" id="friendId" name="friendId" required><br><br>
+
+    <button type="submit">Add Friend</button>
+</form>
+
+<form id="deleteAllPostsForm">
+    <button type="button" id="deleteAllPostsButton">Delete All Posts</button>
+</form>
+    <h2>Login</h2>
+    <form id="loginForm">
+        <label for="loginEmail">Email:</label>
+        <input type="email" id="loginEmail" name="loginEmail" required><br><br>
+
+        <label for="loginPassword">Password:</label>
+        <input type="password" id="loginPassword" name="loginPassword" required><br><br>
+
+        <button type="submit">Login</button>
+    </form>
+
+    <form id="createChatForm">
+        <label for="user1">Participant 1 (User ID or Email):</label>
+        <input type="text" id="user1" name="user1" required><br><br>
+
+        <label for="user2">Participant 2 (User ID or Email):</label>
+        <input type="text" id="user2" name="user2" required><br><br>
+
+        <button type="submit">Create Chat</button>
     </form>
 
     <h2>Delete Users</h2>
@@ -43,6 +78,24 @@
     <div id="result"></div>
 
     <script>
+        document.getElementById('deleteAllPostsButton').addEventListener('click', async function() {
+            try {
+                // Send DELETE request to delete all posts
+                const response = await fetch('http://localhost:3000/post/deleteAll', {
+                    method: 'DELETE',
+                });
+
+                const result = await response.json();
+                if (response.ok) {
+                    document.getElementById('result').innerHTML = `<p style="color: green;">${result.msg}</p>`;
+                } else {
+                    document.getElementById('result').innerHTML = `<p style="color: red;">${result.msg}</p>`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = `<p style="color: red;">Failed to delete all posts. Please try again later.</p>`;
+            }
+        });
         // Register Form Handling
         document.getElementById('registerForm').addEventListener('submit', async function(event) {
             event.preventDefault(); // Prevent the form from submitting traditionally
@@ -81,6 +134,42 @@
             } catch (error) {
                 console.error('Error:', error);
                 document.getElementById('result').innerHTML = `<p style="color: red;">Failed to register. Please try again later.</p>`;
+            }
+        });
+
+        // Login Form Handling
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent the form from submitting traditionally
+
+            const loginEmail = document.getElementById('loginEmail').value;
+            const loginPassword = document.getElementById('loginPassword').value;
+
+            const loginData = {
+                email: loginEmail,
+                password: loginPassword
+            };
+
+            try {
+                // Send POST request to login endpoint
+                const response = await fetch('http://localhost:3000/auth/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(loginData)
+                });
+
+                const result = await response.json();
+                console.log(result);
+
+                if (response.ok) {
+                    document.getElementById('result').innerHTML = `<p style="color: green;">${result.message}</p>`;
+                } else {
+                    document.getElementById('result').innerHTML = `<p style="color: red;">${result.message}</p>`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = `<p style="color: red;">Failed to login. Please try again later.</p>`;
             }
         });
 
@@ -142,7 +231,7 @@
                     // Create a list of users
                     let usersHtml = '<ul>';
                     result.users.forEach(user => {
-                        usersHtml += `<li>Name: ${user.name}, Email: ${user.email}</li>`;
+                        usersHtml += `<li>${JSON.stringify(user)}</li>`;
                     });
                     usersHtml += '</ul>';
 
@@ -153,6 +242,77 @@
             } catch (error) {
                 console.error('Error:', error);
                 document.getElementById('usersList').innerHTML = `<p style="color: red;">Failed to retrieve users. Please try again later.</p>`;
+            }
+        });
+
+        document.getElementById('befriendForm').addEventListener('submit', async function(event) {
+        event.preventDefault(); // Prevent traditional form submission
+
+        // Get form values
+        const userId = document.getElementById('userId').value;
+        const friendId = document.getElementById('friendId').value;
+
+        // Prepare the payload
+        const data = { userId, friendId };
+
+        try {
+            // Send POST request to befriend endpoint
+            const response = await fetch('http://localhost:3000/user/befriend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
+
+            // Parse the response and display feedback
+            const result = await response.text(); // Assuming the response is plain text
+            console.log(result);
+
+            if (response.ok) {
+                document.getElementById('result').innerHTML = `<p style="color: green;">${result}</p>`;
+            } else {
+                document.getElementById('result').innerHTML = `<p style="color: red;">${result}</p>`;
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            document.getElementById('result').innerHTML = `<p style="color: red;">Failed to add friend. Please try again later.</p>`;
+        }
+    });
+        document.getElementById('createChatForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            // Get participant IDs or emails
+            const user1 = document.getElementById('user1').value;
+            const user2 = document.getElementById('user2').value;
+
+            console.log(user1, user2);
+            
+            const chatData = {
+                userId: user1, otherUserId: user2
+            };
+
+            try {
+                // Send POST request to create a chat
+                const response = await fetch('http://localhost:3000/user/createChat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(chatData)
+                });
+
+                const result = await response.json();
+                console.log(result);
+
+                if (response.ok) {
+                    document.getElementById('result').innerHTML = `<p style="color: green;">Chat created successfully with ID: ${result.chatId}</p>`;
+                } else {
+                    document.getElementById('result').innerHTML = `<p style="color: red;">${result.message}</p>`;
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('result').innerHTML = `<p style="color: red;">Failed to create chat. Please try again later.</p>`;
             }
         });
     </script>
