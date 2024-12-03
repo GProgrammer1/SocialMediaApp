@@ -111,6 +111,10 @@ a:hover{
   color: #0260c5;
 }
 
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   .settings {
     left: 0;

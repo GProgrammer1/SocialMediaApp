@@ -1,88 +1,50 @@
 <div class="suggested-container">
   <div>
     <ul class="suggested-list">
-      <!-- <li *ngFor="let friend of suggestedFriends" class="suggested-item"> -->
-      <li class="suggested-item">
+      @if ((suggestedFriends$ | async); as suggestedFriends) {
+        @if (suggestedFriends.length > 0) {
+          @for (suggestedFriend of suggestedFriends; track suggestedFriend.name) {
+            <li
+              class="suggested-item"
+              (click)="onViewProfile(suggestedFriend._id!)"> <!-- Navigate on item click -->
 
-        <img src='assets/default-profile-pic.jpeg' alt="Suggested Friend Picture" />
-        <div class="suggested-info">
-          <p><strong>friendname</strong></p>
-          <p>friendemail</p>
-        </div>
-        <button class="add-btn">Add Friend</button>
-      </li>
-      <li  class="suggested-item">
+              <img
+                [src]="suggestedFriend.profilePic"
+                alt="avatar"
+                onerror="this.src = '../../../assets/default-profile-pic.jpeg'" />
 
-        <img src='assets/default-profile-pic.jpeg' alt="Suggested Friend Picture" />
-        <div class="suggested-info">
-          <p><strong>friendname</strong></p>
-          <p>friendemail</p>
-        </div>
-        <button class="add-btn">Add Friend</button>
-      </li>
-      <li  class="suggested-item">
+              <div class="suggested-info">
+                <p>{{ suggestedFriend.name }}</p>
+              </div>
 
-        <img src='assets/default-profile-pic.jpeg' alt="Suggested Friend Picture" />
-        <div class="suggested-info">
-          <p><strong>friendname</strong></p>
-          <p>friendemail</p>
-        </div>
-        <button class="add-btn">Add Friend</button>
-      </li>
-      <li  class="suggested-item">
-
-        <img src='assets/default-profile-pic.jpeg' alt="Suggested Friend Picture" />
-        <div class="suggested-info">
-          <p><strong>friendname</strong></p>
-          <p>friendemail</p>
-        </div>
-        <button class="add-btn">Add Friend</button>
-      </li>
-      <li  class="suggested-item">
-
-        <img src='assets/default-profile-pic.jpeg' alt="Suggested Friend Picture" />
-        <div class="suggested-info">
-          <p><strong>friendname</strong></p>
-          <p>friendemail</p>
-        </div>
-        <button class="add-btn">Add Friend</button>
-      </li>
-      <li  class="suggested-item">
-
-        <img src='assets/default-profile-pic.jpeg' alt="Suggested Friend Picture" />
-        <div class="suggested-info">
-          <p><strong>friendname</strong></p>
-          <p>friendemail</p>
-        </div>
-        <button class="add-btn">Add Friend</button>
-      </li>
-      <li  class="suggested-item">
-
-        <img src='assets/default-profile-pic.jpeg' alt="Suggested Friend Picture" />
-        <div class="suggested-info">
-          <p><strong>friendname</strong></p>
-          <p>friendemail</p>
-        </div>
-        <button class="add-btn">Add Friend</button>
-      </li>
-      <li  class="suggested-item">
-
-        <img src='assets/default-profile-pic.jpeg' alt="Suggested Friend Picture" />
-        <div class="suggested-info">
-          <p><strong>friendname</strong></p>
-          <p>friendemail</p>
-        </div>
-        <button class="add-btn">Add Friend</button>
-      </li>
-      <li  class="suggested-item">
-
-        <img src='assets/default-profile-pic.jpeg' alt="Suggested Friend Picture" />
-        <div class="suggested-info">
-          <p><strong>friendname</strong></p>
-          <p>friendemail</p>
-        </div>
-        <button class="add-btn">Add Friend</button>
-      </li>
+              <ng-container [ngSwitch]="checkFriendStatus(suggestedFriend)">
+                <button
+                  *ngSwitchCase="'pending'"
+                  class="pending"
+                  (click)="onRemoveFriendRequest(suggestedFriend); $event.stopPropagation()">Pending</button>
+                <ng-container *ngSwitchCase="'accept'">
+                  <button
+                    class="add-btn"
+                    (click)="onAcceptFriend(suggestedFriend); $event.stopPropagation()">Accept</button>
+                  <button
+                    class="reject"
+                    (click)="onDeclineFriend(suggestedFriend); $event.stopPropagation()">Reject</button>
+                </ng-container>
+                <button
+                  *ngSwitchCase="'add'"
+                  class="add-btn"
+                  (click)="onAddFriend(suggestedFriend); $event.stopPropagation()">Request</button>
+              </ng-container>
+            </li>
+          }
+        }
+        @else {
+          <p>No suggested friends</p>
+        }
+      }
+      @else {
+        <p>No suggested friends</p>
+      }
     </ul>
   </div>
   <ng-template #noSuggestions>

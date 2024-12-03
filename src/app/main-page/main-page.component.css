@@ -9,12 +9,13 @@
     padding: 20px;
     padding-top: 50px;
     padding-bottom: 40px;
-    background-image: url('../../../public/assets/main-page-bg.jpeg');
+    background-image: url('../../../public/assets/main-page-bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     margin: 0;
     overflow: hidden;
+    height: 90%;
   }
 
 

@@ -2,6 +2,8 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { io, Socket } from 'socket.io-client';
 import { BehaviorSubject, interval, Observable, startWith, switchMap } from 'rxjs';
 import { Chat, Message, User } from '../models';
+import { HttpClient } from '@angular/common/http';
+import { CommunicatorService } from './communicator.service';
 
 @Injectable({
   providedIn: 'root',
@@ -21,10 +23,13 @@ export class ChatService implements OnDestroy {
 
   selectedChatSubject = new BehaviorSubject<boolean>(false);
 
-  constructor() {
+  constructor(private http: HttpClient, private communicatorService: CommunicatorService) {
     // Initialize socket connection to the /chat namespace
-    this.socket = io('http://localhost:4000/chat');
-
+    
+    const userId = JSON.parse(sessionStorage.getItem('user') || '{}')._id;
+    this.socket = io('http://localhost:4000/chat', {
+      auth: {userId}
+    });
     this.socket.on('connect', () => {
       console.log('Connected to chat server');
     });
@@ -36,7 +41,7 @@ export class ChatService implements OnDestroy {
     this.socket.on('get-online-users', (users) => {
       console.log(users);
       this.onlineUsersSubject.next(users);
-      console.log('Online users in chat service sockeg listener:', users);
+      // console.log('Online users in chat service sockeg listener:', users);
       
     });
 
@@ -49,6 +54,8 @@ export class ChatService implements OnDestroy {
     });
 
     this.socket.on('new_chat', (chat) => {
+      
+      
       const currentChats = this.chatsSubject.value;
       this.chatsSubject.next([...currentChats, chat]);
     });
@@ -74,6 +81,14 @@ export class ChatService implements OnDestroy {
         this.updateUserState(user._id, false);
       }
     });
+
+    this.socket.on('new-notification', (notification) => {
+      console.log('New notification:', notification);
+      communicatorService.notificationsSubject.next([...communicatorService.notificationsSubject.value, notification]);
+
+      
+    }
+    );
 
     
 
@@ -110,7 +125,7 @@ export class ChatService implements OnDestroy {
         })
       )
       .subscribe((users) => {
-        console.log('Periodic users update:', users);
+        // console.log('Periodic users update:', users);
 
         const chats = this.chatsSubject.value;
         users.forEach((user) => {
@@ -149,4 +164,10 @@ export class ChatService implements OnDestroy {
     this.socket.disconnect();
   }
 
+  createChat(email: string) {
+    const userEmail = JSON.parse(sessionStorage.getItem('user') || '{}').email;
+    return this.http.post('http://localhost:3000/user/createChat', { userEmail, otherUserEmail: email });
+  
+
+}
 }

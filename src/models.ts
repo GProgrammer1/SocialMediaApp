@@ -36,6 +36,27 @@ export interface EmailVerificationToken {
     userId: number;
 }
 
+export interface Notification {
+    _id?: number;
+    user: User;
+    notificationMessage: string;
+    notificationType : string;
+    createdAt: Date;
+    isRead: boolean;
+    read: boolean;
+}
+
+export interface Story {
+    _id?: number;
+    user: User;
+    mediaUrl: string;
+    views: number;
+    createdAt: Date;
+    expiresAt: Date;
+    likes: Like[];
+    dislikes: Dislike[];
+    comments: CommentText[];
+}
 
 
 export interface Post {
@@ -43,13 +64,14 @@ export interface Post {
     likes?: Like[];
     dislikes?: Dislike[];
     comments?: CommentText[];
-    uploadDate: Date ;
+    createdAt: Date ;
     lastUpdateDate?: Date ;
-    contentType: string; 
+    contentType: string;
     text?: string;
     mediaUrl? : string ;
-    privacyStatus: 'Public' | 'Private' | 'Friends Only';
-    userId: number ;
+    privacyStatus: 'public' | 'private' | 'friends only';
+    user:User ;
+    shares: number;
 }
 
 export interface Chat {
@@ -71,28 +93,33 @@ export interface Message {
 
 export interface Like {
     _id?: number;
-    likerId: number ;
+    user: User ;
     postId: number ;
 }
 
 export interface Dislike {
     _id?: number;
-    dislikerId: number ;
+    user: User ;
     postId: number ;
 }
 
 export interface CommentText {
     _id?: number;
-    content: string ;
-    commentatorId: number ;
+    text: string ;
+    user: User ;
     postId: number ;
+    createdAt: Date ;
+    replies: CommentText[] ;
+    likes: Like[] ;
+    dislikes: Dislike[] ;
+    parent: CommentText;
 
 }
 
 export interface FriendRequest {
     _id?: number;
-    senderId: number ;
-    receiverId: number ;
+    sender: User ;
+    receiver: User ;
     status: 'Accepted' | 'Pending' | 'Rejected' ;
     timestamp: Date ;
 }

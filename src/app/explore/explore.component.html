@@ -5,7 +5,7 @@
     <div class="search">
       <!-- Search bar -->
       <div class="search-bar">
-        <input type="text" placeholder="Search users..." (keyup.enter)="onSearch()" />
+        <input type="text" placeholder="Search users..." (keyup.enter)="onSearch()" (input)="onSearch()" [(ngModel)]="searchQuery" />
         <button class="search-icon" (click)="onSearch()">
           <mat-icon>search</mat-icon>
         </button>
@@ -14,57 +14,32 @@
       <!-- Search Results -->
       <div class="search-results">
         <ul>
-          <li class="search-result-item">
-              <img src="assets/default-profile-pic.jpeg" alt="User Picture" />
-              <div class="user-info">
-                <p><strong>username</strong></p>
-                <p>useremail</p>
-              </div>
-            <button class="add-friend">
-              Request
-            </button>
-          </li>
-          <li class="search-result-item">
-              <img src="assets/default-profile-pic.jpeg" alt="User Picture" />
-              <div class="user-info">
-                <p><strong>username</strong></p>
-                <p>useremail</p>
-              </div>
-            <button class="remove-friend">
-              Remove
-            </button>
-          </li>
-          <li class="search-result-item">
-              <img src="assets/default-profile-pic.jpeg" alt="User Picture" />
-              <div class="user-info">
-                <p><strong>username</strong></p>
-                <p>useremail</p>
-              </div>
-            <button class="add-friend">
-              Request
-            </button>
-          </li>
-          <li class="search-result-item">
-              <img src="assets/default-profile-pic.jpeg" alt="User Picture" />
-              <div class="user-info">
-                <p><strong>username</strong></p>
-                <p>useremail</p>
-              </div>
-            <button class="remove-friend">
-              Remove
-            </button>
-          </li>
-          <li class="search-result-item">
-            <img src="assets/default-profile-pic.jpeg" alt="User Picture" />
-            <div class="user-info">
-              <p><strong>username</strong></p>
-              <p>useremail</p>
-            </div>
-          <button class="remove-friend">
-            Remove
-          </button>
-        </li>
+          @if ((searchResults$ | async); as searchResults) {
+            @for (user of searchResults; track user._id) {
+              <li 
+                class="search-result-item"
+                (click)="onViewProfile(user._id!)"> <!-- Bind click to navigation -->
+                <img [src]="user.profilePic" 
+                     onerror="this.src = '../../../assets/default-profile-pic.jpeg'" 
+                     alt="User Picture" />
+                <div class="user-info">
+                  <p><strong>{{ user.name }}</strong></p>
+                  <p>{{ user.email }}</p>
+                </div>
+                <ng-container [ngSwitch]="checkFriendStatus(user)">
+                  <button *ngSwitchCase="'friends'" class="remove-friend" (click)="onRemoveFriend(user); $event.stopPropagation()">Remove</button>
+                  <button *ngSwitchCase="'pending'" class="pending" (click)="onRemoveFriendRequest(user); $event.stopPropagation()">Pending</button>
+                  <ng-container *ngSwitchCase="'accept'">
+                    <button class="add-friend" (click)="onAcceptFriend(user); $event.stopPropagation()">Accept</button>
+                    <button class="reject" (click)="onDeclineFriend(user); $event.stopPropagation()">Reject</button>
+                  </ng-container>
+                  <button *ngSwitchDefault class="add-friend" (click)="onAddFriend(user); $event.stopPropagation()">Request</button>
+                </ng-container>
+              </li>
+            }
+          }
         </ul>
+        
       </div>
     </div>
 

@@ -1,28 +1,73 @@
-.story-container {
+.stories {
   display: flex;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   gap: 15px;
-  padding: 10px;
   overflow-x: auto;
+  height: 90%;
 }
+
+.user-story-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.story-user{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.story-user .story {
+  display: none; /* Hide all stories by default */
+}
+
+.story-user .story:first-of-type {
+  display: block; /* Show only the first story */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
 
 .profile-image {
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  flex-shrink: 0;
+  border: 2px solid #2563eb;
+  padding: 0;
 }
 
-.stories-list {
+img {
+  display: block;
+  width: auto;
+  height: 70px;
+  padding: 10px;
+  border-radius: 30px;
+  align-self: center;
+}
+
+.story-list {
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
   gap: 15px;
   overflow-x: auto;
-  padding: 5px 0;
+  height: 90%;
 }
 
-.story-item {
-  min-width: 80px;
-  text-align: center;
+.story{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .story-image {
@@ -39,30 +84,89 @@
   color: #9ca3af;
 }
 
-img{
+.avatar{
   display: none;
 }
 
+.story-card {
+  width: 100px;
+  height: 150px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  overflow: hidden;
+  text-align: center;
+  background-color: #f9f9f9;
+  transition: transform 0.2s ease;
+}
+
+.story-card:hover {
+  transform: scale(1.05);
+}
+
+.story-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+}
+
+.story-name {
+  padding: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+mat-icon{
+  color: #007bff;
+  background-color: #ddd;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
-  .story-container {
-    padding: 5px;
-  }
-
-  .profile-image {
-    width: 45px;
-    height: 45px;
-  }
-
-  .story-image {
-    width: 45px;
-    height: 45px;
-  }
-  img {
+  .avatar{
     display: block;
-    width: 40%;
-    height: auto;
-    padding: 10px;
-    border-radius: 30px;
-    align-self: center;
+    height: 75px;
+    width: 75px;
+    padding: 0;
+    border-radius: 10px;
+  }
+  .icon{
+    border-right: 1px solid #5e5e5e;
+    padding-right: 20px;
   }
 }
+
+::ng-deep .mat-dialog-container {
+  border-radius: 12px;
+  background-color: #2b2b2b; /* Dark theme background */
+  color: #ffffff; /* Text color */
+  padding: 20px;
+  max-width: 600px; /* Control the dialog width */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Shadow for pop effect */
+}
+
+::ng-deep .mat-dialog-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff; /* Title color */
+  margin-bottom: 10px;
+}
+
+::ng-deep .mat-dialog-content {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #dddddd; /* Lighter text for readability */
+}
+
+::ng-deep .mat-dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+

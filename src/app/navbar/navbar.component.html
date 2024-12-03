@@ -2,34 +2,78 @@
   <img src="../../../images.jpeg" alt="avatar">
   <ul class="navbar-list">
     <li>
-      <a routerLink="/home" class="navbar-item" mat-icon-button aria-label="Home">
-        <mat-icon>home</mat-icon>
+      <a
+        routerLink="/home"
+        routerLinkActive="active"
+        [ngClass]="{'active-icon': isActive('/home')}"
+        class="navbar-item"
+        mat-icon-button
+        aria-label="Home">
+        <mat-icon>{{ 'home' }}</mat-icon>
         <p>Home</p>
       </a>
     </li>
     <li>
-      <a routerLink="/explore" class="navbar-item" mat-icon-button aria-label="Explore">
-        <mat-icon>explore</mat-icon>
+      <a
+        routerLink="/explore"
+        routerLinkActive="active"
+        [ngClass]="{'active-icon': isActive('/explore')}"
+        class="navbar-item"
+        mat-icon-button
+        aria-label="Explore">
+        <mat-icon>{{ 'explore' }}</mat-icon>
         <p>Explore</p>
       </a>
     </li>
     <li>
-      <a routerLink="/create-post" class="navbar-item" mat-icon-button aria-label="Create Post">
-        <mat-icon>add_circle</mat-icon>
+      <a
+        routerLink="/create-post"
+        routerLinkActive="active"
+        [ngClass]="{'active-icon': isActive('/create-post')}"
+        class="navbar-item"
+        mat-icon-button
+        aria-label="Create Post">
+        <mat-icon>{{  'add_circle' }}</mat-icon>
         <p>Create</p>
       </a>
     </li>
     <li>
-      <a routerLink="/chat" class="navbar-item" mat-icon-button aria-label="Chat">
-        <mat-icon>chat</mat-icon>
+      <a
+        routerLink="/chat"
+        routerLinkActive="active"
+        [ngClass]="{'active-icon': isActive('/chat')}"
+        class="navbar-item"
+        mat-icon-button
+        aria-label="Chat">
+        <mat-icon>{{ 'chat' }}</mat-icon>
         <p>Chat</p>
       </a>
     </li>
     <li>
-      <a routerLink="/profile" class="navbar-item" mat-icon-button aria-label="Profile">
-        <mat-icon>account_circle</mat-icon>
+      <a
+        routerLink="/profile"
+        routerLinkActive="active"
+        [ngClass]="{'active-icon': isActive('/profile')}"
+        class="navbar-item"
+        mat-icon-button
+        aria-label="Profile">
+        <mat-icon>{{ 'account_circle' }}</mat-icon>
         <p>Profile</p>
       </a>
     </li>
+    @if(isAdmin){
+    <li>
+      <a
+        routerLink="/admin"
+        routerLinkActive="active"
+        [ngClass]="{'active-icon': isActive('/admin')}"
+        class="navbar-item"
+        mat-icon-button
+        aria-label="Admin">
+        <mat-icon>{{ 'face' }}</mat-icon>
+        <p>Admin</p>
+      </a>
+    </li>
+  }
   </ul>
 </nav>

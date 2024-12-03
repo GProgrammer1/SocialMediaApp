@@ -1,13 +1,18 @@
+
+
+
+
+
 <app-navbar class="navbar"></app-navbar>
 <div class="profile">
   <div class="profile-container">
     <div class="profile-header">
       <img mat-card-image class="profile-pic"
-        [src]="profilePicture" onerror="this.src = '../../../assets/default-profile-pic.jpeg'" alt="Profile Picture" />
+        [src]="profilePicture$ | async" onerror="this.src = '../../../assets/default-profile-pic.jpeg'" alt="Profile Picture" />
       <div class="profile-info">
         <div class="followers-info">
-          <p><strong>{{ posts.length }} Posts</strong></p>
-          <p class="followers"><strong (click)="openFriendsList()">{{ friends.length }} Friends</strong></p>
+          <p><strong>{{ (posts$ | async)?.length }} Posts</strong></p>
+          <p class="followers"><strong (click)="openFriendsList()">{{ (friends$ | async)?.length }} Friends</strong></p>
         </div>
         <div class="profile-details">
           <h2>{{ user.name }}</h2>
@@ -17,50 +22,28 @@
     </div>
 
     <div class="bio-section">
-      <p>{{ bio }}</p>
+      <p>{{ bio$ | async }}</p>
     </div>
 
     <hr>
 
     <div class="posts-section">
-      <!-- <h3>Your Posts</h3>
-      <div class="posts-list">
-        <div class="post">
-        <img mat-card-image class="post-image" src="assets/default-profile-pic.jpeg" alt="Post Image">
-      </div>
-      <div class="post">
-        <img mat-card-image class="post-image" src="assets/default-profile-pic.jpeg" alt="Post Image">
-      </div>
-      <div class="post">
-        <img mat-card-image class="post-image" src="assets/default-profile-pic.jpeg" alt="Post Image">
-      </div>
-      <div class="post">
-        <img mat-card-image class="post-image" src="assets/default-profile-pic.jpeg" alt="Post Image">
-      </div>
-      <div class="post">
-        <img mat-card-image class="post-image" src="assets/default-profile-pic.jpeg" alt="Post Image">
-      </div>
-      <div class="post">
-        <img mat-card-image class="post-image" src="assets/default-profile-pic.jpeg" alt="Post Image">
-      </div>
-      <div class="post">
-        <img mat-card-image class="post-image" src="assets/default-profile-pic.jpeg" alt="Post Image">
-      </div>
-
-      </div> -->
+     
+      @if ((posts$ | async) ; as posts) {
       @if (posts.length === 0) {
         <p>No posts yet</p>
       }
       
       @else {
-        @for (post of posts ; track post) {
+        @for (post of sortPostsByCreatedTime(posts) ; track post) {
          
-        <div class="post">
+        <div class="post" >
         
-          <img mat-card-image class="post-image" [src]="post.mediaUrl"  alt="Post Image">
+          <img mat-card-image class="post-image" [src]="post.mediaUrl"  alt="Post Image" (click)="openPost(post)">
         </div>
       }
       }
+    }
       
     </div>
     <div class="profile-settings-edit-btns">

@@ -2,40 +2,53 @@
 <div class="profile">
   <div class="profile-container">
     <!-- Profile Header -->
+     @if ((user$ | async) ;as user) {
     <div class="profile-header">
       <img
       mat-card-image
       class="profile-pic"
-      [src]="profilePicture ? profilePicture : 'assets/default-profile-pic.jpeg'"
+      [src]="user.profilePic" onerror="this.src = '../../../assets/default-profile-pic.jpeg'"
       alt="Profile Picture"
     />
           <div class="profile-info">
         <div class="followers-info">
-          <p><strong>{{ numberOfPosts }} Posts</strong></p>
-          <p><strong>{{ numberOfFriends }} Friends</strong></p>
+          <p><strong>{{ user.posts?.length }} Posts</strong></p>
+          <p class="followers"><strong (click)="openFriendsList()">{{ user.friends?.length }} Friends</strong></p>
         </div>
         <div class="profile-details">
-          <h2>{{ friendName }}</h2>
-          <p>{{ friendEmail }}</p>
+          <h2>{{ user.name }}</h2>
+          <p>{{ user.email }}</p>
         </div>
       </div>
     </div>
+
+    <ng-container [ngSwitch]="checkFriendStatus(user)">
+      <button *ngSwitchCase="'friends'" class="remove-friend" (click)="onRemoveFriend(user); $event.stopPropagation()">Remove</button>
+      <button *ngSwitchCase="'pending'" class="pending" (click)="onRemoveFriendRequest(user); $event.stopPropagation()">Pending</button>
+      <ng-container *ngSwitchCase="'accept'">
+        <button class="add-friend" (click)="onAcceptFriend(user); $event.stopPropagation()">Accept</button>
+        <button class="reject" (click)="onDeclineFriend(user); $event.stopPropagation()">Reject</button>
+      </ng-container>
+
+      <button *ngSwitchDefault class="add-friend" (click)="onAddFriend(user); $event.stopPropagation()">Request</button>
+    </ng-container>
 
     <!-- Bio Section -->
     <div class="bio-section">
-      <p>{{ friendBio }}</p>
+      <p>{{ user.bio}}</p>
     </div>
-
     <hr />
 
     <!-- Posts Section -->
-    <div class="posts-section">
-      <h3>{{ friendName }}'s Posts</h3>
+    <div class="posts-section" >
+      <h3>{{ user.name }}'s Posts</h3>
       <div class="posts-list">
-        <div class="post" *ngFor="let post of friendPosts">
-          <img mat-card-image class="post-image" [src]="post.imageUrl" alt="Post Image" />
+        <div class="post" *ngFor="let post of user.posts" >
+          <img mat-card-image class="post-image" [src]="post.mediaUrl" alt="Post Image" (click)="openPost(post)" />
         </div>
       </div>
     </div>
+  }
   </div>
+
 </div>

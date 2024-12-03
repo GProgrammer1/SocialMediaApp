@@ -71,13 +71,14 @@ h2 {
 .friend-info {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   /* Stack name and email vertically */
 }
 
 .friend-info p {
   margin: 0;
   /* Remove default margin */
-  font-size: 14px;
+  font-size: 10px;
   /* Base text size */
 }
 

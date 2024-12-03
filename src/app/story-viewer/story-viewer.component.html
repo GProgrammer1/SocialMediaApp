@@ -1,0 +1,58 @@
+<div class="story-viewer-dialog">
+  <!-- Header Section -->
+  <div class="story-header">
+    <img
+      [src]="currentStory.user.profilePic"
+      alt="User Avatar"
+      class="user-avatar"
+      onerror="this.src = '../../../assets/default-profile-pic.jpeg'"
+    />
+    <div class="user-details">
+      <h3 class="user-name">{{ getStoryUserName(currentStory) }}</h3>
+      <p class="timestamp">{{ timeAgo(currentStory.createdAt) }}</p>
+    </div>
+  </div>
+
+  <!-- Story Content -->
+  <div class="story-content">
+    <img
+      [src]="currentStory.mediaUrl"
+      alt="Story Image"
+      class="story-media"
+      onerror="this.src = '../../../assets/default-story-image.jpeg'"
+    />
+  </div>
+
+  <!-- Controls Section -->
+  <div class="story-controls">
+    <!-- Previous Story Button -->
+    <button
+      *ngIf="currentIndex > 0"
+      mat-icon-button
+      class="control-button"
+      (click)="previousStory()"
+    >
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+
+    <!-- Next Story Button -->
+    <button
+      *ngIf="currentIndex < stories.length - 1"
+      mat-icon-button
+      class="control-button"
+      (click)="nextStory()"
+    >
+      <mat-icon>arrow_forward</mat-icon>
+    </button>
+  </div>
+
+  <!-- Story Progress Bar -->
+  <mat-slider
+    [max]="stories.length"
+    step="1"
+    class="story-progress-bar"
+    disabled
+  >
+    <input matSliderThumb [value]="currentIndex + 1" />
+  </mat-slider>
+</div>

@@ -6,7 +6,7 @@
     justify-content: center;
     position: relative;
     padding: 20px;
-    background-image: url('../../../public/assets/main-page-bg.jpeg');
+    background-image: url('../../../public/assets/main-page-bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     margin: 0;
@@ -166,8 +166,8 @@ button:disabled {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow */
   }
 
-  
-  
+
+
 .loading-cursor {
     cursor: wait;
 }
@@ -197,6 +197,6 @@ button:disabled {
         padding: 20px;
     }
 
-    
-      
+
+
 }

@@ -3,24 +3,26 @@
   <mat-dialog-content>
     <div class="friend-section">
       <ul class="friends-list">
-        <!-- @if (friends$ | async ; as friends) {
+        @if (friends$ | async ; as friends) {
         @if (friends.length > 0) {
 
         @for(friend of friends ; track friend){
         <li class="friend-item">
-          <img [src]="friend.profilePic" alt="Friend Picture" />
+          <img [src]="friend.profilePic"  alt="Friend Picture" onerror="this.src = '../../../assets/default-profile-pic.jpeg'"  />
           <div class="friend-info">
             <p><strong>{{ friend.name }}</strong></p>
-            <p>{{ friend.email }}</p>
+            @if (mostActiveUser() === friend) {
+            <p>Most Active User</p>
+            }
           </div>
           <button class="remove-btn" (click)="removeFriend(friend._id!)">Remove</button>
         </li>
         }
         } @else {
-        <ng-container *ngTemplateOutlet="noFriends"></ng-container>
+        <p>No friends to show</p>
         }
-        } -->
-        <li class="friend-item">
+        }
+        <!-- <li class="friend-item">
           <img [src]="'assets/default-profile-pic.jpeg'" alt="Friend Picture" />
           <div class="friend-info">
             <p><strong>name</strong></p>
@@ -86,14 +88,16 @@
         </li>
       </ul>
     </div>
-    <ng-template #noFriends>
-      <p>No friends to show.</p>
-    </ng-template>
+    
     <hr>
     <div class="suggested-section">
-      <h3>Suggested Friends</h3>
+      
+    </div> -->
+    
+    <h3>Suggested Friends</h3>
       <app-suggested></app-suggested>
-    </div>
+  </ul>
+  </div>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button class="close-btn" mat-dialog-close>Close</button>

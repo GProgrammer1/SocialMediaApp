@@ -170,6 +170,24 @@ img {
   color: white;
 }
 
+.reject{
+  background-color: #a9a9a9;
+  color: black;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  right: 100px;
+}
+
+.reject:hover{
+  background-color: #d32f2f;
+  color: white;
+}
+
 .add-friend {
   background-color: #0059b9;
   color: white;
@@ -185,6 +203,23 @@ img {
 
 .add-friend:hover {
   background-color: #01438b;
+}
+
+.pending{
+  background-color: #a9a9a9;
+  color: black;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  right: 15px;
+}
+
+.pending:hover {
+  background-color: #9ca3af;
 }
 
 /* Suggested section */

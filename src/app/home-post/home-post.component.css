@@ -1,59 +1,101 @@
-.post-container {
-  background: linear-gradient(135deg, #1e3a8a, #000);
-  border-radius: 8px;
-  margin-bottom: 15px;
-  overflow: hidden;
-}
-
-.post-header {
+/* Parent Component */
+.posts {
   display: flex;
-  align-items: center;
-  padding: 10px;
-  gap: 10px;
+  flex-direction: column;
+  gap: 15px; /* Increased spacing for better readability */
+  padding: 20px;
+  background-color: #1e1e1e; /* Darker background for the parent container */
+  border-radius: 12px;
 }
 
-.post-user-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+/* Individual Post Item */
+.post-item {
+  width: 400px; /* Increased max-width for better visibility */
+  margin: 0 auto; /* Center the post */
+  padding: 15px; /* Added more padding */
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Slightly deeper shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.post-username {
-  font-weight: 500;
-  color: #fff;
+.post-item:hover {
+  transform: scale(1.03); /* More noticeable hover effect */
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.4); /* Slightly deeper shadow on hover */
 }
 
-.post-image {
-  width: 100%;
-  height: auto;
-}
-
-.post-actions {
-  padding: 10px;
-  display: flex;
-  gap: 15px;
-}
-
-.post-description {
-  padding: 0 10px 10px;
-  color: #cbd5e1;
-}
-
+/* Responsive Design */
 @media (max-width: 768px) {
-  .post-container {
-    margin-bottom: 10px;
+  .post-item {
+    max-width: 90%; /* Adjust width for smaller screens */
   }
+}
 
-  .post-header {
-    padding: 8px;
-  }
+.read {
+   /* Primary accent color for read link */
+  font-weight: normal; /* Normal font weight for read link */
+}
 
-  .post-user-image {
-    width: 32px;
-    height: 32px;
-  }
+.notification-info {
+  display: flex;
+  flex-direction: column;
+}
 
-  .post-actions {
-    padding: 8px;
-  }
+.new-num {
+  background-color: #007bff; /* Primary accent color for new notification count */
+  color: white; /* White text color for better visibility */
+  padding: 2px 5px; /* Added padding for better spacing */
+  border-radius: 50%; /* Circular shape for new notification count */
+  font-size: 0.5rem; /* Smaller font size for new notification count */
+  position: relative;
+  left: 12px;
+  bottom: 10px;
+}
+
+.unread {
+  font-weight: bold;
+}
+
+.container{
+  position: relative;
+}
+
+.bell-icon{
+  margin-bottom: 10px;
+}
+
+.notification-bell {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 40vh;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+}
+
+
+::ng-deep .menu{
+  background-color: whitesmoke;
+  max-height: 200px;
+  overflow: scroll;
+  word-wrap:break-word;
+  white-space: normal;
+}
+
+::ng-deep .menu::-webkit-scrollbar {
+  width: 8px;
+}
+
+::ng-deep .menu::-webkit-scrollbar-track {
+  background: #2a2a2a; /* Dark track to blend with container */
+  border-radius: 8px;
+}
+
+::ng-deep .menu::-webkit-scrollbar-thumb {
+  background: #007bff; /* Primary accent color */
+  border-radius: 8px;
+}
+
+::ng-deep .menu::-webkit-scrollbar-thumb:hover {
+  background: #0056b3; /* Darker accent on hover */
 }

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeStoryComponent } from "../home-story/home-story.component";
 import { HomePostComponent } from "../home-post/home-post.component";
 import { NavbarComponent } from "../navbar/navbar.component";
 import { SocketService } from '../socket.service';
+import { HomeStoryComponent } from '../home-story/home-story.component';
 
 @Component({
   selector: 'app-home',

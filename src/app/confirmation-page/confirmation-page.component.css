@@ -1,6 +1,6 @@
 .confirmation-container {
     height: 100vh;
-    background-image: url('../../../public/assets/main-page-bg.jpeg');
+    background-image: url('../../../public/assets/main-page-bg.jpg');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -8,7 +8,7 @@
     align-items: center;
     font-family: 'Exo 2 Black';
   }
-  
+
   .content-container {
     text-align: center;
     background-color: white;
@@ -19,7 +19,7 @@
     max-width: 500px;
     font-family: 'Exo 2 Black';
   }
-  
+
   .gmail-icon {
     font-size: 50px;
     color: #DB4437; /* Gmail Red */
@@ -27,8 +27,8 @@
     width: 90px;
     height: 90px;
   }
-  
- 
+
+
   .message-container {
     margin-top: 20px;
     font-family: 'Exo 2 Black';
@@ -39,26 +39,26 @@
     margin-bottom: 20px;
     font-family: 'Exo 2 Black';
   }
-  
+
   .icon {
     font-size: 50px;
     margin-bottom: 20px;
   }
-  
+
   .success {
     color: green;
   }
-  
+
   .error {
     color: red;
   }
-  
+
   .loading {
     color: #ffa500;
   }
-  
+
   button {
-    
+
     color: white;
     border: none;
     padding: 10px 20px;
@@ -76,9 +76,8 @@
     background-color: #0f9d58;
   }
 
-  
+
   button:hover {
     filter: brightness(0.9);
   }
-  
-  
+

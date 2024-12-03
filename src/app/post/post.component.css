@@ -1,0 +1,270 @@
+/* General Container Styling */
+.c {
+  background-color: #1e1e1e;
+  max-height: 100vh; /* Corrected typo from '100hv' to '100vh' */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Ensures no scrollbars appear */
+}
+
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Post Styling */
+.post {
+  margin: 10px auto; /* Centers post and adds top/bottom spacing */
+  padding: 20px;
+  border: 1px solid #444; /* Darker border */
+  border-radius: 12px; /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth transition effects */
+  width: 100%; /* Ensures the post spans the full width of the container */
+  height: auto; /* Automatically adjusts height */
+  max-width: 450px; /* Limits width to 450px */
+  background-color: #191919; /* Slightly darker background for the post */
+  overflow: hidden; /* Prevents overflow within the post */
+  box-sizing: border-box; /* Ensures padding and borders are included in the size */
+  position: relative;
+}
+
+/* Scale down post to fit in screen */
+.post-wrapper .post {
+  transform: scale(1); /* Default scale */
+  transform-origin: top left; /* Ensures scaling starts from top left */
+  max-width: 100%; /* Ensures the post doesn't exceed the container's width */
+  max-height: 100%; /* Ensures the post doesn't exceed the container's height */
+}
+
+/* Media (images or videos) inside the post */
+.post img,
+.post video {
+  max-width: 100%;
+  max-height: 65vh;
+  object-fit: contain; /* Ensures the content scales without cropping */
+}
+
+
+
+.post:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  /* Deeper hover shadow */
+}
+
+/* Post Header */
+.post-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.profile-pic {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  margin-right: 15px;
+  border: 2px solid #007bff;
+  /* Blue border */
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-info h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #fff;
+  /* Light text for dark background */
+}
+
+.upload-date {
+  font-size: 14px;
+  color: #aaa;
+  /* Lighter gray for subtle contrast */
+}
+
+.side-header{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  right: 20px;
+  width: 100px;
+}
+
+.admin-actions {
+  display: flex;
+  align-content: center;
+  justify-content: space-around;
+  justify-content: center;
+  flex-direction: row;
+  gap: 7px;
+}
+
+.delete {
+  color: #ff4d4d;
+  cursor: pointer;
+}
+
+.delete:hover {
+  color: #ff3030;
+  transition: color 0.5s;
+  transform: scale(1.05);
+}
+
+.edit {
+  color: #007bff;
+  cursor: pointer;
+}
+
+.edit:hover {
+  color: #1082fc;
+  transition: color 0.5s;
+  transform: scale(1.05);
+}
+
+.save {
+  color: #aaa;
+  cursor: pointer;
+}
+
+.save:hover {
+  color: #555;
+  transition: color 0.5s;
+  transform: scale(1.05);
+}
+
+/* Post Body */
+.post-body {
+  margin-bottom: 15px;
+}
+
+.post-text {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ddd;
+  /* Softer white for the text */
+}
+
+/* Post Media */
+.post-media img,
+.post-media video {
+  width: 100%;
+  margin-top: 10px;
+  /* Darker border for media */
+}
+
+/* Post Actions */
+.post-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  gap: 15px;
+  /* Spacing between icons */
+}
+
+/* General Icon Styling */
+.action-icon {
+  font-size: 20px;
+  /* Larger icons */
+  color: #bbb;
+  /* Default color */
+  cursor: pointer;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.btn-action {
+  display: flex;
+  align-items: center;
+  color: #ddd;
+}
+
+.action-icon:hover {
+  transform: scale(1.2);
+  /* Slight scale effect */
+}
+
+/* Liked Icon */
+.liked {
+  color: #007bff;
+  /* Blue for liked state */
+}
+
+/* Disliked Icon */
+.disliked {
+  color: #ff4d4d;
+  /* Softer red for disliked state */
+}
+
+
+/* Comments Section */
+.comments-section {
+  margin-top: 20px;
+  padding-top: 15px;
+  border-top: 1px solid #555;
+  /* Darker border */
+}
+
+.comments-section h4 {
+  margin-bottom: 10px;
+  color: #fff;
+  /* White for headers */
+  font-size: 16px;
+}
+
+.comment {
+  font-size: 14px;
+  line-height: 1.4;
+  color: #ddd;
+  /* Softer white */
+  margin-bottom: 8px;
+}
+
+.level{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-content: baseline;
+  font-size: small;
+  margin-top: 5px;
+}
+.level mat-icon{
+  font-size:larger;
+  margin-right: 3px;
+}
+.private{
+  color: #ff4d4d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  align-content: baseline;
+}
+.private span{
+  color: #ff4d4d;
+}
+
+.friends{
+  color: #007bff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  align-content: baseline;
+}
+.friends span{
+  color: #007bff;
+}

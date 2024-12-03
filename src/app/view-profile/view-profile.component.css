@@ -10,6 +10,76 @@
   align-items: flex-start;
   padding-top: 20px;
   box-sizing: border-box;
+  overflow: auto; /* Allow scrolling if content overflows */
+}
+.followers {
+  cursor: pointer;
+}
+
+.remove-friend {
+  background-color: #a9a9a9;
+  color: black;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  right: 15px;
+}
+
+.remove-friend:hover {
+  background-color: #d32f2f;
+  color: white;
+}
+.reject{
+  background-color: #a9a9a9;
+  color: black;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  right: 100px;
+}
+.reject:hover{
+  background-color: #d32f2f;
+  color: white;
+}
+.add-friend {
+  background-color: #0059b9;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  right: 15px;
+}
+
+.add-friend:hover {
+  background-color: #01438b;
+}
+.pending{
+  background-color: #a9a9a9;
+  color: black;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  position: absolute;
+  right: 15px;
+}
+
+.pending:hover {
+  background-color: #9ca3af;
 }
 
 /* Profile Container */
@@ -24,6 +94,7 @@
   margin: 20px;
   color: #a9a9a9; /* Light gray text color */
   position: relative; /* For absolute positioning of settings and edit buttons */
+  overflow: auto; /* Allow scrolling if content overflows */
 }
 
 /* Profile Header Section */
@@ -229,4 +300,25 @@ hr {
     max-width: 100%; /* Allow full width */
     margin: 8px 0px; /* Add space between the sections */
   }
+}
+
+.profile-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.profile-container::-webkit-scrollbar-track {
+  background: #2a2a2a;
+  /* Dark track to blend with container */
+  border-radius: 8px;
+}
+
+.profile-container::-webkit-scrollbar-thumb {
+  background: #007bff;
+  /* Primary accent color */
+  border-radius: 8px;
+}
+
+.profile-container::-webkit-scrollbar-thumb:hover {
+  background: #0056b3;
+  /* Darker accent on hover */
 }

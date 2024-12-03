@@ -1,0 +1,33 @@
+<app-navbar class="navbar"></app-navbar> <!-- Navbar -->
+
+<div class="admin">
+  <div class="admin-container">
+    <h2 class="admin-header">Admin Dashboard</h2>
+
+    <!-- Manage Users Section -->
+    <section class="admin-section">
+      <h3>Manage Users</h3>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>User ID</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of (users$ | async)">
+            <td>{{ user._id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            <td>
+              <button mat-raised-button color="primary" (click)="viewProfile(user._id!)">View Profile</button>
+              <button mat-raised-button color="warn" (click)="deleteUser(user._id!)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+</div>

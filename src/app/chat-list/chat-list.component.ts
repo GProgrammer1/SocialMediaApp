@@ -1,7 +1,7 @@
 import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { ChatService } from '../chat.service';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SocketService } from '../socket.service';
 import { Socket } from 'socket.io-client';
 import { AsyncPipe, CommonModule } from '@angular/common';
@@ -11,19 +11,25 @@ import { HttpClient } from '@angular/common/http';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { ChatComponent } from '../chat/chat.component';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-chat-list',
   standalone: true,
-  imports: [ FormsModule, CommonModule, AsyncPipe, MatIconModule, MatButtonModule, ChatComponent, NavbarComponent],
+  imports: [ FormsModule, CommonModule, AsyncPipe, MatIconModule, MatButtonModule, ChatComponent, NavbarComponent,
+    MatDialogModule, ReactiveFormsModule
+  ],
   templateUrl: './chat-list.component.html',
   styleUrl: './chat-list.component.css',
   encapsulation: ViewEncapsulation.Emulated
 })
 export class ChatListComponent implements OnDestroy, OnInit {
   private onlineStatusSubjects: { [chatId: string]: BehaviorSubject<boolean> } = {};
-  
-  onlineUsers$!: Observable<User[]>; 
+
+  emailForm! : FormGroup;
+  onlineUsers$!: Observable<User[]>;
   onlineUsersSubscription!: Subscription;
 
   chatList: any;
@@ -31,18 +37,27 @@ export class ChatListComponent implements OnDestroy, OnInit {
   messages$: Observable<Message[]>;
   user: User;
   chats$: Observable<Chat[]>;
-  
+
   message: string = '';
   read: boolean = false;
   showScrollToBottom: boolean = false;
 
   @ViewChild('chatWindow') chatWindow!: ElementRef;
 
-  constructor(private chatService: ChatService, private socketService: SocketService, private http: HttpClient) {
+  constructor(private chatService: ChatService, private socketService: SocketService, private http: HttpClient, private fb: FormBuilder,
+    private dialog:  MatDialog
+  ) {
     this.user = JSON.parse(sessionStorage.getItem('user') || '{}');
     this.onlineUsers$ = this.chatService.onlineUsers$;
     this.chats$ = this.chatService.chats$;
     this.messages$ = this.chatService.messages$;
+
+    this.emailForm = this.fb.group({
+      email: new FormControl('', {
+        validators: [Validators.required, Validators.email]
+      })
+    });
+
   }
 
   ngOnInit(): void {
@@ -111,6 +126,18 @@ export class ChatListComponent implements OnDestroy, OnInit {
     return chat.participants.find((participant) => participant.name !== this.user.name)?.name;
   }
 
+  openEmailDialog() {
+    const dialogRef = this.dialog.open(EmailDialogComponent, {
+      width: '400px',
+    });
+
+    dialogRef.afterClosed().subscribe((email: string) => {
+      if (email) {
+        console.log('Received email:', email);
+        // Handle the email data here (send it to server, update the UI, etc.)
+      }
+    });
+  }
   formatTime(dateString: Date) {
     const date = new Date(dateString);
     let hours = date.getUTCHours();
@@ -132,6 +159,7 @@ export class ChatListComponent implements OnDestroy, OnInit {
     });
   }
 
+
   onScroll(): void {
     const chatWindowElement = this.chatWindow.nativeElement;
     const isAtBottom =
@@ -144,6 +172,69 @@ export class ChatListComponent implements OnDestroy, OnInit {
   }
 
   getChatFriendProfilePicture(chat: Chat) {
-
+    return chat.participants.find((participant: User) => participant.name !== this.user.name)?.profilePic;
   }
 }
+
+
+
+
+  @Component({
+    selector: 'app-create-chat',
+    template: `
+      <h2 mat-dialog-title>Enter the Email</h2>
+      <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" type="email" required />
+          <mat-error *ngIf="emailForm.get('email')?.hasError('required')">Email is required</mat-error>
+          <mat-error *ngIf="emailForm.get('email')?.hasError('email')">Enter a valid email</mat-error>
+        </mat-form-field>
+        <div mat-dialog-actions>
+          <button mat-button (click)="onCancel()">Cancel</button>
+          <button mat-raised-button color="primary" type="submit" [disabled]="emailForm.invalid">Submit</button>
+        </div>
+      </form>
+    `,
+    imports: [MatDialogModule, ReactiveFormsModule, MatFormFieldModule, CommonModule, MatInputModule],
+    standalone: true
+  })
+  export class EmailDialogComponent {
+    emailForm: FormGroup;
+
+    constructor(
+      private fb: FormBuilder,
+      private dialogRef: MatDialogRef<EmailDialogComponent>,
+      private chatService: ChatService
+
+    ) {
+      this.emailForm = this.fb.group({
+        email: ['', [Validators.required, Validators.email]],
+      });
+    }
+
+    onSubmit(): void {
+      if (this.emailForm.valid) {
+        this.dialogRef.close(this.emailForm.value.email);
+         // Send email back to parent
+         this.chatService.createChat(this.emailForm.value.email).subscribe((chat) => {
+          console.log('Chat created:', chat);
+          this.chatService.getChats();
+         });
+
+      }
+      else {
+        console.log('Invalid email');
+        return ;
+      }
+    }
+
+    onCancel(): void {
+      this.dialogRef.close();
+    }
+  }
+
+function formatTime(dateString: any, Date: DateConstructor) {
+  throw new Error('Function not implemented.');
+}
+

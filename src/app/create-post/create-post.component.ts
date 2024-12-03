@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { PostService } from '../post.service';
+import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-post',
@@ -22,7 +23,8 @@ import { PostService } from '../post.service';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
-    NavbarComponent
+    NavbarComponent,
+    MatSnackBarModule
   ],
   templateUrl: './create-post.component.html',
   styleUrls: ['./create-post.component.scss'],
@@ -31,8 +33,9 @@ export class CreatePostComponent {
   postForm: FormGroup;
   selectedFile: File | null = null;
   filePreview: string | ArrayBuffer | null = null;
+  loading = false;
 
-  constructor(private fb: FormBuilder, private postService: PostService) {
+  constructor(private fb: FormBuilder, private postService: PostService, private snackbar: MatSnackBar) {
     this.postForm = this.fb.group({
       text: new FormControl('', Validators.required),
       privacyStatus: new FormControl('public', Validators.required)
@@ -74,7 +77,9 @@ export class CreatePostComponent {
       formData.append('user', userId);
       
       console.log('Form data:', formData);
+      this.loading = true;
       
+      setTimeout(() => {
       this.postService.createPost(formData).subscribe(
         {
           next: (res: any) => {
@@ -83,12 +88,27 @@ export class CreatePostComponent {
             console.log(newPost);
             
             sessionStorage.setItem('user', JSON.stringify(newUser));
+
+            this.postForm.reset();
+            this.selectedFile = null;
+            this.snackbar.open('Post created successfully', 'Close', {
+               duration: 3000,
+               verticalPosition: 'top',
+                horizontalPosition: 'center'}); 
+            this.loading = false;        
           },
           error: (err) => {
             console.error('Error creating post', err);
+            this.snackbar.open('Error creating post', 'Close', {
+               duration: 3000,
+                verticalPosition: 'top',
+                horizontalPosition: 'center'
+              });
+            this.loading = false;
           }
         }
       )
+    }, 2000);
       // Logic to send the formData to the backend
       console.log('Post submitted', formData);
     } else {

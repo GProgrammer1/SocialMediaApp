@@ -1,0 +1,128 @@
+<div class="c">
+  <div class="container">
+    <div class="post" [ngClass]="{ 'focused': editMode }">
+      <!-- Post Header -->
+      <div class="post-header">
+        <img [src]="post.user.profilePic" onerror="this.src = '../../../assets/default-profile-pic.jpeg'"
+          alt="Profile Picture" class="profile-pic" />
+        <div class="user-info">
+          <h3>{{ post.user.name }}</h3>
+          <span class="upload-date">{{ post.createdAt | date: 'hh:mm a' }}</span>
+        </div>
+
+        <div class="side-header">
+
+          <!-- Admin Actions -->
+          @if(isAdmin || post.user._id === user._id) {
+          <div class="admin-actions" [ngClass]="{ 'editing': editMode }">
+            <mat-icon (click)="editPost(post)" aria-label="Edit Post" class="edit">
+              edit
+            </mat-icon>
+            <mat-icon (click)="deletePost(post._id!, source)" aria-label="Delete Post" class="delete">
+              delete
+            </mat-icon>
+            <!-- <button class="save" (click)="savePost(post)">Save</button> -->
+            <mat-icon (click)="savePost(post)" aria-label="Save Post" class="save">
+              save
+            </mat-icon>
+          </div>
+          }
+          <div class="level">
+            <!-- Display privacy status normally -->
+            <ng-container *ngIf="!editMode">
+              @if(post.privacyStatus === 'private') {
+                <div class="private">
+                  <mat-icon aria-label="Level" class="level-icon">lock</mat-icon>
+                  <span>Private</span>
+                </div>
+              }
+              @if(post.privacyStatus === 'friends only') {
+                <div class="friends">
+                  <mat-icon aria-label="Level" class="level-icon">group</mat-icon>
+                  <span>Friends</span>
+                </div>
+              }
+              
+            </ng-container>
+          
+            <!-- Edit mode: Show mat-select for privacy status -->
+            <ng-container *ngIf="editMode">
+              <mat-form-field appearance="fill" class="privacy-select">
+                <mat-label>Account Privacy</mat-label>
+                <mat-select [(value)]="post.privacyStatus">
+                  <mat-option value="public">Public</mat-option>
+                  <mat-option value="friends only">Friends Only</mat-option>
+                  <mat-option value="private">Private</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+          </div>
+          
+        </div>
+      </div>
+
+      <!-- Post Media -->
+      <div class="post-media">
+        <ng-container *ngIf="post.mediaUrl">
+          <ng-container *ngIf="post.contentType.includes('image')">
+            <img [src]="post.mediaUrl" alt="Post Image" class="post-image" />
+          </ng-container>
+          <ng-container *ngIf="post.contentType === 'video'">
+            <video controls class="post-video">
+              <source [src]="post.mediaUrl" type="video/mp4" />
+            </video>
+          </ng-container>
+        </ng-container>
+      </div>
+
+      <!-- Post Body -->
+      <!-- Post Body -->
+      <div class="post-body">
+        <!-- Display the post text if not in edit mode -->
+        <p class="post-text" *ngIf="!editMode">{{ post.text }}</p>
+
+        <!-- Editable area when in edit mode -->
+        <textarea class="post-edit-text" *ngIf="editMode" [(ngModel)]="post.text" autofocus></textarea>
+      </div>
+
+
+      <!-- Post Actions -->
+      <div class="post-actions">
+        <!-- Like -->
+        <div class="btn-action">
+          <mat-icon (click)="checkIfUserLikedPost(post) ? unlikePost(post._id!, source) : likePost(post._id!, source)"
+            aria-label="Like" [ngClass]="{ liked: checkIfUserLikedPost(post) }" class="action-icon">
+            thumb_up
+          </mat-icon>
+          {{ post.likes?.length }}
+        </div>
+
+        <!-- Comment -->
+        <div class="btn-action">
+          <mat-icon (click)="openCommentsDialog(post)" aria-label="Comment" class="action-icon">
+            comment
+          </mat-icon>
+
+          {{ post.comments?.length }}
+        </div>
+
+        <!-- Dislike -->
+        <div class="btn-action">
+          <mat-icon
+            (click)="checkIfUserDislikedPost(post) ? undislikePost(post._id!, source) : dislikePost(post._id!, source)"
+            aria-label="Dislike" [ngClass]="{ disliked: checkIfUserDislikedPost(post) }" class="action-icon">
+            thumb_down
+          </mat-icon>
+          {{ post.dislikes?.length }}
+        </div>
+
+        <div class="btn-action">
+          <mat-icon (click)="sharePost(post)" aria-label="Share" class="action-icon">
+            share
+          </mat-icon>
+          {{ post.shares }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

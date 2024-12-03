@@ -1,0 +1,76 @@
+.story-viewer-dialog {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  background-color: #1e293b; /* Dark blue background */
+  color: #ffffff;
+  border-radius: 12px;
+}
+
+.story-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #007bff; /* Blue border for user avatar */
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.timestamp {
+  font-size: 12px;
+  color: #9ca3af; /* Muted gray */
+}
+
+.story-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2c3140; /* Slightly darker section for content */
+  border-radius: 12px;
+}
+
+.story-media {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 12px;
+}
+
+.story-controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.control-button {
+  color: #ffffff;
+  background-color: transparent;
+  transition: transform 0.2s ease;
+}
+
+.control-button:hover {
+  color: #007bff;
+  transform: scale(1.1);
+}
+
+.story-progress-bar {
+  margin-top: 10px;
+  accent-color: #007bff;
+}

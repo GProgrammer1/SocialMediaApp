@@ -1,0 +1,136 @@
+/* Admin Dashboard Page Styles */
+.admin {
+  position: relative;
+  left: 200px;
+  width: calc(100% - 200px);
+  height: 100%;
+  background-color: #1a1a1a; /* Dark background */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+/* Admin Container */
+.admin-container {
+  width: 90%;
+  height: 85%;
+  max-width: 900px;
+  background-color: #202020; /* Dark container background */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px;
+  color: #a9a9a9; /* Light gray text color */
+  overflow: auto;
+}
+
+.admin-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admin-container::-webkit-scrollbar-track {
+  background: #2a2a2a; /* Dark track to blend with container */
+  border-radius: 8px;
+}
+
+.admin-container::-webkit-scrollbar-thumb {
+  background: #007bff; /* Primary accent color */
+  border-radius: 8px;
+}
+
+.admin-container::-webkit-scrollbar-thumb:hover {
+  background: #0056b3; /* Darker accent on hover */
+}
+
+/* Admin Header */
+.admin-header {
+  text-align: center;
+  color: #0056b3; /* Darker blue accent */
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+/* Admin Section Styling */
+.admin-section {
+  margin-top: 30px;
+
+  h3 {
+    font-size: 20px;
+    color: #0056b3; /* Darker blue accent color */
+    margin-bottom: 15px;
+  }
+}
+
+/* Table Styling */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #252525;
+  border: 1px solid #333;
+}
+
+.admin-table th,
+.admin-table td {
+  border: 1px solid #444;
+  padding: 10px;
+  text-align: left;
+}
+
+.admin-table th {
+  background-color: #0056b3;
+  color: white;
+}
+
+.admin-table tr:nth-child(even) {
+  background-color: #2a2a2a;
+}
+
+.admin-table tr:hover {
+  background-color: #333;
+}
+
+.admin-table button {
+  margin-right: 10px;
+}
+
+/* Buttons */
+button {
+  border-radius: 5px;
+  padding: 8px 16px;
+  font-size: 14px;
+}
+
+/* Responsive Design for Smaller Screens */
+@media (max-width: 768px) {
+  .admin {
+    left: 0;
+    width: 100%;
+    justify-content: flex-start;
+    padding: 20px;
+  }
+
+  .admin-container {
+    width: 95%;
+    height: auto;
+    margin: 15px auto;
+    padding: 15px;
+  }
+
+  .admin-table {
+    font-size: 14px;
+  }
+
+  .admin-section h3 {
+    font-size: 18px;
+  }
+  .navbar{
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+}

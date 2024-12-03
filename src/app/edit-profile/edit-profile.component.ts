@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { AuthService } from '../auth.service';
-import { state } from '@angular/animations';
 
 @Component({
   selector: 'app-edit-profile',
@@ -13,11 +12,16 @@ import { state } from '@angular/animations';
   standalone: true,
   imports: [ReactiveFormsModule, MatButtonModule, NavbarComponent],
 })
-export class EditProfileComponent {
+export class EditProfileComponent implements OnInit {
   editProfileForm: FormGroup;
-  profileImage: File | null = null; // Initialize profileImage as a File (null initially)
+  profileImagePreview: string | null = null; // Stores the preview URL for the profile image
+  profileImage: File | null = null; // Selected profile image file
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) {
     // Initialize form group with validators
     this.editProfileForm = this.fb.group({
       username: ['', [Validators.required, Validators.maxLength(50)]],
@@ -26,40 +30,46 @@ export class EditProfileComponent {
     });
   }
 
-  // Load mock data into the form (simulate API call or service)
-  loadExistingData() {
-    const mockProfile = {
-      username: 'John Doe',
-      email: 'johndoe@example.com',
-      bio: 'A passionate developer and tech enthusiast.',
-      profession: 'Software Engineer',
-      location: 'Lebanon',
-    };
+  ngOnInit(): void {
+    this.loadExistingData();
+  }
 
-    this.editProfileForm.patchValue(mockProfile);
+  // Load existing data into the form
+  loadExistingData(): void {
+    // Get the current user data from session storage (or fetch it from a service)
+    const user = JSON.parse(sessionStorage.getItem('user') || '{}');
+
+    if (user) {
+      this.editProfileForm.patchValue({
+        username: user.name,
+        email: user.email,
+        bio: user.bio,
+      });
+
+      // Load the profile picture preview
+      this.profileImagePreview = user.profilePic || 'assets/default-profile.png';
+    }
   }
 
   // Handle file input for profile picture
-  onFileSelect(event: Event) {
+  onFileSelect(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input?.files?.length) {
       const file = input.files[0];
-      this.profileImage = file; // Store the file directly (no need to convert to base64)
-      
-      // Optionally, you can display a preview of the image
+      this.profileImage = file; // Store the file directly
+
+      // Update the preview image
       const reader = new FileReader();
       reader.onload = () => {
-        const previewImage = reader.result as string;
-        // You can use this preview image for UI preview
+        this.profileImagePreview = reader.result as string;
       };
       reader.readAsDataURL(file);
     }
   }
 
   // Save the updated profile changes
-  saveChanges() {
+  saveChanges(): void {
     if (this.editProfileForm.valid) {
-
       const updatedProfile = this.editProfileForm.value;
       const { username, email, bio } = updatedProfile;
       const formData = new FormData();
@@ -73,14 +83,16 @@ export class EditProfileComponent {
         formData.append('profilePicture', this.profileImage, this.profileImage.name);
       }
 
-      console.log('Updated Profile:', updatedProfile);
-
       this.authService.updateUserInfo(email, formData).subscribe({
         next: (response: any) => {
-          console.log('Response:', response.user);
           const user = JSON.parse(sessionStorage.getItem('user')!);
           const responseUser = response.user;
-          const newUser = { ...user, profilePic: responseUser.profilePic, bio: responseUser.bio,  name: responseUser.name };
+          const newUser = {
+            ...user,
+            profilePic: responseUser.profilePic,
+            bio: responseUser.bio,
+            name: responseUser.name,
+          };
           sessionStorage.setItem('user', JSON.stringify(newUser));
           this.router.navigate(['/profile', { state: { updated: true } }]);
         },
@@ -88,14 +100,11 @@ export class EditProfileComponent {
           console.error('Error:', error);
         }
       });
-
-      // Navigate back to the profile page after saving
-      ;
     }
   }
 
   // Cancel editing and return to the profile page
-  cancel() {
+  cancel(): void {
     this.router.navigate(['/profile']);
   }
 }

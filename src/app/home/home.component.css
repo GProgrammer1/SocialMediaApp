@@ -9,7 +9,7 @@
 }
 
 .home-story {
-  height: 20%;
+  height: calc(100vh - 85%);
   background-color: #1a1a1a;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   color: #9ca3af;
@@ -42,14 +42,9 @@
     width: 100%;
   }
 
-  .home-story {
-    height: auto;
-    min-height: 100px;
-    padding: 10px;
-  }
-
   .home-post {
     padding: 10px;
+    height: 50vh;
   }
   .navbar {
     position: fixed;
@@ -57,3 +52,22 @@
     width: 100%;
   }
 }
+
+.home-post::-webkit-scrollbar {
+  width: 8px;
+}
+
+.home-post::-webkit-scrollbar-track {
+  background: #2a2a2a; /* Dark track to blend with container */
+  border-radius: 8px;
+}
+
+.home-post::-webkit-scrollbar-thumb {
+  background: #007bff; /* Primary accent color */
+  border-radius: 8px;
+}
+
+.home-post::-webkit-scrollbar-thumb:hover {
+  background: #0056b3; /* Darker accent on hover */
+}
+

@@ -1,45 +1,221 @@
+.container {
+  position: relative;
+  left: 200px;
+  display: flex;
+  height: 100vh;
+  background: linear-gradient(135deg, #111, #1e3a8a);
+  color: #e0e0e0;
+  /* Light text color for contrast */
+  margin: 0;
+  width: calc(100% - 200px);
+  /* Adjusted for padding */
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  overflow-y: auto;
+  /* Ensures content is scrollable if necessary */
+}
+
+.loading {
+  cursor: wait;
+}
+
 .post-card {
-    max-width: 500px;
-    margin: 0 auto;
+  max-width: 700px;
+  /* Limit card width for readability */
+  width: 100%;
+  background: linear-gradient(145deg, #1a1a1a, #333);
+  /* Subtle gradient for the card */
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  /* Enhanced shadow for depth */
+  color: #fff;
+  /* White text for readability */
+  padding: 20px;
+}
+
+.header {
+  font-size: 24px;
+  font-weight: bold;
+  color: #f0f0f0;
+  /* Slightly brighter text for titles */
+  padding: 8px 16px;
+}
+
+.mat-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+/* Reuse other styles from your previous design for form fields, buttons, etc. */
+
+
+mat-icon {
+  height: 50%;
+  width: 50%;
+}
+
+.file-upload {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px dashed #444;
+  /* Adjusted for better visibility */
+  border-radius: 8px;
+  padding: 24px;
+  /* Larger padding for a more spacious look */
+  cursor: pointer;
+  background-color: #1a1a1a;
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.upload-placeholder {
+  text-align: center;
+  color: #999;
+  /* Softer text color for placeholders */
+  font-size: 14px;
+}
+
+.upload-placeholder mat-icon {
+  font-size: 36px;
+  color: #666;
+  /* Muted icon color */
+}
+
+.media-preview {
+  max-width: 100%;
+  max-height: 400px;
+  /* Increased preview size */
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.text-access {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding: 10px;
+  align-items: center;
+}
+
+.level {
+  height: 50%;
+}
+
+.mat-form-field {
+  width: 100%;
+  /* Ensure form fields span the card width */
+}
+
+.mat-form-field.appearance-fill .mat-form-field-wrapper {
+  background: #1a1a1a;
+  /* Darker background for fields */
+  border-radius: 6px;
+  padding: 8px;
+}
+
+textarea.mat-input-element,
+.mat-select-trigger {
+  background-color: #111;
+  /* Darker field background */
+  border: 1px solid #444;
+  /* Subtle border for better visibility */
+  color: #fff;
+  /* White text for readability */
+  border-radius: 6px;
+  padding: 10px;
+}
+
+textarea.mat-input-element:focus,
+.mat-select-trigger:focus {
+  border-color: #2563eb;
+  /* Highlight border on focus */
+  box-shadow: 0 0 6px #2563eb;
+}
+
+textarea.mat-input-element::placeholder {
+  color: #777;
+  /* Softer placeholder text */
+}
+
+.mat-select {
+  background-color: #111;
+  /* Darker background for select */
+  border: 1px solid #444;
+  color: #fff;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #2563eb;
+  /* Blue highlight for focus */
+}
+
+.mat-select-arrow {
+  color: #fff;
+}
+
+.mat-card-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 16px;
+}
+
+button[mat-raised-button] {
+  font-size: 16px;
+  padding: 10px 24px;
+  border-radius: 6px;
+  background: #2563eb;
+  /* Primary button color */
+  color: #fff;
+  transition: background-color 0.3s;
+}
+
+button[mat-raised-button]:hover {
+  background-color: #1a4dbe;
+  /* Darker blue on hover */
+}
+
+button[mat-raised-button][disabled] {
+  background-color: #555;
+  /* Gray background for disabled buttons */
+  color: #999;
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 768px) {
+  .container {
+    left: 0;
+    width: 100%;
+    padding-top: 0;
     display: flex;
-    gap: 16px;
-    
+    flex-direction: column;
   }
 
-  .full-width {
-    margin-right: 14px;
+  .post-card {
+    padding: 10px;
   }
-  
-  .file-upload {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    border: 2px dashed #ccc;
-    border-radius: 8px;
-    padding: 16px;
-    cursor: pointer;
-    position: relative;
-    margin-bottom: 8px;
+
+  .navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 1000;
   }
-  
-  .upload-placeholder {
-    text-align: center;
-    color: #aaa;
-  }
-  
-  body {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-  }
-  .media-preview {
-    max-width: 100%;
-    max-height: 300px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-  
+}

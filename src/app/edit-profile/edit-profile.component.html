@@ -5,11 +5,11 @@
     <form [formGroup]="editProfileForm" class="edit-profile-form" (ngSubmit)="saveChanges()">
       <!-- Profile Picture -->
       <div class="profile-pic-section">
-        <!--<img
+        <img
           class="profile-pic-preview"
-          [src]="profileImage || 'assets/default-profile.png'"
+          [src]="profileImagePreview"
           alt="Profile Picture"
-        />-->
+        />
         <div class="profile-pic-upload">
           <label for="profilePicture">Update Profile Picture</label><br />
           <input type="file" id="profilePicture" (change)="onFileSelect($event)" />
@@ -19,24 +19,45 @@
       <!-- Username -->
       <div>
         <label for="username">Username</label><br />
-        <input id="username" type="text" formControlName="username" placeholder="Enter your username" />
+        <input
+          id="username"
+          type="text"
+          formControlName="username"
+          placeholder="Enter your username"
+        />
       </div>
 
       <!-- Email -->
       <div>
         <label for="email">Email</label><br />
-        <input id="email" type="email" formControlName="email" placeholder="Enter your email" />
+        <input
+          id="email"
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
       </div>
 
       <!-- Bio -->
       <div>
         <label for="bio">Bio</label><br />
-        <textarea id="bio" formControlName="bio" rows="3" placeholder="Write a short bio"></textarea>
+        <textarea
+          id="bio"
+          formControlName="bio"
+          rows="3"
+          placeholder="Write a short bio"
+        ></textarea>
       </div>
 
       <!-- Form Buttons -->
       <div class="form-buttons">
-        <button type="submit" class="save-btn" (click)="saveChanges()" [disabled]="!editProfileForm.valid">Save Changes</button>
+        <button
+          type="submit"
+          class="save-btn"
+          [disabled]="!editProfileForm.valid"
+        >
+          Save Changes
+        </button>
         <button type="button" class="cancel-btn" (click)="cancel()">Cancel</button>
       </div>
     </form>

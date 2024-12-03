@@ -1,0 +1,69 @@
+<div class="container">
+  <h4 mat-dialog-title>Comments</h4>
+  <div mat-dialog-actions class="add">
+    <!-- Add a new comment -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Write a comment...</mat-label>
+      <input matInput [(ngModel)]="newComment" placeholder="Write your comment here..." (keydown.enter)="addComment()" />
+    </mat-form-field>
+    <div class="btns">
+      <button mat-button (click)="close()">Close</button>
+      <button mat-raised-button color="primary" (click)="addComment()">Post</button>
+    </div>
+  </div>
+  <div mat-dialog-content class="scrollable-content">
+    <!-- Display Comments -->
+    @if ((comments$ | async); as comments) {
+      <div *ngIf="comments.length > 0; else noComments" class="comments-list">
+        <div *ngFor="let comment of comments" class="comment-item">
+          <img [src]="comment.user.profilePic" onerror="this.src = '../../../assets/default-profile-pic.jpeg'" alt="Profile Picture" />
+          <div class="comment-details">
+            <p class="timestamp">{{ comment.createdAt | date: 'hh:mm a' }}</p>
+            <p>
+              <strong>{{ comment.user.name }}</strong>: {{ comment.text }}
+            </p>
+          </div>
+          <div class="delete-btn-container" *ngIf="comment.user._id! === user._id || user.role === 'Admin'">
+            <button mat-icon-button (click)="deleteComment(comment._id!, source)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <!-- Reply input -->
+          <div class="reply-container">
+            <mat-form-field appearance="fill" class="reply-input">
+              <mat-label>Write a reply...</mat-label>
+              <input
+                matInput
+                [(ngModel)]="replies[comment._id!]"
+                placeholder="Reply to this comment"
+                (keydown.enter)="addReply(comment._id!, replies[comment._id!])"
+              />
+            </mat-form-field>
+            <button mat-button color="primary" (click)="addReply(comment._id!, replies[comment._id!])">Reply</button>
+          </div>
+          <!-- Display Replies -->
+          <div *ngIf="comment.replies!.length > 0" class="replies-list">
+            <div *ngFor="let reply of comment.replies" class="reply-item">
+             
+              <div class="reply-line"></div>
+              <div class="reply-content">
+                <img [src]="reply.user.profilePic" onerror="this.src = '../../../assets/default-profile-pic.jpeg'" alt="Profile Picture" />
+                <div class="comment-details">
+                  <p class="timestamp">{{ reply.createdAt | date: 'hh:mm a' }}</p>
+                  <p>
+                    <strong>{{ reply.user.name }}</strong>: {{ reply.text }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+
+    <!-- Fallback if no comments exist -->
+    <ng-template #noComments>
+      <p>No comments yet. Be the first to comment!</p>
+    </ng-template>
+  </div>
+</div>

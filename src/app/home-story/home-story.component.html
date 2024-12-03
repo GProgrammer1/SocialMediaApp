@@ -1,9 +1,48 @@
-<div class="stories">
-  <img src="../../../images.jpeg" alt="avatar">
-  <div  class="story">
-    <!-- @for(friend of friends; track friend) {
-      <img [src]="friend.storyImage" alt="{{friend.name}}'s Story">
-      <span>{{friend.name}}</span>
+<!-- <div class="stories">
+  <div class="icon">
+    <img src="../../../images.jpeg" alt="avatar" class="avatar">
+  </div>
+  <div class="story-list">
+    <button mat-raised-button class="add-button" (click)="addStory()">
+      <mat-icon>add</mat-icon>
+    </button>
+
+    @if ((stories$ | async) ; as stories) {
+      @if(stories.length > 0) {
+        @for (story of stories; track $index) {
+          <div class="story" (click)="viewStory(story)">
+            <img [src]="story.mediaUrl" alt="Your story" class="profile-image">
+            <div class="story-username">{{story.user.name}}</div>
+          </div>
+        }
+
+      }
     } -->
+    <!-- @for(friend of friends; track friend) {
+      <div class="story" (click)="viewStory(friend)">
+        <img [src]="friend.storyImage" alt="{{ friend.name }}'s story" class="profile-image">
+        <div class="story-username">{{ friend.name }}</div>
+      </div>
+    } -->
+  <!-- </div>
+</div> -->
+<!-- home-story.component.html -->
+<div class="stories">
+  <div class="icon">
+    <img src="../../../images.jpeg" alt="avatar" class="avatar">
+  </div>
+  <div class="story-list">
+      <mat-icon class="add-button" (click)="addStory()">add</mat-icon>
+
+    <!-- Loop through the grouped stories -->
+    <div *ngFor="let userStories of groupedStories | keyvalue" class="user-story-group">
+      <div *ngIf="userStories.value.length > 0" class="story-user">
+        <div *ngFor="let story of userStories.value" class="story" (click)="viewStory(story)">
+          <img [src]="story.mediaUrl" alt="Your story" class="profile-image">
+          <div class="story-username">{{story.user.name}}</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
+
