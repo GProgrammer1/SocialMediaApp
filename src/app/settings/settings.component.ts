@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 // Inline Delete Confirmation Dialog Component
 
-import { LikedComponent } from '../liked/liked.component';
 import { NavbarComponent } from "../navbar/navbar.component";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -22,7 +21,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 
   imports: [
     FormsModule, ReactiveFormsModule, MatButtonModule, CommonModule,
-    MatIconModule, MatOptionModule, MatListModule, MatDialogModule, 
+    MatIconModule, MatOptionModule, MatListModule, MatDialogModule,
     MatSlideToggleModule, NavbarComponent, MatCheckboxModule,
     RouterLink
   ],
@@ -39,13 +38,13 @@ isPublicAccess: boolean = JSON.parse(sessionStorage.getItem('user')!).accountPri
 
   constructor(private authService: AuthService, private dialog: MatDialog, private router: Router, private userService : UserService) {
     console.log(this.isPublicAccess);
-    
+
   }
 
   changeAccountPrivacy() {
     const status = this.isPublicAccess ? 'Public' : 'Private';
     console.log(status);
-    
+
     const user = JSON.parse(sessionStorage.getItem('user')!);
     const email = user.email;
     const formData = new FormData();

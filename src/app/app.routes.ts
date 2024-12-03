@@ -18,7 +18,6 @@ import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { autoLoginResolver } from './auto-login.resolver';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { LikedComponent } from './liked/liked.component';
 import { ViewProfileComponent } from './view-profile/view-profile.component';
 import { MatDialog } from '@angular/material/dialog';
 import { FriendsListComponent } from './friends-list/friends-list.component';
@@ -46,7 +45,6 @@ export const routes: Routes = [
   { path: 'auth/confirm/:token', component: ConfirmationPageComponent },
   { path: 'auth/resetPassword/:token', component: ResetPasswordComponent },
   { path: 'reactive-form', component: EditProfileComponent },
-  { path: 'liked', component: LikedComponent },
   { path: 'view-profile', component: ViewProfileComponent },
   { path: 'friends-list', component: FriendsListComponent },
   { path: 'mat-dialog', component: MatDialog },

@@ -3,12 +3,7 @@
   <div class="settings-container">
     <h2>Settings</h2>
     <ul class="settings-list">
-      <a routerLink="/liked">
-        <li >
-          <i class="fas fa-thumbs-up"></i>
-          Liked Content
-        </li>
-      </a>
+      
       <li class="access-level">
 
 
@@ -20,7 +15,7 @@
           <span class="access-label" [class.on]="isPublicAccess" [class.off]="!isPublicAccess">
             {{ isPublicAccess ? 'Public' : 'Private' }}
           </span>
-        
+
           <input type="checkbox" (change)="changeAccountPrivacy()" [(ngModel)]="isPublicAccess">
         </div>
       </li>
